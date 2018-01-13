@@ -1,0 +1,22 @@
+<header 
+    [ngClass]="{'medium-sleep':medium === 'Sleep', 'medium-stressors':medium === 'Stressors'}">
+    <h2>{{medium}}</h2>
+    <div>{{ moodItems | categoryList }}</div>
+</header>
+<section>
+  <mw-mood-item
+    [ngClass]="{'medium-sleep': moodItem.medium==='Sleep', 'medium-stressors':moodItem.medium==='Stressors'}" 
+    *ngFor="let moodItem of moodItems"
+    [moodItem]="moodItem"
+    (delete)="onMoodItemDelete($event)">
+  </mw-mood-item>
+  <div id="login-box" class="hide">
+    <p>Please login on your google account.</p>
+    <button id="btnLogin" onclick="handleAuthClick()" class="button">Login</button>
+  </div>
+</section>
+<footer>
+  <a routerLink="/add">
+    <img src="media/01.png" class="icon" />
+  </a>
+</footer>

@@ -1,0 +1,66 @@
+
+<header>
+</header>
+<section>
+
+<table class='table table-hover'>
+<thead >
+    <tr >
+        <td style='width: 30px;'><b>Date</b></td>
+        <td><b>Time of Day</b></td>
+        <td><b>General Mood</b></td> 
+        <td><b>Appetite</b></td>
+        <td><b>Sleep Quality</b></td>
+            <!--<tr>
+                <td>sleepQuality</td>
+                <td>sleepDifficulty</td>
+                <td>sleepDreams</td>
+                <td>sleepParalysis</td>
+                <td>sleepNotes</td>
+            </tr>-->
+        <td><b>Capacity for Pleasure</b></td>
+        <td><b>Energy Leve</b></td>
+        <td><b>Motivation</b></td>
+        <td><b>Self Worth</b></td>
+        <td><b>Concentration</b></td>
+    </tr>
+</thead>
+<tbody>
+    <tr *ngFor="let v of moodItems" (click)="clickedButton(v)" (delete)="onMediaItemDeleteEvenet(v)">   
+        <td>{{v.date}}</td>  
+        <td>{{v.timeOfDay}}</td>  
+        <td>{{v.generalMood}}</td> 
+        <td>{{v.appetite}}</td>
+        <td>{{v.sleepQuality}}</td>
+        <td>{{v.pleasureCapacity}}</td>
+        <td>{{v.energyLevel}}</td>
+        <td>{{v.motivation}}</td>
+        <td>{{v.selfworth}}</td>
+        <td>{{v.concentration}}</td>
+    </tr>
+</tbody>
+</table>
+</section><!--
+<td>1</td>  
+<td>{{v.generalMood}}</td> 
+<td>{{v.apetite}}</td>
+<td>{{v.sleep}}</td>
+<tr>
+    <td>{{v.sleepQuality}}</td>
+    <td>{{v.sleepDifficulty}}</td>
+    <td>{{v.sleepDreams}}</td>
+    <td>{{v.sleepParalysis}}</td>
+    <td>{{v.sleepNotes}}</td>
+</tr>
+<td>{{v.pleasureCapacity}}</td>
+<td>{{v.energyLevel}}</td>
+<td>{{v.motivation}}</td>
+<td>{{v.selfWorth}}</td>
+<td>{{v.concentration}}</td>
+<td>{{v.extStressors}}</td>
+< <tr>
+    <td>{{v.dietaryNotes}}</td>
+    <td>{{v.stressEvents}}</td>
+    <td>{{v.percievedMoodInfluence}}</td>
+</tr>
+<td>{{v.additionalNotes}}</td>-->

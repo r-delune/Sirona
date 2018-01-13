@@ -1,0 +1,133 @@
+<header>
+  <h2>How is your day going?</h2>
+</header>
+<form [formGroup]='form' (ngSubmit)='onSubmit(form.value)' >
+  <ul>
+      <li class='form-group'>
+          <label for="name">Date</label>
+          <input type="text" name="date" id="date" formControlName='date'>
+      </li>
+      <li>
+          <label for="category">General Mood</label>
+          <select name="generalMood" id="generalMood" formControlName='generalMood'>
+              <option value="Very Bad">Very Bad</option>
+              <option value="Bad">Bad</option>
+              <option value="Normal">Normal</option>
+              <option value="Good">Good</option>
+              <option value="Very Good">Very Good</option>
+          </select>
+          </li>
+      <li>
+      <li>
+          <label for="timeOfDay">Time of Day</label>
+          <select name='timeOfDay' id='timeOfDay' formControlName='timeOfDay' >
+              <option *ngFor='let medium of lookupLists.timeOfDay' value="{{timeOfDay}}">{{timeOfDay}}</option>
+          </select>
+          </li>
+      <li>
+          <label for="name">Appetite</label>
+          <input type="text" name="appetite" id="appetite" formControlName='appetite'>
+      </li>
+      <li>
+      <label for="name">Pleasure Capacity</label>
+          <input type="text" name="pleasureCapacity" id="pleasureCapacity" formControlName='pleasureCapacity'>
+      </li>
+      <li>
+          <label for="name">Energy Level</label>
+          <input type="text" name="energyLevel" id="energyLevel" formControlName='energyLevel'>
+      </li>
+      <li>
+          <label for="name">Motivation</label>
+          <input type="text" name="motivation" id="motivation" formControlName='motivation'>
+          <div *ngIf='form.controls.motivation.errors?.pattern' class='errors'>
+              <!--Must be between {{form.controls.year.errors?.year.min}}
+              and Must be between {{form.controls.year.errors?.year.max}}-->
+          </div>
+      </li>
+      <li>
+          <label for="name">Self Worth</label>
+          <input type="text" name="selfWorth" id="selfWorth" formControlName='selfWorth'>
+      </li>
+      <li>
+          <label for="name">Concentration</label>
+          <input type="text" name="concentration" id="concentration" formControlName='concentration'>
+      </li>
+      <li>
+        <label for="name">Sleep</label>
+    </li>
+      <li>
+          <label for="name">Sleep Quality</label>
+          <input type="text" name="sleepQuality" id="sleepQuality" formControlName='sleepQuality'>
+      </li>
+      <li>
+          <label for="name">Sleep Difficulty</label>
+          <input type="text" name="sleepDifficulty" id="sleepDifficulty" formControlName='sleepDifficulty'>
+      </li>
+      <li>
+          <label for="name">Dream Intensity</label>
+          <input type="text" name="sleepDreamIntensity" id="sleepDreamIntensity" formControlName='sleepDreamIntensity'>
+      </li>
+      <li>
+          <label for="name">Sleep Paralysis</label>
+          <input type="text" name="sleepParalysis" id="sleepParalysis" formControlName='sleepParalysis'>
+      </li>
+          <li>
+          <label for="name">Sleep Notes</label>
+          <input type="text" name="sleepNotes" id="sleepNotes" formControlName='sleepNotes'>
+      </li>
+      <li>
+          <label for="name">Additional Notes</label>
+          <input type="text" name="additionalNotes" id="additionalNotes" formControlName='additionalNotes'>
+      </li>
+      <li>
+          <label for="name">Stress Events</label>
+      </li>
+      <li>
+          <label for="name">Dietary Notes</label>
+          <input type="text" name="dietaryNotes" id="dietaryNotes" formControlName='dietaryNotes'>
+      </li>
+  </ul>
+  <button type="submit" [disabled]="!form.valid">Save</button>
+</form>
+
+<!--<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit(form.value)">
+  <ul>
+    <li>
+      <label for="medium">Medium</label>
+      <select name="medium" id="medium" formControlName="medium">
+        <option *ngFor="let medium of lookupLists.mediums" value="{{medium}}">{{medium}}</option>
+      </select>
+    </li>
+    <li>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" formControlName="name">
+      <div *ngIf="form.controls.name.errors?.pattern" class="error">
+        Name has invalid characters
+      </div>
+    </li>
+    <li>
+      <label for="category">Category</label>
+      <select name="category" id="category" formControlName="category">
+        <option value="Action">Action</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Horror">Horror</option>
+        <option value="Romance">Romance</option>
+      </select>
+    </li>
+    <li>
+      <label for="year">Year</label>
+      <input type="text" name="year" id="year" maxlength="4" formControlName="year">
+      <div *ngIf="form.controls.year.errors?.year" class="error">
+        Must be between 
+        {{form.controls.year.errors?.year.min}} 
+        and 
+        {{form.controls.year.errors?.year.max}}
+      </div>
+    </li>
+  </ul>
+  <button type="submit" [disabled]="!form.valid">Save</button>
+</form>-->
