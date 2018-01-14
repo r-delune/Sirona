@@ -4,10 +4,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
 
 import { AngularFireModule } from 'angularfire2';
-
-// New imports to update based on AngularFire2 version 4
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
 
@@ -25,6 +25,9 @@ import { MockXHRBackend } from './mock-xhr-backend';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 
+import { environment } from '../environments/environment';
+import { UploadFormComponent } from './upload-form.component';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyDIA02kcimwJRaruUPR2Qe8Ro6m1aLYj_g",
   authDomain: "luminous-bazaar-191816.firebaseapp.com",
@@ -40,8 +43,8 @@ export const firebaseConfig = {
     ReactiveFormsModule,
     HttpModule,
     routing,
-    AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule
   ],
   declarations: [
@@ -51,13 +54,13 @@ export const firebaseConfig = {
     FavoriteDirective,
     CategoryListPipe,
     MoodItemFormComponent,
-    MoodItemLogComponent
+    MoodItemLogComponent,
+    UploadFormComponent
   ],
   providers: [
     MoodItemService,
     { provide: lookupListToken, useValue: lookupLists },
     { provide: XHRBackend, useClass: XHRBackend },
-    //Enter app at this point - home
     { provide: APP_BASE_HREF, useValue: '/'}
   ],
   bootstrap: [

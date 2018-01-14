@@ -3,11 +3,8 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
-
 import { MoodItemService } from './mood-item.service';
 import { lookupListToken } from './providers';
-
-
 
 @Component({
   selector: 'mw-mood-item-log',
@@ -30,7 +27,6 @@ export class MoodItemLogComponent {
     //we want to use this in the template markup so we can render out the select options in the form
     // we are using the opaque token we created, this is value type injection
 
-
   ngOnInit() {
 
     this.paramsSubscription = this.activatedRoute.params
@@ -41,9 +37,7 @@ export class MoodItemLogComponent {
         }
         this.getMoodItems(medium);
       });
-
-      
-  }
+    }
 
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();

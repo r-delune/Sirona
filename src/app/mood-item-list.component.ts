@@ -19,32 +19,32 @@ export class MoodItemListComponent {
 
   ngOnInit() {
     this.paramsSubscription = this.activatedRoute.params
-      .subscribe(params => {
-        let medium = params['medium'];
-        if(medium.toLowerCase() === 'all') {
-          medium = '';
-        }
-        this.getMoodItems(medium);
-      });
+   //   .subscribe(params => {
+  //      let medium = params['medium'];
+   //     if(medium.toLowerCase() === 'all') {
+   //       medium = '';
+   //     }
+   //     this.getMoodItems(medium);
+   //   });
   }
 
   ngOnDestroy() {
-    this.paramsSubscription.unsubscribe();
+   // this.paramsSubscription.unsubscribe();
   }
 
   onMoodItemDelete(moodItem) {
     this.moodItemService.delete(moodItem)
-      .subscribe(() => {
-        this.getMoodItems(this.medium);
-      });
+  //    .subscribe(() => {
+   //     this.getMoodItems(this.medium);
+    //  });
   }
 
   getMoodItems(medium) {
     this.medium = medium;
-    this.moodItemService.get(medium)
-      .subscribe(moodItems => {
-        this.moodItems = moodItems;
-      });
+   // this.moodItemService.get(medium)
+   //   .subscribe(moodItems => {
+   //     this.moodItems = moodItems;
+   //   });
   }
 
   

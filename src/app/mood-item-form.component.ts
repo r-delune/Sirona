@@ -1,28 +1,46 @@
 import { Component, Inject } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import { MoodItemService } from './mood-item.service';
 import { lookupListToken } from './providers';
+
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+
+export interface Item { name: string; }
 
 @Component({
   selector: 'mw-mood-item-form',
   templateUrl: './mood-item-form.component.html',
   styleUrls: ['./mood-item-form.component.css']
 })
+
+
+
 export class MoodItemFormComponent {
   form;
+  private itemsCollection: AngularFirestoreCollection<Item>;
+  items: Observable<Item[]>;
 
   constructor(
     private formBuilder: FormBuilder,
     //allow access to media item service so we can add 
     private moodItemService: MoodItemService,   
+    private afs: AngularFirestore,
+    items: Observable<Item[]>,
     //tells angular that we want the lookuplist value item
     //we want to use this in the template markup so we can render out the select options in the form
     // we are using the opaque token we created, this is value type injection
     @Inject(lookupListToken) public lookupLists,
     private router: Router
-  ) {}
+  ) {
+
+    this.itemsCollection = afs.collection<Item>('moodItems');
+    this.items = this.itemsCollection.valueChanges();
+
+
+  }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -75,12 +93,20 @@ export class MoodItemFormComponent {
      }
     }
 
-  onSubmit(moodItem) {
-    this.moodItemService.add(moodItem)
-      .subscribe(() => {
-        this.router.navigate(['/', moodItem.medium]);
-      });
+    
+
+  onSubmit(item: Item) {
+   // this.moodItemService.add(moodItem)
+    console.log('submitting')
+    //const items = this.db.list('items');
+    //items.push('new item');
+
+
+      this.itemsCollection.add(item);
+    }
+
+    //  .subscribe(() => {
+    //    this.router.navigate(['/', moodItem.medium]);
+    //  });
   }
 
-  
-}

@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
-
-
-// Do not import from 'firebase' as you'd lose the tree shaking benefits
-
 import {Observable} from 'rxjs/Observable';
 import { AngularFireModule } from 'angularfire2';
 
 // New imports to update based on AngularFire2 version 4
 import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireList } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
+
 import { AngularFireAction } from '@angular/cli'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
@@ -22,21 +19,21 @@ import * as firebase from 'firebase/app';
 })
 
 export class AppComponent {
-  items$: Observable<AngularFireAction<firebase.database.DataSnapshot>[]>;
-  size$: BehaviorSubject<string|null>;
-  
-  constructor(db: AngularFireDatabase) {
-    console.log(this.size$)
-    console.log(this.size$)
-    this.size$ = new BehaviorSubject(null);
-    this.items$ = this.size$.switchMap(size =>
-      db.list('/items', ref =>
-        size ? ref.orderByChild('size').equalTo(size) : ref
-      ).snapshotChanges()
-    );
+
+size;
+items;
+
+  constructor(db: AngularFirestore) {
+    console.log(db)
+    console.log(this.items)
+    
+    this.items = db.collection('moodItems').valueChanges();
+    console.log(db.collection)
+    console.log(db.collection('items'))
+
   }
   filterBy(size: string|null) {
-    this.size$.next(size);
+    this.size.next(size);
   }
 
  }
