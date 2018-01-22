@@ -1,0 +1,83 @@
+<header>
+  <h2>Daily Log</h2>
+</header>
+<form [formGroup]='form' (ngSubmit)='onSubmit(form.value)' >
+  <ul>
+      <li class='form-group'>
+          <label for="name">Date</label>
+          <input type="text" name="date" id="date" formControlName='date'>
+      </li>
+      <li>
+        <label for="timeOfDay">Time of Day</label>
+        <select name='timeOfDay' id='timeOfDay' formControlName='timeOfDay' >
+              <option value="Morning">Morning</option>
+              <option value="Afternoon">Afternoon</option>
+              <option value="Evening">Evening</option>
+           <!-- <option *ngFor='let medium of lookupLists.timeOfDay' value="{{timeOfDay}}">{{timeOfDay}}</option>-->
+        </select>
+    </li>
+      <li>
+          <label for="category">General Mood</label>
+          <select name="generalMood" id="generalMood" formControlName='generalMood'>
+              <option value="Very Bad">Very Bad</option>
+              <option value="Bad">Bad</option>
+              <option value="Normal">Normal</option>
+              <option value="Good">Good</option>
+              <option value="Very Good">Very Good</option>
+          </select>
+          </li>
+      <li>
+
+      <li>
+          <label for="name">Appetite</label>
+          <input type="text" name="appetite" id="appetite" formControlName='appetite'>
+      </li>
+    <li>
+        <label for="name">Energy Level</label>
+        <input type="text" name="energyLevel" id="energyLevel" formControlName='energyLevel'>
+    </li>
+    <li>
+        <label for="name">Motivation</label>
+        <input type="text" name="motivation" id="motivation" formControlName='motivation'>
+    </li>
+        <li>
+        <label for="name">Concentration</label>
+        <input type="text" name="concentration" id="concentration" formControlName='concentration'>
+    </li>
+    <li>
+        <label for="name">Excercise Notes</label>
+        <input type="text" name="excerciseNotes" id="excerciseNotes" formControlName='excerciseNotes'>
+    </li>
+    <li>
+        <label for="name">Stressfull Events</label>
+        <input type="text" name="stressEVents" id="stressEVents" formControlName='stressEVents'>
+    </li>
+    <li>
+        <label for="name">Supplements</label>
+        <input type="text" name="supplements" id="supplements" formControlName='supplements'>
+    </li>
+
+      <li>
+            <label for="name">Sleep Quality</label>
+            <input type="text" name="sleepQuality" id="sleepQuality" formControlName='sleepQuality'>
+        </li>
+      <li>
+          <label for="name">Sleep Difficulty</label>
+          <input type="text" name="sleepDifficulty" id="sleepDifficulty" formControlName='sleepDifficulty'>
+      </li>
+      <li>
+        <label for="name">Sleep Notes</label>
+        <input type="text" name="sleepNotes" id="sleepNotes" formControlName='sleepNotes'>
+    </li>
+      <li>
+          <label for="name">Dietary Notes</label>
+          <input type="text" name="dietaryNotes" id="dietaryNotes" formControlName='dietaryNotes'>
+      </li>
+      <li>
+            <label for="name">Additional Notes</label>
+            <input type="text" name="additionalNotes" id="additionalNotes" formControlName='additionalNotes'>
+        </li>
+  </ul>
+  <button type="submit" [disabled]="!form.valid">Save</button>
+</form>
+

@@ -1,13 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { MoodItemFormComponent } from './mood-item-form.component';
-import { MoodItemListComponent } from './mood-item-list.component';
-import { MoodItemLogComponent } from './mood-item-log.component';
+import { LogItemFormComponent } from './log-item-form.component';
+import { LogItemListComponent } from './log-item-list.component';
+import { LogItemTableComponent } from './log-item-table.component';
 
 const appRoutes: Routes = [
-  { path: 'add', component: MoodItemFormComponent },
-  { path: 'log', component: MoodItemLogComponent },
-  { path: ':medium', component: MoodItemListComponent },
+  { path: 'add', component: LogItemFormComponent },
+  { path: 'table', component: LogItemTableComponent },
+  { path: 'home', component: LogItemTableComponent },
+  { path: ':medium', component: LogItemListComponent },
   { path: '', pathMatch: 'full', redirectTo: 'all' }
 ];
 

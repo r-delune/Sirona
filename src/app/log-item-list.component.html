@@ -1,0 +1,72 @@
+<header 
+    [ngClass]="{'medium-sleep':medium === 'Sleep', 'medium-stressors':medium === 'Stressors'}">
+    <h2>{{medium}}</h2>
+    <div>{{ logItems | categoryList }}</div>
+</header>
+<section>
+  <mw-log-item
+    [ngClass]="{'medium-sleep': logItem.medium==='Sleep', 'medium-stressors':logItem.medium==='Stressors'}" 
+    *ngFor="let logItem of logItems"
+    [logItem]="logItem"
+    (delete)="deleteLogItem($event)">
+</mw-log-item>
+  <table class='table table-hover'>
+      <thead >
+          <tr >
+              <td style='width: 30px;'><b>Date</b></td>
+              <td><b>Time of Day</b></td>
+              <td><b>General Mood</b></td> 
+              <td><b>Appetite</b></td>
+              <td><b>Energy Level</b></td>
+              <td><b>Motivation</b></td>
+              <td><b>Concentration</b></td>
+              <td><b>Stress Events</b></td>
+              <td><b>Coffee</b></td>
+              <td><b>Supplements</b></td>
+              <td><b>Excercise</b></td>
+              <td><b>Dietary</b></td>
+              <td><b>Sleep Quality</b></td>
+              <td><b>Sleep Difficulty</b></td>
+              <td><b>Sleep</b></td>
+              <td><b>Additional</b></td>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let item of Items | async" (click)="clickedButton(v)">   
+              <td>{{item.date}}</td> 
+              <td>{{item.timeOfDay}}</td>
+              <td>{{item.generalMood}}</td>
+              <td>{{item.appetite}}</td>
+              <td>{{item.energyLevel}}</td>
+              <td>{{item.motivation}}</td>
+              <td>{{item.concentration}}</td>
+              <td>{{item.stressEvents}}</td>
+              <td>{{item.coffee}}</td>
+              <td>{{item.supplements}}</td>
+              <td>{{item.exerciseNotes}}</td>
+              <td>{{item.Dietary}}</td>
+              <td>{{item.sleepQuality}}</td>
+              <td>{{item.exerciseNotes}}</td>
+              <td>{{item.sleepNotes}}</td>
+              <td>{{item.additionalNotes}}</td>
+          </tr>
+      </tbody> 
+      <h1>{{ logItems | async | json }}</h1>
+      <input type="text" #newname placeholder="Name" />
+      <input type="text" #newsize placeholder="Size" />
+      <br />
+      <button (click)="save(newname.value)">Set Name</button>
+      <button (click)="update(newsize.value)">Update Size</button>
+      <button (click)="delete()">Delete</button>
+      <button (click)="loginWithGoogle()">Login with Google</button>
+    </table>
+  <div id="login-box" class="hide">
+    <p>Please login on your google account.</p>
+    <button id="btnLogin" onclick="handleAuthClick()" class="button">Login</button>
+  </div>
+</section>
+<footer>
+  <a routerLink="/add">
+    <img src="media/01.png" class="icon" />
+  </a>
+</footer>

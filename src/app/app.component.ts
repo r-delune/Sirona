@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { AngularFireModule } from 'angularfire2';
-
+import { Router, RouterModule } from '@angular/router';
 // New imports to update based on AngularFire2 version 4
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireDatabase, AngularFireDatabaseProvider } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestoreDocument } from 'angularfire2/firestore';
+import {AngularFireObject } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 
 import { AngularFireAction } from '@angular/cli'
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
+import { Item } from './log-item-form.component';
+import { AngularFireList } from 'angularfire2/database/interfaces';
+import { LogItemService } from './log-item.service';
 
-import * as firebase from 'firebase/app';
 @Component({
   selector: 'mw-app',
   templateUrl: 'app.component.html',
@@ -20,20 +25,39 @@ import * as firebase from 'firebase/app';
 
 export class AppComponent {
 
-size;
-items;
-
-  constructor(db: AngularFirestore) {
-    console.log(db)
-    console.log(this.items)
+    itemRef: AngularFireObject<any>;
+    item: Observable<any>;
+    logItems;
     
-    this.items = db.collection('moodItems').valueChanges();
-    console.log(db.collection)
-    console.log(db.collection('items'))
+    constructor(db: AngularFireDatabase,
+    private logItemService: LogItemService) {
+      this.itemRef = db.object('Users');
+      //this.item = this.itemRef.valueChanges();
+      this.logItems = this.logItemService.getLogItems()
+      console.log('App logItems')
+      console.log(this.logItems) 
+    }
+   
+    save(newName: string) {
+      this.itemRef.set({ name: newName });
+    }
 
-  }
-  filterBy(size: string|null) {
-    this.size.next(size);
-  }
+    update(newSize: string) {
+      this.itemRef.update({ size: newSize });
+    }
 
- }
+    delete() {
+      this.itemRef.remove();
+    }
+
+    ngOnInit() {
+      //this.item.subscribe((items) => {
+      //  console.log('Appcomponent not using servcioe')
+      //   console.log(items)
+      // });
+        this.logItems = this.logItemService.getLogItems()
+        console.log('Appcomponent  servcioe')
+        console.log(this.logItems)
+    }
+}
+ 

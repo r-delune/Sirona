@@ -69,3 +69,7 @@ img {
   display:block;
   margin-bottom:12px;
 }
+
+.wrapper{
+  padding: 20px;
+}

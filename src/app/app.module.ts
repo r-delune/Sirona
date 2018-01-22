@@ -5,7 +5,6 @@ import { HttpModule, XHRBackend } from '@angular/http';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
@@ -13,29 +12,30 @@ import {Observable} from 'rxjs/Observable';
 
 
 import { AppComponent } from './app.component';
-import { MoodItemComponent } from './mood-item.component';
-import { MoodItemListComponent } from './mood-item-list.component';
+import { LogItemComponent } from './log-item.component';
+import { LogItemListComponent } from './log-item-list.component';
 import { FavoriteDirective } from './favorite.directive';
 import { CategoryListPipe } from './category-list.pipe';
-import { MoodItemLogComponent } from './mood-item-log.component';
-import { MoodItemFormComponent } from './mood-item-form.component';
-import { MoodItemService } from './mood-item.service';
+import { LogItemTableComponent } from './log-item-table.component';
+import { LogItemFormComponent } from './log-item-form.component';
+import { LogItemService } from './log-item.service';
 import { lookupListToken, lookupLists } from './providers';
-import { MockXHRBackend } from './mock-xhr-backend';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 
 import { environment } from '../environments/environment';
-import { UploadFormComponent } from './upload-form.component';
+import { ListTaskComponent } from './list-task/list-task.component';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyDIA02kcimwJRaruUPR2Qe8Ro6m1aLYj_g",
-  authDomain: "luminous-bazaar-191816.firebaseapp.com",
-  databaseURL: "https://luminous-bazaar-191816.firebaseio.com",
-  projectId: "luminous-bazaar-191816",
-  storageBucket: "luminous-bazaar-191816.appspot.com",
-  messagingSenderId: "495548272715"
+  apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
+  authDomain: "sirona-7d26e.firebaseapp.com",
+  databaseURL: "https://sirona-7d26e.firebaseio.com",
+  projectId: "sirona-7d26e",
+  storageBucket: "",
+  messagingSenderId: "752822378676"
 };
+
+firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   imports: [
@@ -45,20 +45,21 @@ export const firebaseConfig = {
     routing,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   declarations: [
     AppComponent,
-    MoodItemComponent,
-    MoodItemListComponent,
+    LogItemComponent,
+    LogItemListComponent,
     FavoriteDirective,
     CategoryListPipe,
-    MoodItemFormComponent,
-    MoodItemLogComponent,
-    UploadFormComponent
+    LogItemFormComponent,
+    LogItemTableComponent,
+    ListTaskComponent
   ],
   providers: [
-    MoodItemService,
+    LogItemService,
     { provide: lookupListToken, useValue: lookupLists },
     { provide: XHRBackend, useClass: XHRBackend },
     { provide: APP_BASE_HREF, useValue: '/'}
@@ -68,4 +69,5 @@ export const firebaseConfig = {
   ],
   
 })
+
 export class AppModule {}

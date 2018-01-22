@@ -4,11 +4,11 @@ import { Pipe } from '@angular/core';
   name: 'categoryList'
 })
 export class CategoryListPipe {
-  transform(moodItems) {
+  transform(logItems) {
     var categories = [];
-    moodItems.forEach(moodItems => {
-      if (categories.indexOf(moodItems.category) <= -1) {
-        categories.push(moodItems.category);
+    logItems.forEach(logItems => {
+      if (categories.indexOf(logItems.category) <= -1) {
+        categories.push(logItems.category);
       }
     });
     return categories.join(', ');
