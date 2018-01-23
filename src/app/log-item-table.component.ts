@@ -43,9 +43,6 @@ export class LogItemTableComponent {
       this.logItems = this.itemRef.valueChanges();
     }
 
-
-
-    
     //tells angular that we want the lookuplist value item
     //we want to use this in the template markup so we can render out the select options in the form
     // we are using the opaque token we created, this is value type injection

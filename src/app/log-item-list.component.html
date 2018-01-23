@@ -1,7 +1,7 @@
 <header 
     [ngClass]="{'medium-sleep':medium === 'Sleep', 'medium-stressors':medium === 'Stressors'}">
     <h2>{{medium}}</h2>
-    <div>{{ logItems | categoryList }}</div>
+    <div>{{logItems | categoryList }}</div>
 </header>
 <section>
   <mw-log-item

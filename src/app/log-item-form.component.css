@@ -1,16 +1,38 @@
+@import "nouislider/distribute/nouislider.css";
+
 :host {
   display: block;
-  padding: 10px;
+  padding: 5px;
 }
 ul {
   list-style-type: none;
+  text-align: center 
 }
 ul li {
-  margin: 10px 0;
+  margin: 5px 0;
+  padding-right: 3%;
+
 }
-header, label {
-  color: #53ace4;
+
+
+header {
+  color: #1d6b0d;
+  align-items: center;
+  margin:auto;
+  width:30%;
 }
+
+button {
+  align-items: center;
+
+}
+
+label {
+  color: #1d6b0d;
+  font-weight:bold;
+}
+
+
 input, select {
   background-color: #29394b;
   color: #c6c5c3;
@@ -50,4 +72,12 @@ button[type=submit]:disabled {
   background-color: #333;
   color: #666;
   cursor: default;
+}
+
+#saveButton{
+  margin: auto;
+  left: 30%;
+  position: relative;
+  width: 40%;
+  padding: 5% 5% 5%;
 }

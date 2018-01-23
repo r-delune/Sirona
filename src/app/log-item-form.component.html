@@ -1,11 +1,11 @@
 <header>
-  <h2>Daily Log</h2>
+  <h2 >Add Entry</h2>
 </header>
 <form [formGroup]='form' (ngSubmit)='onSubmit(form.value)' >
   <ul>
       <li class='form-group'>
-          <label for="name">Date</label>
-          <input type="text" name="date" id="date" formControlName='date'>
+          <label for="name">{{date}}</label>
+          <!--<input type="text" name="date" id="date" formControlName='date'>-->
       </li>
       <li>
         <label for="timeOfDay">Time of Day</label>
@@ -15,7 +15,7 @@
               <option value="Evening">Evening</option>
            <!-- <option *ngFor='let medium of lookupLists.timeOfDay' value="{{timeOfDay}}">{{timeOfDay}}</option>-->
         </select>
-    </li>
+      </li>
       <li>
           <label for="category">General Mood</label>
           <select name="generalMood" id="generalMood" formControlName='generalMood'>
@@ -30,54 +30,58 @@
 
       <li>
           <label for="name">Appetite</label>
-          <input type="text" name="appetite" id="appetite" formControlName='appetite'>
+          <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="appetite"></nouislider>
       </li>
     <li>
         <label for="name">Energy Level</label>
-        <input type="text" name="energyLevel" id="energyLevel" formControlName='energyLevel'>
+       <!-- <input type="text" name="energyLevel" id="energyLevel" formControlName='energyLevel'>-->
+        <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="energyLevel"></nouislider>
     </li>
     <li>
         <label for="name">Motivation</label>
-        <input type="text" name="motivation" id="motivation" formControlName='motivation'>
+       <!-- <input type="text" name="motivation" id="motivation" formControlName='motivation'>-->
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="motivation"></nouislider>
     </li>
         <li>
         <label for="name">Concentration</label>
-        <input type="text" name="concentration" id="concentration" formControlName='concentration'>
+      <!-- <input type="text" name="concentration" id="concentration" formControlName='concentration'>-->
+       <nouislider [config]="someRange2config" [tooltips]="[true ]" formControlName="concentration.single"></nouislider>
+    </li>
+    <li>
+        <label for="name">Sleep Quality</label>
+        <nouislider [config]="someRange2config"  formControlName="sleepQuality"></nouislider>
+    </li>
+    <li>
+        <label for="name">Sleep Difficulty</label>
+        <!--<input type="text" name="sleepDifficulty" id="sleepDifficulty" formControlName='sleepDifficulty'>-->
+        <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="sleepDifficulty"></nouislider>
+    </li>
+    <li>
+        <label for="name">Sleep Notes</label>
+        <input type="text" name="sleepNotes"  id="sleepNotes" formControlName='sleepNotes'>
     </li>
     <li>
         <label for="name">Excercise Notes</label>
         <input type="text" name="excerciseNotes" id="excerciseNotes" formControlName='excerciseNotes'>
     </li>
     <li>
-        <label for="name">Stressfull Events</label>
-        <input type="text" name="stressEVents" id="stressEVents" formControlName='stressEVents'>
+        <label for="name">Supplements</label>
+        <input type="text" name="supplements"  id="supplements" formControlName='supplements'>
     </li>
     <li>
-        <label for="name">Supplements</label>
-        <input type="text" name="supplements" id="supplements" formControlName='supplements'>
+        <label for="name">Dietary Notes</label>
+        <input type="text" name="dietaryNotes"  id="dietaryNotes" formControlName='dietaryNotes'>
     </li>
-
-      <li>
-            <label for="name">Sleep Quality</label>
-            <input type="text" name="sleepQuality" id="sleepQuality" formControlName='sleepQuality'>
+    <li>
+            <label for="name">Stressfull Events</label>
+            <input type="text" name="stressEvents" id="stressEvents" formControlName='stressEvents'>
         </li>
-      <li>
-          <label for="name">Sleep Difficulty</label>
-          <input type="text" name="sleepDifficulty" id="sleepDifficulty" formControlName='sleepDifficulty'>
-      </li>
-      <li>
-        <label for="name">Sleep Notes</label>
-        <input type="text" name="sleepNotes" id="sleepNotes" formControlName='sleepNotes'>
+    <li>
+        <label for="name">Additional Notes</label>
+        <input type="text" name="additionalNotes" id="additionalNotes" formControlName='additionalNotes'>
     </li>
-      <li>
-          <label for="name">Dietary Notes</label>
-          <input type="text" name="dietaryNotes" id="dietaryNotes" formControlName='dietaryNotes'>
-      </li>
-      <li>
-            <label for="name">Additional Notes</label>
-            <input type="text" name="additionalNotes" id="additionalNotes" formControlName='additionalNotes'>
-        </li>
+    <li>
+        <button id='saveButton' type="submit" [disabled]="!form.valid">Save</button> </li>
   </ul>
-  <button type="submit" [disabled]="!form.valid">Save</button>
 </form>
 

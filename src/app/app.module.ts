@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
+import { NouisliderModule } from 'ng2-nouislider';
+import { FormsModule, FormControlDirective } from '@angular/forms';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -46,7 +49,8 @@ firebase.initializeApp(firebaseConfig);
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NouisliderModule
   ],
   declarations: [
     AppComponent,
@@ -60,6 +64,7 @@ firebase.initializeApp(firebaseConfig);
   ],
   providers: [
     LogItemService,
+    
     { provide: lookupListToken, useValue: lookupLists },
     { provide: XHRBackend, useClass: XHRBackend },
     { provide: APP_BASE_HREF, useValue: '/'}

@@ -1,9 +1,13 @@
 import { Component, Inject } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
+import { Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { LogItemService } from './log-item.service';
 import { lookupListToken } from './providers';
+import { NgModule } from '@angular/core';
+import { NgControl } from '@angular/forms';
+import { EventEmitter } from '@angular/core'
 
 import {  AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireList, AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject } from 'angularfire2/database';
@@ -33,6 +37,8 @@ export class LogItemFormComponent {
   logLengthID;  
   logList: AngularFireList<any>;
   logItem;
+  date = new Date
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,7 +67,25 @@ export class LogItemFormComponent {
   }
 
 
+  someRange2config: any = {
+    behaviour: 'drag',
+    start: [0, 100],
+
+    range: {
+      min: 0,
+      max: 100
+    }
+ 
+  };
+
+
+
+
+
   ngOnInit() {
+
+    
+
     this.log.subscribe((log) => {
       console.log('FORM:  items')
       console.log(log)
@@ -81,7 +105,7 @@ export class LogItemFormComponent {
         Validators.required,
         Validators.pattern('[\\w\\-\\s\\/]+')
       ])),
-      sleepQuality: this.formBuilder.control('50'),
+      sleepQuality : this.formBuilder.control,
       sleepDifficulty: this.formBuilder.control('50'),
       energyLevel: this.formBuilder.control('50'),
       motivation: this.formBuilder.control('50'),  
@@ -94,6 +118,12 @@ export class LogItemFormComponent {
       sleepNotes: this.formBuilder.control('A fine sleep'),
       additionalNotes: this.formBuilder.control('None')
       })
+  }
+
+  onChange(event){
+    console.log('change')
+
+
   }
 
   percentageValidator(control){
