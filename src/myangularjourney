@@ -1,0 +1,100 @@
+wednsday - started learning NPM
+thursday - watched how to build local server. NOTE - run angular project on npm server
+ - use nodesasss
+    run script to nodesass format
+    stle.css.map links style.css to sass, makes inspect element more useful
+    nodesass watch, watch folder for changes
+
+- may need to transpile if es6, use babel cli
+    es6 has let and contasnt variables
+    dont forget babel config file
+    js-transform in script 
+    SO helps in trnsforming es6 to readable js
+    
+
+ANGULAR
+    - need some typescript, es2015
+    - import is typescript
+    downwards through components
+    - each coponent has selector
+    - directive, display data client side
+    - interpolation = curly braces
+    - hashtag refecrences for direct injectiomn
+    DI DEPENDANCY INJECTION
+    - put app business logic in services
+        javscript logic not coupled with angular
+        allows for modular resusable code
+    ROUTING
+        - something to do with http
+    DECORATOR
+        - @whatever
+
+
+BUCKYTIPS
+    -
+
+
+GIT 
+    not staged = means needs to be added
+    - git add.
+    - git status (whats gonna be staged?)
+    - git log (what happened?)
+    - git commit -m "" (make commit with name)
+    - git checkout
+        if you delete a file, checkout and it will return. aka unstage the deletion
+    - git --all (grab everything and stage)
+    - git checkout hash (return to past version)    
+        detached head mode!!
+            - playground to do experimental shit
+            - changes wont be saved unless 
+            - create new branch,log, alternate reality!
+    - git branch (show branches)
+        - git branch master leaves it behind
+        - checkout goes into branch
+    - git merge alternateReality (with whatever im in)
+    - git branch -m alternatReality newName (change name)
+    - git branch -d alternateReality (branch delete)
+    - .gitignore, dont bother uploading these files 
+TYPESCRIPT    
+    - must be converted to js to run in browser (transpiler)
+
+FOLDER STRUCTURE
+    - when converted to js, map files created to help debug
+    - never edit node_modules
+    - package.json
+        - dependencies
+        - licences
+    -tsconfig
+        - outdir, when finished put in
+        - 
+    - typeing.json
+        - help convert stuff
+COMPONENTS            
+    - can be made of other components
+    - import {component} from angular class
+    - @Component({ 
+        selector: 'myAPP ' (referecnes component)
+        template: (actual html)
+        })
+    
+    - export class AppComponent {}
+        - can use it elsewhere
+    - system.js 
+        - packages, tells progream to do something when it sees new file
+        - tacks on .js extension for imported files
+
+FOR VIDEO CLASS  
+    - create class with attributes inside video.tsconfig
+    - create playlist component
+    - use template url instead of template, include full url
+        - make html file with whatever
+
+    - nesting components
+        - directives, mention which other component you want to include
+            dont freak out, here is a list of the other html components we wrote
+        - to nest variables in html
+                <tr *ngFor="# of videos">   
+            <td>{{v.id}}</td>  
+            <td>{{v.title}}</td> 
+            <td>{{v.description}}</td>
+                </tr>
