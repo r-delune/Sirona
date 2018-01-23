@@ -55,6 +55,10 @@ GIT
     - git branch -m alternatReality newName (change name)
     - git branch -d alternateReality (branch delete)
     - .gitignore, dont bother uploading these files 
+
+    - sign in as neew user
+        - $ git config --global user.email "email@example.com"
+
 TYPESCRIPT    
     - must be converted to js to run in browser (transpiler)
 
