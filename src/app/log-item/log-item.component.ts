@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class LogItemComponent {
   @Input() logItem;
+  logItems: string
   @Output() delete = new EventEmitter();
 
   onDelete() {

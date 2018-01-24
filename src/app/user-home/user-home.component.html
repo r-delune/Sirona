@@ -1,3 +1,51 @@
-<p>
-  user-home works!
-</p>
+
+<header>HOME</header>
+<section>
+<table class='table table-hover'>     
+<div *ngIf="authService.authState | async as user; else showLogin">
+        <h1>Hello {{ user.displayName }}!</h1>
+        <button>Logout</button>
+</div>         
+<thead >
+<tr >
+      <td style='width: 30px;'><b>Date</b></td>
+      <td><b>Time of Day</b></td>
+      <td><b>General Mood</b></td> 
+      <td><b>Appetite</b></td>
+      <td><b>Energy Level</b></td>
+      <td><b>Motivation</b></td>
+      <td><b>Concentration</b></td>
+      <td><b>Stress Events</b></td>
+      <td><b>Coffee</b></td>
+      <td><b>Supplements</b></td>
+      <td><b>Excercise</b></td>
+      <td><b>Dietary</b></td>
+      <td><b>Sleep Quality</b></td>
+      <td><b>Sleep Difficulty</b></td>
+      <td><b>Sleep</b></td>
+      <td><b>Additional</b></td>
+</tr>
+</thead>
+<tbody>
+  <tr *ngFor="let item of logItems | async">   
+          <td>{{item.log[0].timeOfDay}}</td> 
+          <td>{{item.timeOfDay}}</td>
+          <td>{{item.generalMood}}</td>
+          <td>{{item.appetite}}</td>
+          <td>{{item.energyLevel}}</td>
+          <td>{{item.motivation}}</td>
+          <td>{{item.concentration}}</td>
+          <td>{{item.stressEvents}}</td>
+          <td>{{item.coffee}}</td>
+          <td>{{item.supplements}}</td>
+          <td>{{item.exerciseNotes}}</td>
+          <td>{{item.Dietary}}</td>
+          <td>{{item.sleepQuality}}</td>
+          <td>{{item.exerciseNotes}}</td>
+          <td>{{item.sleepNotes}}</td>
+          <td>{{item.additionalNotes}}</td>
+      </tr>
+</tbody>
+<h1>{{ logItems | async | json }}</h1>
+</table>
+</section>

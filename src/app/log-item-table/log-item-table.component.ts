@@ -32,8 +32,6 @@ export class LogItemTableComponent {
   public firebase;
   logArray;
 
-  
-
   constructor(
     private formBuilder: FormBuilder,
     //allow access to media item service so we can add 

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListTaskComponent } from './list-task.component';
+import { UserGraphComponent } from './user-graph.component';
 
-describe('ListTaskComponent', () => {
-  let component: ListTaskComponent;
-  let fixture: ComponentFixture<ListTaskComponent>;
+describe('UserGraphComponent', () => {
+  let component: UserGraphComponent;
+  let fixture: ComponentFixture<UserGraphComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListTaskComponent ]
+      declarations: [ UserGraphComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListTaskComponent);
+    fixture = TestBed.createComponent(UserGraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

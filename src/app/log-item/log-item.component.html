@@ -1,6 +1,6 @@
-<h2>{{ logItem.generalMood }}</h2>
-<template [ngIf]="logItem.date">
-  <div>Entry made on {{ logItem.date | date: 'shortDate' }}</div>
+<h2>{{ logItems }}</h2>
+<template [ngIf]="logItem">
+  <div>Entry made on {{ logItem | date: 'shortDate' }}</div>
 </template>
 <div>{{ logItem.concentration }}</div>
 <div>{{ logItem.appetite }}</div>

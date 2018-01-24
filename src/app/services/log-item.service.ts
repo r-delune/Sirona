@@ -4,40 +4,86 @@ import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
-import { AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject } from 'angularfire2/database';
+import { AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject, AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import { Item } from '../log-item-form/log-item-form.component';
+import { AngularFireAuth } from 'angularfire2/auth';
 //get and set data from the data store
 //in this case, display items
 //can wrap up a formula here and use it wherever
 //specific things that are none component specific
+export class ItemTest {
+  body: string;
+}
 
 @Injectable()
 export class LogItemService {
 
+  itemTest : AngularFireObject<ItemTest[]> = null;
+  userId: string;
   itemRef: AngularFireObject<any>;
-  item: Observable<any>;
-  users: Observable<Item>;
-
+  items: Observable<any>;
+  users : AngularFireObject<any>;
   logRef: AngularFireObject<any>;
   logItem: Observable<any>;
   logItems: Observable<Item>;
   
-  constructor(private http: Http, db: AngularFireDatabase) {
+  
+  constructor(private http: Http, db: AngularFireDatabase,
+    dbm: AngularFireDatabaseModule,
+  private userAuth: AngularFireAuth) {
     this.itemRef = db.object('Users');
-    this.item = this.itemRef.valueChanges();
-
+    this.items = this.itemRef.valueChanges();
     this.logRef = db.object('Users/0/log');
     this.logItem = this.itemRef.valueChanges();
 
+    this.userAuth.authState.subscribe(user => {
+     // if (user) this.userId = user.uid
+    })
+
+    this.userAuth.authState.subscribe(user => {
+     // this.userId = user.uid
+    })
+
+    this.items.subscribe((items) => {
+      console.log('User Item service')
+       console.log(items)
+     });
+ 
+     this.logItem.subscribe((logItem) => {
+       console.log('Log Item service')
+        console.log(logItem)
+      });
+
+      this.logItem.subscribe((logItem) => {
+        console.log('user Item service')
+         console.log(logItem)
+       });
 
     console.log(this.itemRef)
-    console.log(this.item)
+    console.log(this.items)
 
-    const users: AngularFireObject<Item> = db.object('Users')
-    const logItems: AngularFireObject<Item> = db.object('Users/0/log')
+  //  const users: AngularFireObject<Item> = db.object('Users')
+   // const logItems: AngularFireObject<Item> = db.object('Users/0/log')
+  }
+
+
+  getUsersList() : AngularFireObject<ItemTest[]>{
+    console.log('user id is null, retturnign')
+
+    if (!this.userId) return;
+    //this.itemTest = this.db.list('items/${this.userId}')
+    console.log('getting user list')
+    console.log(this.users)
+    return this.itemTest;
+  }
+
+  createUser(item: Item){
+
+    console.log('creating user')
+   // this.itemTest.push(item)
   }
 
   getLogItems() {
@@ -50,11 +96,11 @@ export class LogItemService {
   }
 
   getUserItems() {
-    this.item.subscribe((items) => {
-      console.log('getting User Item service from base')
+    this.items.subscribe((items) => {
+      console.log('getting Items from base')
        console.log(items)
        //return items
-       return this.users
+       return this.items
      }); 
   }
 
@@ -85,14 +131,6 @@ export class LogItemService {
  }
 
  ngOnInit() {
-   this.item.subscribe((items) => {
-     console.log('User Item service')
-      console.log(items)
-    });
 
-    this.logItem.subscribe((logItem) => {
-      console.log('Log Item service')
-       console.log(logItem)
-     });
  }
 }

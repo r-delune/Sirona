@@ -20,7 +20,8 @@ export interface Item {
 })
 export class LogItemListComponent {
   medium = '';
-  logItems
+  logItems;
+  logItemArray : AngularFireObject<any>;
   paramsSubscription;
   firstUserDetails = []
   firstUserLogItem = []
@@ -29,12 +30,11 @@ export class LogItemListComponent {
   logRef :  AngularFireObject<any>;
   logList
   currentList
-  items
+  items;
   array = []
   grey = []
   albums
   mystring
-
 
   constructor(
     //allow access to media item service so we can add 
@@ -63,6 +63,9 @@ export class LogItemListComponent {
     console.log( 'this.logItems') 
     console.log( this.logItems) 
     console.log(this.logRef) 
+
+
+
   });
   }
 
@@ -74,7 +77,11 @@ export class LogItemListComponent {
     this.logItemService.deleteLogItem(logItem)
   }
 
-  getLogItems() {
-
+  getLogItems():Promise<any> {
+   console.log('MY PROMISE')
+   //console.log(this.logItemService.getLogItems())
+    return 
   }
+
+  deleteLogItem(r){}
 }

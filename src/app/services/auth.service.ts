@@ -12,9 +12,7 @@ export class AuthService {
   authState: any = null;
 
   test(){
-
     console.log('testing!')
-
   }
 
   constructor(private afAuth: AngularFireAuth,
@@ -28,22 +26,27 @@ export class AuthService {
 
   // Returns true if user is logged in
   get authenticated(): boolean {
+    console.log('checking if authenticated')
     return this.authState !== null;
   }
 
   // Returns current user data
   get currentUser(): any {
+    console.log('getting current user')
     return this.authenticated ? this.authState : null;
   }
 
   // Returns
   get currentUserObservable(): any {
+    console.log('getting current user observable')
     return this.afAuth.authState
   }
 
   // Returns current user UID
   get currentUserId(): string {
-    return this.authenticated ? this.authState.uid : '';
+    console.log('getting current user id')
+    //return this.authenticated ? this.authState.uid : '';
+    return 'SORT THIS'
   }
 
   // Anonymous User
@@ -59,22 +62,21 @@ export class AuthService {
   }
 
   //// Social Auth ////
-  githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider()
-    return this.socialSignIn(provider);
-  }
 
   googleLogin() {
+    console.log('logginf in via google')
     const provider = new firebase.auth.GoogleAuthProvider()
     return this.socialSignIn(provider);
   }
 
   facebookLogin() {
+    console.log('loggin in via facebook')
     const provider = new firebase.auth.FacebookAuthProvider()
     return this.socialSignIn(provider);
   }
 
   twitterLogin(){
+    console.log('loggin in via twitter')
     const provider = new firebase.auth.TwitterAuthProvider()
     return this.socialSignIn(provider);
   }
@@ -88,9 +90,10 @@ export class AuthService {
       .catch(error => console.log(error));
   }
 
-
   //// Anonymous Auth ////
   anonymousLogin() {
+    console.log('signing in anonymously')
+
     return this.afAuth.auth.signInAnonymously()
     .then((user) => {
       this.authState = user
@@ -101,17 +104,23 @@ export class AuthService {
 
   //// Email/Password Auth ////
   emailSignUp(email:string, password:string) {
+
+    console.log('signing up via email:')
+    console.log(email)
+    console.log(password)
+
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user
         this.updateUserData()
+        console.log('signed up siccessfully')
       })
       .catch(error => console.log(error));
   }
 
   emailLogin(email:string, password:string) {
 
-    console.log('auth signin stage - ')
+    console.log('signing in via email:')
     console.log(email)
     console.log(password)
 
@@ -119,6 +128,7 @@ export class AuthService {
        .then((user) => {
          this.authState = user
          this.updateUserData()
+         console.log('logged in siccessfully')
        })
        .catch(error => console.log(error));
   }
@@ -126,36 +136,30 @@ export class AuthService {
   // Sends email allowing user to reset password
   resetPassword(email: string) {
     var auth = firebase.auth();
-
+    console.log('resetting passwword')
     return auth.sendPasswordResetEmail(email)
       .then(() => console.log("email sent"))
       .catch((error) => console.log(error))
   }
 
-
   //// Sign Out ////
-  signOut(): void {
+  signOut(): void {   
+    console.log('signed ut')
     this.afAuth.auth.signOut();
     this.router.navigate(['/'])
   }
 
-
   //// Helpers ////
   private updateUserData(): void {
-  // Writes user name and email to realtime db
-  // useful if your app displays information about users or for admin features
+    // Writes user name and email to realtime db
+    // useful if your app displays information about users or for admin features
+    console.log('updsating user data')
     let path = `users/${this.currentUserId}`; // Endpoint on firebase
     let data = {
                   email: this.authState.email,
                   name: this.authState.displayName
                 }
-
     this.db.object(path).update(data)
     .catch(error => console.log(error));
-
   }
-
-
-
-
 }

@@ -4,7 +4,7 @@
     <div>{{logItems | categoryList }}</div>
 </header>
 <section>
-  <mw-log-item
+ <!-- <mw-log-item
     [ngClass]="{'medium-sleep': logItem.medium==='Sleep', 'medium-stressors':logItem.medium==='Stressors'}" 
     *ngFor="let logItem of logItems"
     [logItem]="logItem"
@@ -32,7 +32,7 @@
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let item of Items | async" (click)="clickedButton(v)">   
+          <tr *ngFor="let item of Items | async" >   
               <td>{{item.date}}</td> 
               <td>{{item.timeOfDay}}</td>
               <td>{{item.generalMood}}</td>
@@ -51,19 +51,13 @@
               <td>{{item.additionalNotes}}</td>
           </tr>
       </tbody> 
-      <h1>{{ logItems | async | json }}</h1>
-      <input type="text" #newname placeholder="Name" />
-      <input type="text" #newsize placeholder="Size" />
-      <br />
-      <button (click)="save(newname.value)">Set Name</button>
-      <button (click)="update(newsize.value)">Update Size</button>
-      <button (click)="delete()">Delete</button>
-      <button (click)="loginWithGoogle()">Login with Google</button>
+      <h1>{{ logList | async | json }}</h1>
+
     </table>
   <div id="login-box" class="hide">
     <p>Please login on your google account.</p>
-    <button id="btnLogin" onclick="handleAuthClick()" class="button">Login</button>
-  </div>
+    <button id="btnLogin"  class="button">Login</button>
+  </div>-->
 </section>
 <footer>
   <a routerLink="/add">

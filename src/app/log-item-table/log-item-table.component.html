@@ -1,18 +1,15 @@
 <nav>
-        <a routerLink="/">
-          <img src="../assets/1.png" class="icon"/>
-        </a>
-        <a routerLink="/add">
-          <img src="../assets/3.png" class="icon"/>
-        </a>
-        <a routerLink="/home">
-          <img src="../assets/2.png" class="icon"/>
-        </a>
-        <a routerLink="/table">
-          <img src="../assets/1.png" class="icon"/>
-        </a>
-      </nav>
-      <header>LOG</header>
+  <a routerLink="/home">
+    <img src="../assets/2.png" class="icon"/>
+  </a>
+  <a routerLink="/table">
+    <img src="../assets/1.png" class="icon"/>
+  </a>
+  <a routerLink="/graph">
+    <img src="../assets/1.png" class="icon"/>
+  </a>
+</nav>
+      <header>TABLE</header>
 <section>
 
 <table class='table table-hover'>     
@@ -41,8 +38,8 @@
     </tr>
 </thead>
 <tbody>
-        <tr *ngFor="let item of Items | async" (click)="clickedButton(v)">   
-                <td>{{item.date}}</td> 
+        <tr *ngFor="let item of logItems | async" (click)="clickedButton(v)">   
+                <td>{{item.log[0].timeOfDay}}</td> 
                 <td>{{item.timeOfDay}}</td>
                 <td>{{item.generalMood}}</td>
                 <td>{{item.appetite}}</td>

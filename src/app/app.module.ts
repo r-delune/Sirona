@@ -28,11 +28,9 @@ import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 
-
-
 import { environment } from './environments/environment';
-import { ListTaskComponent } from './list-task/list-task.component';
 import { UserHomeComponent } from './user-home/user-home.component';
+import { UserGraphComponent } from './user-graph/user-graph.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -67,7 +65,8 @@ firebase.initializeApp(firebaseConfig);
     LogItemFormComponent,
     LogItemTableComponent,
     LoginFormComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    UserGraphComponent
   ],
   providers: [
     LogItemService,
