@@ -36,7 +36,6 @@ section > header .description {
     padding-top: 0px; 
 }
 
-
 input#message {
   background:#fff;
   border:none;
@@ -72,3 +71,8 @@ img {
 .wrapper{
   padding: 20px;
 }
+
+
+
+/*login section*/
+

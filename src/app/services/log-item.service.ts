@@ -8,7 +8,7 @@ import { AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject } f
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
-import { Item } from './log-item-form.component';
+import { Item } from '../log-item-form/log-item-form.component';
 //get and set data from the data store
 //in this case, display items
 //can wrap up a formula here and use it wherever

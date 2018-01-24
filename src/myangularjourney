@@ -102,3 +102,19 @@ FOR VIDEO CLASS
             <td>{{v.title}}</td> 
             <td>{{v.description}}</td>
                 </tr>
+
+export const ROUTES: Routes = [
+   {
+      path: '',
+      component: MainComponent,
+      children: [
+         { path: '', component: HomeComponent },
+         { path: 'download', component: DownloadComponent },
+         { path: 'compare', component: CompareComponent }
+      ] 
+   },
+   { path: 'login', component: LoginComponent },
+]                
+
+
+ - include facebgook login

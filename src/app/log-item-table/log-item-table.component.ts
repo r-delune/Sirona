@@ -3,8 +3,8 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import {Observable} from 'rxjs/Observable';
-import { LogItemService } from './log-item.service';
-import { lookupListToken } from './providers';
+import { LogItemService } from '../services/log-item.service';
+import { lookupListToken } from '../providers';
 
 import { AngularFireDatabase, AngularFireDatabaseProvider } from 'angularfire2/database';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
@@ -14,6 +14,7 @@ import * as firebase from 'firebase/app';
 
 import { AngularFireAction } from '@angular/cli'
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'mw-log-item-table',
@@ -38,6 +39,7 @@ export class LogItemTableComponent {
     //allow access to media item service so we can add 
     private logItemService: LogItemService,  
     private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
     db: AngularFireDatabase) {
       this.itemRef = db.object('Users');
       this.logItems = this.itemRef.valueChanges();
@@ -72,8 +74,8 @@ export class LogItemTableComponent {
       console.log('Log items')
       console.log(items)
 
-      this.logItems = items.json();
-      this.logArray = Array.of(this.logItems); 
+     // this.logItems = items.json();
+     // this.logArray = Array.of(this.logItems); 
     });
   }
 

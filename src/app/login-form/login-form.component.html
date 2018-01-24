@@ -1,0 +1,25 @@
+<!--<header>
+</header>-->
+        <div *ngIf="authService.authState | async as user; else showLogin">
+            <h1>Hello {{ user.displayName }}!</h1>
+            <button (click)="logout()">Logout</button>
+          </div>
+          <ng-template #showLogin>
+                <div class="header">
+                        <div>Sirona<span>health</span></div>
+                    </div>
+            <div class="login">
+            <input type="text" placeholder="username" name="user"><br>
+            <input type="password" placeholder="password" name="password"><br>
+            <input (click)="emailLogin()" type="button" value="Login">
+            </div>
+          </ng-template>
+
+          
+
+ 
+
+
+
+  
+  

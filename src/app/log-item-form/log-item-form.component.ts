@@ -3,11 +3,11 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { LogItemService } from './log-item.service';
-import { lookupListToken } from './providers';
+import { lookupListToken } from '../providers';
 import { NgModule } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { EventEmitter } from '@angular/core'
+import { LogItemService } from '../services/log-item.service'
 
 import {  AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireList, AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject } from 'angularfire2/database';

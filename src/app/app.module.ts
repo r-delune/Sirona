@@ -12,22 +12,27 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-import { AppComponent } from './app.component';
-import { LogItemComponent } from './log-item.component';
-import { LogItemListComponent } from './log-item-list.component';
+import { AppComponent } from './app-component/app.component';
+import { LogItemComponent } from './log-item/log-item.component';
+import { LogItemListComponent } from './log-item-list/log-item-list.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 import { FavoriteDirective } from './favorite.directive';
 import { CategoryListPipe } from './category-list.pipe';
-import { LogItemTableComponent } from './log-item-table.component';
-import { LogItemFormComponent } from './log-item-form.component';
-import { LogItemService } from './log-item.service';
+import { LogItemTableComponent } from './log-item-table/log-item-table.component';
+import { LogItemFormComponent } from './log-item-form/log-item-form.component';
+import { LogItemService } from './services/log-item.service';
+import { AuthService } from './services/auth.service';
 import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { environment } from '../environments/environment';
+
+
+import { environment } from './environments/environment';
 import { ListTaskComponent } from './list-task/list-task.component';
+import { UserHomeComponent } from './user-home/user-home.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -50,7 +55,8 @@ firebase.initializeApp(firebaseConfig);
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    NouisliderModule
+    NouisliderModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
@@ -60,11 +66,12 @@ firebase.initializeApp(firebaseConfig);
     CategoryListPipe,
     LogItemFormComponent,
     LogItemTableComponent,
-    ListTaskComponent
+    LoginFormComponent,
+    UserHomeComponent
   ],
   providers: [
     LogItemService,
-    
+    AuthService,
     { provide: lookupListToken, useValue: lookupLists },
     { provide: XHRBackend, useClass: XHRBackend },
     { provide: APP_BASE_HREF, useValue: '/'}

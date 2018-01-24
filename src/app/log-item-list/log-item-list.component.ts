@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { LogItemService } from './log-item.service';
+import { LogItemService } from '../services/log-item.service';
 import {Observable} from 'rxjs/Observable';
 import { AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject } from 'angularfire2/database';
 import { User } from 'firebase/app';
