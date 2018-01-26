@@ -119,6 +119,12 @@ export const ROUTES: Routes = [
 
  - include facebgook login
 
-
  - no need for time of day, add entry whneevr and it will log
- - change gradient color based on stats
+ - change gradient color based on stats, constantly moving
+ - fields are selectable by user
+ - avergae mood number 
+ - ideally user should make entry every time mood changes significantly
+
+ todo:
+    remove nav on login
+    add user images

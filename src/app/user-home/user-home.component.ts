@@ -16,9 +16,11 @@ import { DatastoreService } from '../services/datastore.service';
 
 export class UserHomeComponent implements OnInit {
     
+
+
     constructor(
       private datastoreService: DatastoreService,  
-      private authService: AuthService,
+      public authService: AuthService,
       private router: Router,
       db: AngularFireDatabase) {
         this.datastoreService.getAllLogItems().subscribe(logItemArray => {console.log('HOME PAGE, FROM SERVICE, IN CONSTRUCTOR'); console.log(logItemArray)});
@@ -29,8 +31,8 @@ export class UserHomeComponent implements OnInit {
 
       console.log('home page loaded')
 
-      this.authService.anonymousLogin().then((data) => {
-        this.router.navigate(['']);
-      })
+     // this.authService.anonymousLogin().then((data) => {
+    //    this.router.navigate(['']);
+    //  })
     }
   }

@@ -1,0 +1,31 @@
+<form [formGroup]='form' (ngSubmit)='onRegister(form.value)' >
+    <div class="login">       
+        <input type="text" placeholder="Name" name="displayName" formControlName="displayName">
+        <input type="text" placeholder="Email" name="email" formControlName="email">
+        <input type="password" placeholder="Password" name="password" formControlName="password">
+        <!--<select name='Sex' id='sex' formControlName='sex' >
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>-->
+        <button id='saveButton' type="submit" [disabled]="!form.valid">Register!</button> 
+        <button id='signInButton' type='button' routerLink="/login">Sign In</button> 
+    </div>
+</form>
+<div *ngIf="authService.authState | async as user; else showLogin">
+    <h1>Hello {{ user.displayName }}!</h1>
+    <button >Logout</button>
+</div>
+<ng-template #showLogin>
+    <div class="header">
+    <div>Sirona<span>app</span></div>
+    </div>
+</ng-template>
+
+          
+
+ 
+
+
+
+  
+  

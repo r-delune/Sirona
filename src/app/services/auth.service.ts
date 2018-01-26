@@ -4,9 +4,10 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase';
-import { AngularFireObject } from 'angularfire2/database/interfaces';
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireObject} from 'angularfire2/database/interfaces';
+import { AngularFireModule} from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
+
 
 interface User {
   uid: string;
@@ -16,80 +17,69 @@ interface User {
   favoriteColor?: string;
 }
 
-
 @Injectable()
 export class AuthService {
 
   authState: any = null;
   user: Observable<any>;
 
-
-  test(){
-    console.log('testing!')
-  }
-
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
               private afs: AngularFireModule,
               private router:Router) {
 
-            this.afAuth.authState.subscribe((auth) => {
-              this.authState = auth
-            });
-         
-            // this.itemRef = db.object('Users');
-            // this.logItems = this.itemRef.valueChanges();
-            this.user = this.afAuth.authState
-            .switchMap(user => {
-              if (user) {
-                return this.db.object('Users/${user.uid}').valueChanges()
-              } else {
-                
-                console.log('ERRORROROROR')        
-                //return AngularFireObject.of(null)
-                return 'ERRRR'
-              }
-            })
-          }
-        
-          
-          private oAuthLogin(provider) {
-
-            console.log('oAuth lofin')
-
-            return this.afAuth.auth.signInWithPopup(provider)
-              .then((credential) => {
-                this.updateUserData(credential.user)
-              })
-          }
-
-          private updateUserData(user) {
-            // Sets user data to firestore on login
-            //const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-            const userRef: Observable<any> = this.db.object('Users/${user.uid}').valueChanges()
-            const data: User = {
-              uid: user.uid,
-              email: user.email,
-              displayName: user.displayName,
-              photoURL: user.photoURL
-            }     
-            
-            console.log('UPDATING DATA')
-            console.log(data)        
-           // return userRef.set(data)
-           return 'NOTHING HERE'
-          }
-
-          signOut() {
-            this.afAuth.auth.signOut().then(() => {
-              console.log('SIGNING OUT')
-                this.router.navigate(['/login']);
-            });
-          }
-        
 
 
-  // Returns true if user is logged in
+                this.afAuth.authState.subscribe((auth) => {
+                  this.authState = auth;
+                  console.log('AUTH:')
+                  console.log(this.authState)
+              });
+
+
+    this.user = this.afAuth.authState
+    .switchMap(user => {
+      if (user) {
+        return this.db.object('Users/${user.uid}').valueChanges()
+      } else {               
+        console.log('ERRORROROROR')        
+        //return AngularFireObject.of(null)
+        return 'ERRRR'
+      }
+    })
+  }
+
+  private oAuthLogin(provider) {
+
+    console.log('oAuth lofin')
+
+    return this.afAuth.auth.signInWithPopup(provider)
+      .then((credential) => {
+        this.updateUserData(credential.user)
+      })
+  }
+
+  private updateUserData(user) {
+    const userRef: Observable<any> = this.db.object('Users/${user.uid}').valueChanges()
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL
+    }     
+  
+    return 'NOTHING HERE'
+  }
+
+  signOut() {
+
+    
+    this.afAuth.auth.signOut().then(() => {
+      console.log('SIGNING OUT')
+        this.router.navigate(['/login']);
+    });
+  }
+      
   get authenticated(): boolean {
     console.log('checking if authenticated')
     return this.authState !== null;
@@ -110,8 +100,7 @@ export class AuthService {
   // Returns current user UID
   get currentUserId(): string {
     console.log('getting current user id')
-    //return this.authenticated ? this.authState.uid : '';
-    return 'SORT THIS'
+    return this.authenticated ? this.authState.uid : '';
   }
 
   // Anonymous User
@@ -130,8 +119,9 @@ export class AuthService {
 
   googleLogin() {
     console.log('logginf in via google')
-    const provider = new firebase.auth.GoogleAuthProvider()
-    return this.socialSignIn(provider);
+    //const provider = new firebase.auth.GoogleAuthProvider()
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    //return this.socialSignIn(provider);
   }
 
   facebookLogin() {
@@ -179,6 +169,7 @@ export class AuthService {
         this.authState = user
     //    this.updateUserData()
         console.log('signed up siccessfully')
+        this.router.navigate(['/profile']);
       })
       .catch(error => console.log(error));
   }
@@ -194,6 +185,7 @@ export class AuthService {
          this.authState = user
      //    this.updateUserData()
          console.log('logged in siccessfully')
+         this.router.navigate(['/profile']);
        })
        .catch(error => console.log(error));
   }
@@ -206,25 +198,4 @@ export class AuthService {
       .then(() => console.log("email sent"))
       .catch((error) => console.log(error))
   }
-
-  //// Sign Out ////
- // signOut(): void {   
-  //  console.log('signed ut')
- //   this.afAuth.auth.signOut();
-  //  this.router.navigate(['/'])
-  //}
-
-  //// Helpers ////
- // private updateUserData(): void {
-    // Writes user name and email to realtime db
-    // useful if your app displays information about users or for admin features
- //   console.log('updsating user data')
- //   let path = `users/${this.currentUserId}`; // Endpoint on firebase
-  //  let data = {
-  //                email: this.authState.email,
-  //                name: this.authState.displayName
-  //              }
- //   this.db.object(path).update(data)
- //   .catch(error => console.log(error));
- // }
 }

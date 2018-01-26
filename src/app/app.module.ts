@@ -33,6 +33,7 @@ import { environment } from './environments/environment';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -70,7 +71,8 @@ firebase.initializeApp(firebaseConfig);
     LoginFormComponent,
     UserHomeComponent,
     UserGraphComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    RegistrationFormComponent
   ],
   providers: [
     DatastoreService,

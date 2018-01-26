@@ -7,11 +7,6 @@ import { User } from 'firebase/app';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFirestore } from 'angularfire2/firestore';
 
-export interface Item {
-  User: string;
-  log: string;
-}
-
 @Component({
   selector: 'mw-log-item-list',
   templateUrl: './log-item-list.component.html',
@@ -19,6 +14,7 @@ export interface Item {
 })
 export class LogItemListComponent {
   medium = '';
+  myImage
 
   constructor(
     //allow access to media item service so we can add 
@@ -28,10 +24,6 @@ export class LogItemListComponent {
     db: AngularFireDatabase) {
     
     }
-
-  ngOnInit() {
-
-  }
 
   deleteLogItem(r){}
 }

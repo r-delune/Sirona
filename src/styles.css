@@ -4,6 +4,10 @@ body {
     background: linear-gradient(#780206, #780206);
 }
 
+html {
+    background: linear-gradient(#780206, #780206);
+}
+
 h1{
     position: absolute;
     top:50%;

@@ -7,15 +7,17 @@ import { UserHomeComponent } from './user-home/user-home.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
 import { AuthGuard } from './authGuard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginFormComponent, data: { animation: 'tiger' } },
   { path: 'add', component: LogItemFormComponent, data: { animation: 'dolphin'} },
-  { path: 'table', component: LogItemTableComponent },
-  { path: 'profile', component: UserProfileComponent },
-  { path: 'graph', component: UserGraphComponent },
-  { path: ':medium', component: LogItemListComponent },
-  { path: 'home', component: UserHomeComponent, canActivate: [AuthGuard]},
+  { path: 'table', component: LogItemTableComponent, data: { animation: 'dolphin'}},
+  { path: 'register', component: RegistrationFormComponent, data: { animation: 'dolphin'}},
+  { path: 'profile', component: UserProfileComponent, data: { animation: 'dolphin'}},
+  { path: 'graph', component: UserGraphComponent ,data: { animation: 'dolphin'}},
+  { path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
+  { path: 'home', component: UserHomeComponent, data: { animation: 'dolphin'},canActivate: [AuthGuard]},
   //{
  //   path: 'full',
   //  component: UserHomeComponent,

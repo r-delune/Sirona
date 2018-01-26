@@ -6,13 +6,9 @@ import { Observable } from 'rxjs/Observable';
 import { lookupListToken } from '../providers';
 import { NgModule } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { EventEmitter } from '@angular/core'
 import { DatastoreService } from '../services/datastore.service'
-
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
-import { AngularFireList, AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject } from 'angularfire2/database';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFirestoreDocument } from 'angularfire2/firestore';
+
 import * as firebase from 'firebase/app';
 import { AuthService } from '../services/auth.service';
 
@@ -26,46 +22,17 @@ export interface Item { name: string; }
 
 export class LogItemFormComponent {
   form;
-  logItems;
-  private logCollection: AngularFirestoreCollection<Item>;  
-  items: Observable<Item[]>;
-  public task;
-  public firebase;
-  item: Observable<any>;
-  log: Observable<any>;
-  itemRef : AngularFireObject<any>;
-  logRef :  AngularFireObject<any>;
-  logLengthID;  
-  logList: AngularFireList<any>;
-  logItem;
+  logLengthID;
   date = new Date
+  logList
 
   constructor(
     private formBuilder: FormBuilder,
     private datastoreService: DatastoreService, 
-    db: AngularFireDatabase, 
-    afc: AngularFirestore, 
     authService: AuthService,
     @Inject(lookupListToken) public lookupLists,
     private router: Router
-  ) {
-    this.logCollection = afc.collection<Item>('Users/0/log');
-    this.items = this.logCollection.valueChanges();
-
-    const collection: AngularFirestoreCollection<Item> = afc.collection('Users/0/log');
-    
-    this.logList = db.list('Users/0/log');
-    this.logItem = this.logList.valueChanges();
-   
-    this.itemRef = db.object('Users');
-    this.item = this.itemRef.valueChanges();
-
-    this.logRef = db.object('Users/0/log');
-    this.log = this.logRef.valueChanges()
-
-    const users: AngularFireObject<Item> = db.object('Users')
-    const logs: AngularFireObject<Item> = db.object('Users/0/log')
-  }
+  ) {  }
 
   someRange2config: any = {
     behaviour: 'drag',
@@ -75,20 +42,12 @@ export class LogItemFormComponent {
       min: 0,
       max: 100
     }
- 
   };
 
   ngOnInit() {
-    this.log.subscribe((log) => {
-      console.log('FORM:  items')
-      console.log(log)
-      this.logLengthID = log.length
-      console.log('COUNT : ' + log.length )
-    });
-      console.log('FORM')
-      console.log(this.logItems)
-      const date = Date.now()
-    
+
+  
+
     this.form = this.formBuilder.group({
       id: Math.random(),
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
@@ -115,8 +74,6 @@ export class LogItemFormComponent {
 
   onChange(event){
     console.log('change')
-
-
   }
 
   percentageValidator(control){
@@ -152,5 +109,4 @@ export class LogItemFormComponent {
     const count = this.logLengthID
     this.logList.push( item).then((item) => { console.log('success - item key is: ' + item.key); });
    }
-  }
-
+}

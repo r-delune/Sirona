@@ -8,6 +8,8 @@ import {  OnInit, HostBinding } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
 import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
+
+
 import {
   trigger,
   state,
@@ -16,6 +18,8 @@ import {
   transition,
   query,
 } from '@angular/animations';
+
+
 
 import {  AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireList, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -27,47 +31,12 @@ declare var jquery:any;
 declare var $ :any;
 
 @Component({
-  selector: 'mw-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css'],
-  animations: [
-    trigger('routerAnimation', [
-      transition('* <=> *', [
-        // Initial state of new route
-        query(':enter',
-          style({
-            position: 'fixed',
-            width:'100%',
-            transform: 'translateX(-100%)'
-          }),
-          {optional:true}),
-        // move page off screen right on leave
-        query(':leave',
-          animate('500ms ease',
-            style({
-              position: 'fixed',
-              width:'100%',
-              transform: 'translateX(100%)'
-            })
-          ),
-        {optional:true}),
-        // move page in screen from left to right
-        query(':enter',
-          animate('500ms ease',
-            style({
-              opacity: 1,
-              transform: 'translateX(0%)'
-            })
-          ),
-        {optional:true}),
-      ])
-    ])
-  ]
+  selector: 'app-registration-form',
+  templateUrl: './registration-form.component.html',
+  styleUrls: ['./registration-form.component.css']
 })
+export class RegistrationFormComponent implements OnInit {
 
-
-
-export class LoginFormComponent {
   form;
   authState
   showNav = true;
@@ -92,9 +61,25 @@ export class LoginFormComponent {
     this.form = this.formBuilder.group({
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
       email: this.formBuilder.control(''),
-      password: this.formBuilder.control('')
+      password: this.formBuilder.control(''),
+      displayName: this.formBuilder.control('')
+     // sex: this.formBuilder.control('50'),
     })
   }
+
+  onRegister(form) {
+    console.log('submitting form')
+    console.log(form)
+    console.log(form.email)
+    console.log(form.email.toLocaleString())
+    this.error = this.authService.emailSignUp(form.email.toLocaleString(), form.password.toLocaleString())
+    $(".registrationError").text(this.error)
+    //.then((user) => {
+    //  this.authState = user
+    //  console.log('signed up siccessfully')
+   // })
+    //.catch(error => $(".registrationError").text(error)))
+ }
 
   percentageValidator(control){
     return { 
@@ -104,27 +89,6 @@ export class LoginFormComponent {
     }}
   }
 
-  googleLogin() {
-    this.authService.googleLogin()
-  }
-
-  facebookLogin() {
-    this.authService.facebookLogin()
-  }
-
-  onSubmit(form){
-    console.log('logincompeemnail')
-    console.log(form.email)
-    console.log(form.password)
     
-    this.error = this.authService.emailLogin(form.email.toLocaleString(), form.password.toLocaleString()) 
 
-    $(".registrationError").text(this.error)
-    // .then((user) => {
-     // this.authState = user
-    //  console.log('signed up siccessfully')
-   // })
-   // .catch(error => $(".logInError").text(error))
-  }
 }
-

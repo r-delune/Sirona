@@ -78,24 +78,34 @@ export class AppComponent {
     open;
     isCollapsed:boolean;
     logItemsFromService: Observable<any>;
+    userid
     
     constructor(db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
+    private router: Router,
     private datastoreService: DatastoreService,
-    private authService : AuthService) {
+    public authService : AuthService) {
       
-
-
       this.isCollapsed = true;
 
       this.afAuth.authState.subscribe((auth) => {
-        this.authState = auth
-        console.log('app component auth state is')
-        console.log(this.authState)
-      });
-    }
+        if(auth) { 
+          this.userid = auth.uid;   
+          console.log('app component auth state is')
+          console.log(this.authState)
+        }else{
+          console.log('APPC - tried to log inbut couldnt')
+          console.log(this.afAuth)
+          console.log(authService)
+          console.log(this.afAuth.authState)
+
+          this.router.navigate(['/login']);
+        }
+      })}
   
     ngOnInit() {
+
+      $(".navItems").fadeIn(200);
 
         $(".button a").click(function(){
           $(".overlay").fadeToggle(200);

@@ -1,22 +1,15 @@
-<!--<header>
-</header>-->
-<div class="login">
-        <input type="text" placeholder="username" name="user"><br>
-        <input type="password" placeholder="password" name="password"><br>
-        <input (click)="attemptLogin(user.value, password.value)" type="button" value="Login">
-        </div>
-
-
-        <div *ngIf="authService.authState | async as user; else showLogin">
-            <h1>Hello {{ user.displayName }}!</h1>
-            <button >Logout</button>
-          </div>
-          <ng-template #showLogin>
-                <div class="header">
-                        <div>Sirona<span>health</span></div>
-                    </div>
-
-          </ng-template>
+<form [formGroup]='form' (ngSubmit)='onSubmit(form.value)' >
+    <div class="login">       
+        <input type="text" placeholder="email" name="email" formControlName="email">
+        <input type="password" placeholder="password" name="password" formControlName="password"><br>
+        <button id='saveButton' type="submit" [disabled]="!form.valid">Sign In</button> 
+        <button type='button' id='signUpButton' routerLink="/register">Register</button> 
+        <div class='loginError'></div>
+    </div>
+</form>
+<div class="header">
+    <div>Sirona<span>app</span></div>
+</div>
 
           
 

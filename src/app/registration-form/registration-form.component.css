@@ -17,11 +17,10 @@ html{
 
 }
 
-#signUpButton{
+#signInButton{
     left: 115px;
     position: relative;
 }
-
 
 .body{
 	position: absolute;
@@ -36,6 +35,8 @@ html{
 	-webkit-filter: blur(5px);
 	z-index: 0;
 }
+
+
 
 .grad{
 	position: absolute;

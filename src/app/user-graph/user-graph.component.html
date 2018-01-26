@@ -12,11 +12,7 @@
       <header>TABLE</header>
 <section>
 
-<table class='table table-hover'>     
-        <div *ngIf="authService.authState | async as user; else showLogin">
-                <h1>Hello {{ user.displayName }}!</h1>
-                <button (click)="logout()">Logout</button>
-        </div>         
+<table class='table table-hover'>            
 <thead >
     <tr >
             <td style='width: 30px;'><b>Date</b></td>
@@ -38,7 +34,7 @@
     </tr>
 </thead>
 <tbody>
-        <tr *ngFor="let item of logItems | async" (click)="clickedButton(v)">   
+        <tr *ngFor="let item of logItems | async">   
                 <td>{{item.log[0].timeOfDay}}</td> 
                 <td>{{item.timeOfDay}}</td>
                 <td>{{item.generalMood}}</td>
@@ -59,12 +55,5 @@
 </tbody>
 
 <h1>{{ logItems | async | json }}</h1>
-<input type="text" #newname placeholder="Name" />
-<input type="text" #newsize placeholder="Size" />
-<br />
-<button (click)="save(newname.value)">Set Name</button>
-<button (click)="update(newsize.value)">Update Size</button>
-<button (click)="delete()">Delete</button>
-<button (click)="loginWithGoogle()">Login with Google</button>
 </table>
 </section>

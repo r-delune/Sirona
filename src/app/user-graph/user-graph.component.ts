@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth.service'
 
 @Component({
   selector: 'app-user-graph',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-graph.component.css']
 })
 export class UserGraphComponent implements OnInit {
+  logItems = []
 
-  constructor() { }
+  constructor(  authService: AuthService) { }
 
   ngOnInit() {
   }

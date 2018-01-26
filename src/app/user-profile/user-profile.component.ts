@@ -6,6 +6,9 @@ import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
 import { DatastoreService } from '../services/datastore.service';
 
+declare var jquery:any;
+declare var $ :any;
+
 @Component({
   selector: 'user-profile',
   templateUrl: './user-profile.component.html',
@@ -24,7 +27,7 @@ export class UserProfileComponent {
 
   constructor(
     private datastoreService: DatastoreService,  
-    private authService: AuthService,
+    public authService: AuthService,
     public afAuth: AngularFireAuth,
     db: AngularFireDatabase) {
 
@@ -37,4 +40,10 @@ export class UserProfileComponent {
         this.datastoreService.getAllLogItems().subscribe(logItemArray => {console.log('USER PAGE, FROM SERVICE, Constructor, user'); console.log(logItemArray)});
         this.datastoreService.getAllUserInfo().subscribe(UserItemArray => {console.log('USER PAGE, FROM SERVICE, Constructor, log'); console.log(UserItemArray)});
       }
+
+    OnInit () {
+      console.log('profile has initiated')
+      $(".navItem").fadeOut(200);
+
+    }
 }
