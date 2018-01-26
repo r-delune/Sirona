@@ -21,12 +21,12 @@ const appRoutes: Routes = [
   //  component: UserHomeComponent,
   //  canActivate: [AuthGuard], 
   //  children: [
-  ///    {path: '', redirectTo: 'full'},
+  //    {path: '', redirectTo: 'full'},
   //    {path: 'table', component: LogItemTableComponent, data: { animation: 'tiger' }},
   //    {path: 'add', component: LogItemFormComponent, data: { animation: 'dolphin' }},
   //  ]
   //},
-  { path: '', pathMatch: 'full', redirectTo: 'home' }
+  { path: '', pathMatch: 'full', redirectTo: '/' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

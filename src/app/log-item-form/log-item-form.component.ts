@@ -7,7 +7,7 @@ import { lookupListToken } from '../providers';
 import { NgModule } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { EventEmitter } from '@angular/core'
-import { LogItemService } from '../services/log-item.service'
+import { DatastoreService } from '../services/datastore.service'
 
 import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireList, AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject } from 'angularfire2/database';
@@ -42,7 +42,7 @@ export class LogItemFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private logItemService: LogItemService, 
+    private datastoreService: DatastoreService, 
     db: AngularFireDatabase, 
     afc: AngularFirestore, 
     authService: AuthService,

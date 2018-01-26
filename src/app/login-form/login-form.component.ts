@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { LogItemService } from '../services/log-item.service';
+import { DatastoreService } from '../services/datastore.service';
 import { AuthService } from '../services/auth.service';
 
 import {  OnInit, HostBinding } from '@angular/core';
@@ -62,41 +62,21 @@ export interface Item { name: string; }
   ]
 })
 
-
 export class LoginFormComponent {
   form;
-  private logCollection: AngularFirestoreCollection<Item>;  
-  items: Observable<Item[]>;
-  public firebase;
-  item: Observable<any>;
-  logList: AngularFireList<any>;
-  logItem;
   authState
-
-  test: string = 'just a test';
 
   constructor(
     private formBuilder: FormBuilder,
     public authService: AuthService, 
+    private datastoreService: DatastoreService,
     db: AngularFireDatabase, 
     afc: AngularFirestore,
     af: AngularFireAuth,
     afi: AngularFireAuthModule, 
     private router: Router
-  ) {
-    this.logCollection = afc.collection<Item>('Users/0/log');
-    this.items = this.logCollection.valueChanges();
-    const collection: AngularFirestoreCollection<Item> = afc.collection('Users/0/log');  
-    this.logList = db.list('Users/0/log');
-    this.logItem = this.logList.valueChanges();
+  ) { }
 
-    //this.af.subscribe(auth => { 
-    //  if(auth) {
-    ///    this.router.navigateByUrl('/members');
-    //  }
-    //})
-  }
-  
 
   ngOnInit() {
     console.log(this.authService.test());
@@ -115,11 +95,6 @@ export class LoginFormComponent {
     }}
   }
 
-  onSubmit(item: Item) {
-    console.log('submitting form')
-    console.log(item)
-  }
-
   googleLogin() {
     this.authService.googleLogin()
   }
@@ -134,8 +109,5 @@ export class LoginFormComponent {
     console.log(pass)
     this.authService.emailLogin(email, pass)
   }
-
-
-
 }
 

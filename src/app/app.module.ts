@@ -22,7 +22,7 @@ import { FavoriteDirective } from './favorite.directive';
 import { CategoryListPipe } from './category-list.pipe';
 import { LogItemTableComponent } from './log-item-table/log-item-table.component';
 import { LogItemFormComponent } from './log-item-form/log-item-form.component';
-import { LogItemService } from './services/log-item.service';
+import { DatastoreService } from './services/datastore.service';
 import { AuthService } from './services/auth.service';
 import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
@@ -73,7 +73,7 @@ firebase.initializeApp(firebaseConfig);
     UserProfileComponent
   ],
   providers: [
-    LogItemService,
+    DatastoreService,
     AuthService,
     { provide: lookupListToken, useValue: lookupLists },
     { provide: XHRBackend, useClass: XHRBackend },

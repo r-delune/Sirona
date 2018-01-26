@@ -2,15 +2,12 @@ import { Component } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import { AngularFireModule } from 'angularfire2';
 import { Router, RouterModule } from '@angular/router';
-// New imports to update based on AngularFire2 version 4
 import { AngularFireDatabase, AngularFireDatabaseProvider } from 'angularfire2/database';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFirestoreDocument } from 'angularfire2/firestore';
 import {AngularFireObject } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-
-//import { NoopAnimationsModule } from '@angular/animations';
 import {
   trigger,
   state,
@@ -19,16 +16,14 @@ import {
   transition,
   query,
 } from '@angular/animations';
-
 import { AngularFireAction } from '@angular/cli'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
 import { Item } from '../log-item-form/log-item-form.component';
 import { AngularFireList } from 'angularfire2/database/interfaces';
-import { LogItemService } from '../services/log-item.service';
+import { DatastoreService } from '../services/datastore.service';
 import { AuthService } from '../services/auth.service';
-
 
 declare var jquery:any;
 declare var $ :any;
@@ -77,45 +72,30 @@ export class AppComponent {
     itemRef: AngularFireObject<any>;
     item: Observable<any>;
     logItems;
+    userItems;
     authState: any = null;
     authenticated
     open;
     isCollapsed:boolean;
     logItemsFromService: Observable<any>;
-
     
     constructor(db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
-    private logItemService: LogItemService,
+    private datastoreService: DatastoreService,
     private authService : AuthService) {
-      this.itemRef = db.object('0/Users');
-      //this.item = this.itemRef.valueChanges();
-      this.logItems = this.logItemService.getLogItems()
       
-      console.log('App logItems')
-      console.log(this.logItems) 
+
+
       this.isCollapsed = true;
 
       this.afAuth.authState.subscribe((auth) => {
         this.authState = auth
-        console.log('auth state is')
+        console.log('app component auth state is')
         console.log(this.authState)
       });
     }
   
-
     ngOnInit() {
-      //this.item.subscribe((items) => {
-      //  console.log('Appcomponent not using servcioe')
-      //   console.log(items)
-      // });
-
-
-
-        //this.logItemsFromService = this.logItemService.getLogItems()
-        console.log('Appcomponent  servcioe')
-        console.log(this.logItems)
-        console.log(this.logItemService.getLogItems())
 
         $(".button a").click(function(){
           $(".overlay").fadeToggle(200);
@@ -134,7 +114,6 @@ export class AppComponent {
       }
 
       logout(){
-
         console.log('app component logging out')
       }
 }
