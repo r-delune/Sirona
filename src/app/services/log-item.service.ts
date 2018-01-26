@@ -34,9 +34,9 @@ export class LogItemService {
   constructor(private http: Http, db: AngularFireDatabase,
     dbm: AngularFireDatabaseModule,
   private userAuth: AngularFireAuth) {
-    this.itemRef = db.object('Users');
+    this.itemRef = db.object('0/Logs');
     this.items = this.itemRef.valueChanges();
-    this.logRef = db.object('Users/0/log');
+    this.logRef = db.object('0/Users/');
     this.logItem = this.itemRef.valueChanges();
 
     this.userAuth.authState.subscribe(user => {
@@ -47,22 +47,20 @@ export class LogItemService {
      // this.userId = user.uid
     })
 
-    this.items.subscribe((items) => {
+    this.items.subscribe((myitems) => {
       console.log('User Item service')
-       console.log(items)
+       console.log(myitems)
      });
- 
-     this.logItem.subscribe((logItem) => {
-       console.log('Log Item service')
-        console.log(logItem)
-      });
 
-      this.logItem.subscribe((logItem) => {
-        console.log('user Item service')
-         console.log(logItem)
+      this.logItem.subscribe((logItems) => {
+        console.log('getting LogItem service from base inside constructor')
+         console.log(logItems)
        });
 
     console.log(this.itemRef)
+    console.log(this.items)
+
+    console.log(this.logItem)
     console.log(this.items)
 
   //  const users: AngularFireObject<Item> = db.object('Users')
@@ -88,9 +86,8 @@ export class LogItemService {
 
   getLogItems() {
     this.logItem.subscribe((logItems) => {
-      console.log('getting LogItem service from base')
+      console.log('getting LogItem service from base outside constructor')
        console.log(logItems)
-       console.log(logItems.length)
        return this.logItems
      });
   }

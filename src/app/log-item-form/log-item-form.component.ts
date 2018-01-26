@@ -9,11 +9,12 @@ import { NgControl } from '@angular/forms';
 import { EventEmitter } from '@angular/core'
 import { LogItemService } from '../services/log-item.service'
 
-import {  AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireList, AngularFireDatabase, AngularFireDatabaseProvider, AngularFireObject } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreDocument } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
+import { AuthService } from '../services/auth.service';
 
 export interface Item { name: string; }
 
@@ -39,12 +40,12 @@ export class LogItemFormComponent {
   logItem;
   date = new Date
 
-
   constructor(
     private formBuilder: FormBuilder,
     private logItemService: LogItemService, 
     db: AngularFireDatabase, 
     afc: AngularFirestore, 
+    authService: AuthService,
     @Inject(lookupListToken) public lookupLists,
     private router: Router
   ) {
@@ -66,7 +67,6 @@ export class LogItemFormComponent {
     const logs: AngularFireObject<Item> = db.object('Users/0/log')
   }
 
-
   someRange2config: any = {
     behaviour: 'drag',
     start: [0, 100],
@@ -78,14 +78,7 @@ export class LogItemFormComponent {
  
   };
 
-
-
-
-
   ngOnInit() {
-
-    
-
     this.log.subscribe((log) => {
       console.log('FORM:  items')
       console.log(log)

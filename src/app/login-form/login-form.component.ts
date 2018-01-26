@@ -77,7 +77,7 @@ export class LoginFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService, 
+    public authService: AuthService, 
     db: AngularFireDatabase, 
     afc: AngularFirestore,
     af: AngularFireAuth,

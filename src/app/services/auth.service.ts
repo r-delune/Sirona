@@ -4,12 +4,25 @@ import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/dat
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase';
+import { AngularFireObject } from 'angularfire2/database/interfaces';
+import { AngularFireModule } from 'angularfire2';
+import { Observable } from 'rxjs/Observable';
+
+interface User {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+  favoriteColor?: string;
+}
 
 
 @Injectable()
 export class AuthService {
 
   authState: any = null;
+  user: Observable<any>;
+
 
   test(){
     console.log('testing!')
@@ -17,12 +30,64 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
+              private afs: AngularFireModule,
               private router:Router) {
 
             this.afAuth.authState.subscribe((auth) => {
               this.authState = auth
             });
+         
+            // this.itemRef = db.object('Users');
+            // this.logItems = this.itemRef.valueChanges();
+            this.user = this.afAuth.authState
+            .switchMap(user => {
+              if (user) {
+                return this.db.object('Users/${user.uid}').valueChanges()
+              } else {
+                
+                console.log('ERRORROROROR')        
+                //return AngularFireObject.of(null)
+                return 'ERRRR'
+              }
+            })
           }
+        
+          
+          private oAuthLogin(provider) {
+
+            console.log('oAuth lofin')
+
+            return this.afAuth.auth.signInWithPopup(provider)
+              .then((credential) => {
+                this.updateUserData(credential.user)
+              })
+          }
+
+          private updateUserData(user) {
+            // Sets user data to firestore on login
+            //const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+            const userRef: Observable<any> = this.db.object('Users/${user.uid}').valueChanges()
+            const data: User = {
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+              photoURL: user.photoURL
+            }     
+            
+            console.log('UPDATING DATA')
+            console.log(data)        
+           // return userRef.set(data)
+           return 'NOTHING HERE'
+          }
+
+          signOut() {
+            this.afAuth.auth.signOut().then(() => {
+              console.log('SIGNING OUT')
+                this.router.navigate(['/login']);
+            });
+          }
+        
+
 
   // Returns true if user is logged in
   get authenticated(): boolean {
@@ -85,7 +150,7 @@ export class AuthService {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) =>  {
           this.authState = credential.user
-          this.updateUserData()
+     //     this.updateUserData()
       })
       .catch(error => console.log(error));
   }
@@ -97,7 +162,7 @@ export class AuthService {
     return this.afAuth.auth.signInAnonymously()
     .then((user) => {
       this.authState = user
-      this.updateUserData()
+    //  this.updateUserData()
     })
     .catch(error => console.log(error));
   }
@@ -112,7 +177,7 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user
-        this.updateUserData()
+    //    this.updateUserData()
         console.log('signed up siccessfully')
       })
       .catch(error => console.log(error));
@@ -127,7 +192,7 @@ export class AuthService {
      return this.afAuth.auth.signInWithEmailAndPassword(email, password)
        .then((user) => {
          this.authState = user
-         this.updateUserData()
+     //    this.updateUserData()
          console.log('logged in siccessfully')
        })
        .catch(error => console.log(error));
@@ -143,23 +208,23 @@ export class AuthService {
   }
 
   //// Sign Out ////
-  signOut(): void {   
-    console.log('signed ut')
-    this.afAuth.auth.signOut();
-    this.router.navigate(['/'])
-  }
+ // signOut(): void {   
+  //  console.log('signed ut')
+ //   this.afAuth.auth.signOut();
+  //  this.router.navigate(['/'])
+  //}
 
   //// Helpers ////
-  private updateUserData(): void {
+ // private updateUserData(): void {
     // Writes user name and email to realtime db
     // useful if your app displays information about users or for admin features
-    console.log('updsating user data')
-    let path = `users/${this.currentUserId}`; // Endpoint on firebase
-    let data = {
-                  email: this.authState.email,
-                  name: this.authState.displayName
-                }
-    this.db.object(path).update(data)
-    .catch(error => console.log(error));
-  }
+ //   console.log('updsating user data')
+ //   let path = `users/${this.currentUserId}`; // Endpoint on firebase
+  //  let data = {
+  //                email: this.authState.email,
+  //                name: this.authState.displayName
+  //              }
+ //   this.db.object(path).update(data)
+ //   .catch(error => console.log(error));
+ // }
 }

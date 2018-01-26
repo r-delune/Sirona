@@ -1,22 +1,12 @@
-<nav>
-  <a routerLink="/home">
-    <img src="../assets/2.png" class="icon"/>
-  </a>
-  <a routerLink="/table">
-    <img src="../assets/1.png" class="icon"/>
-  </a>
-  <a routerLink="/graph">
-    <img src="../assets/1.png" class="icon"/>
-  </a>
-</nav>
+
       <header>TABLE</header>
 <section>
 
 <table class='table table-hover'>     
-        <div *ngIf="authService.authState | async as user; else showLogin">
+       <!-- <div *ngIf="authService.user | async as user; else showLogin">-->
                 <h1>Hello {{ user.displayName }}!</h1>
-                <button (click)="logout()">Logout</button>
-        </div>         
+                <button >Logout</button>
+      <!--  </div>  -->       
 <thead >
     <tr >
             <td style='width: 30px;'><b>Date</b></td>
@@ -59,12 +49,12 @@
 </tbody>
 
 <h1>{{ logItems | async | json }}</h1>
-<input type="text" #newname placeholder="Name" />
+<!--<input type="text" #newname placeholder="Name" />
 <input type="text" #newsize placeholder="Size" />
 <br />
 <button (click)="save(newname.value)">Set Name</button>
 <button (click)="update(newsize.value)">Update Size</button>
 <button (click)="delete()">Delete</button>
-<button (click)="loginWithGoogle()">Login with Google</button>
+<button >Login with Google</button>-->
 </table>
 </section>

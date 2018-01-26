@@ -13,6 +13,8 @@ export interface Item {
   log: string;
 }
 
+
+
 @Component({
   selector: 'mw-log-item-list',
   templateUrl: './log-item-list.component.html',
@@ -35,6 +37,8 @@ export class LogItemListComponent {
   grey = []
   albums
   mystring
+
+  myImage : string = "assets/images/add.png";
 
   constructor(
     //allow access to media item service so we can add 

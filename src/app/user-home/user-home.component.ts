@@ -36,16 +36,26 @@ export class UserHomeComponent implements OnInit {
       private authService: AuthService,
       private router: Router,
       db: AngularFireDatabase) {
-        this.userRef = db.object('Users');
-        this.userLogRef = db.object('LogItems');
+        this.userRef = db.object('0/Users');
+        this.userLogRef = db.object('0/Logs');
         this.userItems = this.userRef.valueChanges();
         this.logItems = this.userLogRef.valueChanges();
+
+        console.log('HOME PAGE DIRECT')
+        console.log(this.userItems)
+        console.log(this.logItems)
+
+        console.log('HOME PAGE FROM SERVICE')
+        console.log(this.userItems)
+        console.log(this.logItems)
+
+        console.log(firebase.auth().currentUser)
       }
   
     ngOnInit() {
 
       console.log('home page loaded')
-      console.log(firebase.auth().currentUser)
+      
       
       this.authService.anonymousLogin().then((data) => {
         this.router.navigate(['']);

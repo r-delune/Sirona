@@ -37,7 +37,7 @@ export class LogItemTableComponent {
     //allow access to media item service so we can add 
     private logItemService: LogItemService,  
     private activatedRoute: ActivatedRoute,
-    private authService: AuthService,
+     authService: AuthService,
     db: AngularFireDatabase) {
       this.itemRef = db.object('Users');
       this.logItems = this.itemRef.valueChanges();
@@ -57,15 +57,7 @@ export class LogItemTableComponent {
       //});
    // }
    
-  save(newName: string) {
-    this.itemRef.set({ name: newName });
-  }
-  update(newSize: string) {
-    this.itemRef.update({ size: newSize });
-  }
-  delete() {
-    this.itemRef.remove();
-  }
+
 
   ngOnInit() {
     this.logItems.subscribe((items) => {

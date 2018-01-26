@@ -3,24 +3,67 @@
    <!--<header>
    <h1>
       <b style='color:green'>Sirona</b> healthlogger-
-    </h1>
-
-    <div class="body"></div>
-		<div class="grad"></div>
-		<div class="header">
-			<div>Sirona<span>health</span></div>
-		</div>
-		<br>
-
-
-    <ng-template #showLogin>
-      <p>Please login.</p>
-      <button >Login with Google</button>
-    </ng-template>
-  
-
-  </header>-->
-  <div [@routerAnimation]="getRouteAnimation(route)">
-    <router-outlet #route="outlet"></router-outlet>
-  </div>
+    </h1>-->
+    <nav>
+        <!--</ul>
+        <li><a (click)='logout()' href="">Logout</a></li>-->
+        <ul>        
+          <li><a routerLink="/home">User</a></li>
+          <li><a routerLink="/table">Table</a></li>
+          <li><a routerLink="/graph">Graph</a></li>
+        </ul>
+        <div class="button">
+          <a class="btn-open" href="#"></a>
+        </div>
+        </nav>
+        <div class="overlay">
+          <div class="wrap">
+              <h1 class>  <b style='color:green'>Sirona</b> healthlogger</h1>
+            <ul class="wrap-nav">
+                
+              <li><a href="#">Graphs</a>
+              <ul>
+                <li><a routerLink="/graph">Graph1</a></li>
+                <li><a routerLink="/graph">Graph2</a></li>
+              </ul>
+              </li>
+              <li><a href="#">Table</a>
+                <ul>
+                    <li><a routerLink="/table">Table 1</a></li>
+                    <li><a routerLink="/table">Table 2</a></li>
+                  </ul>
+              </li>
+              <li><a href="#">User</a>
+                <ul>
+                    <li><a routerLink="/profile">Profile</a></li>
+                    <li><a routerLink="/profile">Settings</a></li>
+                  </ul>
+              </li>
+            </ul>
+            <div class="social">
+              <a href="">
+              <div class="social-icon">
+                <i class="fa fa-github"></i>
+              </div>
+              </a>
+              <a href="">
+                  <div class="social-icon">
+                    <i class="fa fa-google"></i>
+                  </div>
+                  </a>
+                <a href="">
+                      <div class="social-icon">
+                        <i class="fa fa-twitter"></i>
+                      </div>
+              </a>
+              <p>
+                <a (click)='authService.signOut()' href="">Logout</a><br>
+                 Email: <a href="">bdillon@live.ie</a>
+              </p>
+            </div>
+          </div>
+        </div>
+            <div [@routerAnimation]="getRouteAnimation(route)">
+                <router-outlet #route="outlet"></router-outlet>
+              </div>
 </section>

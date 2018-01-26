@@ -27,10 +27,12 @@ import { AuthService } from './services/auth.service';
 import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { environment } from './environments/environment';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -54,7 +56,8 @@ firebase.initializeApp(firebaseConfig);
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     NouisliderModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -66,7 +69,8 @@ firebase.initializeApp(firebaseConfig);
     LogItemTableComponent,
     LoginFormComponent,
     UserHomeComponent,
-    UserGraphComponent
+    UserGraphComponent,
+    UserProfileComponent
   ],
   providers: [
     LogItemService,

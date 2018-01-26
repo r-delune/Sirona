@@ -1,13 +1,7 @@
 <header>
-  <h2 >Add Entry</h2>
-  
-        
-  <div *ngIf="afAuth.authState | async as user; else showLogin">
-    <h1>Hello {{ user.displayName }}!</h1>
-    <button (click)="logout()">Logout</button>
-  </div>
-
+  <h2 >Add Entry</h2>      
 </header>
+
 <form [formGroup]='form' (ngSubmit)='onSubmit(form.value)' >
   <ul>
       <li class='form-group'>

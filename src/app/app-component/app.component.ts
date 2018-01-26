@@ -9,6 +9,7 @@ import { AngularFirestoreDocument } from 'angularfire2/firestore';
 import {AngularFireObject } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+
 //import { NoopAnimationsModule } from '@angular/animations';
 import {
   trigger,
@@ -27,6 +28,10 @@ import { Item } from '../log-item-form/log-item-form.component';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { LogItemService } from '../services/log-item.service';
 import { AuthService } from '../services/auth.service';
+
+
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'mw-app',
@@ -74,17 +79,22 @@ export class AppComponent {
     logItems;
     authState: any = null;
     authenticated
+    open;
+    isCollapsed:boolean;
+    logItemsFromService: Observable<any>;
 
     
     constructor(db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
     private logItemService: LogItemService,
     private authService : AuthService) {
-      this.itemRef = db.object('Users');
+      this.itemRef = db.object('0/Users');
       //this.item = this.itemRef.valueChanges();
       this.logItems = this.logItemService.getLogItems()
+      
       console.log('App logItems')
       console.log(this.logItems) 
+      this.isCollapsed = true;
 
       this.afAuth.authState.subscribe((auth) => {
         this.authState = auth
@@ -99,13 +109,33 @@ export class AppComponent {
       //  console.log('Appcomponent not using servcioe')
       //   console.log(items)
       // });
-        this.logItems = this.logItemService.getLogItems()
+
+
+
+        //this.logItemsFromService = this.logItemService.getLogItems()
         console.log('Appcomponent  servcioe')
         console.log(this.logItems)
+        console.log(this.logItemService.getLogItems())
+
+        $(".button a").click(function(){
+          $(".overlay").fadeToggle(200);
+         $(this).toggleClass('btn-open').toggleClass('btn-close');
+        });
+
+        $('.overlay').on('click', function(){
+          $(".overlay").fadeToggle(200);   
+          $(".button a").toggleClass('btn-open').toggleClass('btn-close');
+          this.open = false;
+        })
     }
 
-    getRouteAnimation(outlet) {
-      return outlet.activatedRouteData.animation
-    }
+      getRouteAnimation(outlet) {
+        return outlet.activatedRouteData.animation
+      }
+
+      logout(){
+
+        console.log('app component logging out')
+      }
 }
  

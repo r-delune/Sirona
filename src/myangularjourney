@@ -118,3 +118,7 @@ export const ROUTES: Routes = [
 
 
  - include facebgook login
+
+
+ - no need for time of day, add entry whneevr and it will log
+ - change gradient color based on stats
