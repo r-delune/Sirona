@@ -9,6 +9,7 @@
         </select>-->
         <button id='saveButton' type="submit" [disabled]="!form.valid">Register!</button> 
         <button id='signInButton' type='button' routerLink="/login">Sign In</button> 
+        <div class='registrationError'></div>>
     </div>
 </form>
 <div *ngIf="authService.authState | async as user; else showLogin">

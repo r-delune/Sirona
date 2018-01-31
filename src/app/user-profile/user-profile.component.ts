@@ -5,7 +5,7 @@ import {AngularFireAuth} from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
 import { DatastoreService } from '../services/datastore.service';
-
+import { Validators, FormBuilder } from '@angular/forms';
 declare var jquery:any;
 declare var $ :any;
 
@@ -16,34 +16,57 @@ declare var $ :any;
 })
 export class UserProfileComponent {
 
-  users : Observable<any>;
+  users: Observable<any>;
   user: Observable<any>;
   log: Observable<any>;
-
+  form;
   usersRef
   userRef
   logRef
+  //user;
   authState
+  userID
+  currentUserInfo
+  userEntryCount;
+  imagePath
 
   constructor(
     private datastoreService: DatastoreService,  
     public authService: AuthService,
-    public afAuth: AngularFireAuth,
+    public formBuilder: FormBuilder,
     db: AngularFireDatabase) {
+      this.userEntryCount = this.datastoreService.getUserLogItems.length
+      console.log('userEntryCount')
+      console.log(this.userEntryCount)
 
-        this.afAuth.authState.subscribe((auth) => {
-          this.authState = auth
-          console.log('USER auth state is')
-          console.log(this.authState)
-        });
-
-        this.datastoreService.getAllLogItems().subscribe(logItemArray => {console.log('USER PAGE, FROM SERVICE, Constructor, user'); console.log(logItemArray)});
-        this.datastoreService.getAllUserInfo().subscribe(UserItemArray => {console.log('USER PAGE, FROM SERVICE, Constructor, log'); console.log(UserItemArray)});
-      }
+    }
 
     OnInit () {
-      console.log('profile has initiated')
-      $(".navItem").fadeOut(200);
 
+
+
+      if (this.authService.currentUserProfileURL != null)
+      this.imagePath = this.authService.currentUserProfileURL
+      else
+        this.imagePath = "assets/img/nobody.jpeg";
+      
+
+      console.log('profile has initiated')
+   //   $(".navItem").fadeOut(200);
+      this.form = this.formBuilder.group({
+        name: this.formBuilder.control(this.authService.currentUserDisplayName),
+        signedUp: this.formBuilder.control(this.authService.currentUserEmail),
+        email: this.formBuilder.control(this.authService.currentUserId)
+      })
+    }
+
+    onSubmit(){
+      console.log('updating user info')
+      //NEED TO UPDATE FIREBASE USER, OBSERVABLE SHOULD CHANGE USER DATA IN BACKEND
+
+    }
+
+    logout(){
+      this.authService.signOut()
     }
 }

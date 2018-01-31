@@ -1,27 +1,40 @@
-<div *ngIf="authService.user | async; then authenticated else guest">
-    <!-- template will replace this div -->
-</div>
-<!-- User NOT logged in -->
-<ng-template #guest>
-<h3>Howdy, GUEST</h3>
-<p>Login to get started...</p>
+<div class="container">
+    <div class="row">
+        <div class="row">
+            <div class="col-md-3 col-lg-3 " align="center">
+                <div class="box-body">
+                    <div class="col-sm-6">
+                        <div  align="center"> 
+                            <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"><span>
+                            <div style="color:#999;"><input id="profile-image-upload" class="hidden" type="file">Click to change</div></span>
+                            </div>
+                        </div>
+                    <div class=" col-md-9 col-lg-9 "> 
+                        <table class="table table-user-information">
+                            <tbody>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td>{{this.authService.currentUserDisplayName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email:</td>
+                                    <td><a href="mailto:info@support.com">{{this.authService.currentUserEmail}}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Signed up on:</td>
+                                    <td>{{this.authService.currentUserSignedUpOn}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Entries: </td>
+                                    <td>{{this.userEntryCount}}</td>
+                                </tr>
 
-<button (click)="authService.googleLogin()">
-    <i class="fa fa-google"></i> Connect Google
-</button>
-</ng-template>
-<!-- User logged in -->
-<h1>Hello {{ user }}!</h1>
-<button >Logout</button>
-    <h1>{{ log | async | json }}</h1>
-    <h1>{{ users | async | json }}</h1>
-    <h1>{{ user | async | json }}</h1>
-<ng-template #authenticated>
-<div *ngIf="authService.user | async as user">
-    <h3>Howdy, {{ user.displayName }}</h3>
-    <img  [src]="user.photoURL">
-    <p>UID: {{ user.uid }}</p>
-    <p>Favorite Color: {{ user?.favoriteColor }} </p>
-    <button (click)="authService.signOut()">Logout</button>
-</div>
-</ng-template>
+                            </tbody>
+                        </table>       
+                    <a (click)='logout()' class="btn btn-primary">Logout</a>
+                </div>
+            </div>
+            </div>  
+        </div>
+    </div>
+    </div>

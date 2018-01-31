@@ -124,6 +124,8 @@ export const ROUTES: Routes = [
  - fields are selectable by user
  - avergae mood number 
  - ideally user should make entry every time mood changes significantly
+ - if fields are left blank they are said to be normal (maximise efficincy in filling out a form) 
+
 
  todo:
     remove nav on login

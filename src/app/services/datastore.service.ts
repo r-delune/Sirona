@@ -3,7 +3,6 @@ import { Http, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 
-import { AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { Item } from '../log-item-form/log-item-form.component';
@@ -31,11 +30,15 @@ export class DatastoreService {
     this.allUsersRef = db.object('1/Users/');
     this.allUserItems = this.allUsersRef.valueChanges();
 
-   // this.currentUserRef = db.object('1/Users/'+userAuth.auth.uid+'');
-   // this.currentUserItem = this.currentUserRef.valueChanges();
+      console.log('HERE!!')
+      console.log(userAuth)
+      console.log(userAuth.auth)
+     // console.log(userAuth.auth.currentUser.uid)
 
-   // this.currentUserLogsRef = db.object('1/Logs/'+userAuth.auth.uid+'');
-   // this.currentUserLogsItems = this.currentUserLogsRef.valueChanges();
+     // this.currentUserRef = db.object('1/Users/'+userAuth.auth.currentUser.uid+'');
+     // this.currentUserItem = this.currentUserRef.valueChanges();
+     // this.currentUserLogsRef = db.object('1/Logs/'+userAuth.auth.currentUser.uid+'');
+     // this.currentUserLogsItems = this.currentUserLogsRef.valueChanges();
   }
 
   getAllLogItems(): Observable<any> {

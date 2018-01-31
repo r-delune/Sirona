@@ -1,4 +1,3 @@
-
 import { Injectable } from '@angular/core';
 import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -7,7 +6,6 @@ import * as firebase from 'firebase';
 import { AngularFireObject} from 'angularfire2/database/interfaces';
 import { AngularFireModule} from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
-
 
 interface User {
   uid: string;
@@ -22,31 +20,47 @@ export class AuthService {
 
   authState: any = null;
   user: Observable<any>;
+  currentUserLogsItems: Observable<any>
+  authServiceState: any = null;
+  userId
+  currentUserLogsRef
+  userIdAuth: any = null;
+
+  currentUserLogsRefList
+  currentUserLogsItemsList: Observable<any>
 
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
               private afs: AngularFireModule,
               private router:Router) {
 
-
-
                 this.afAuth.authState.subscribe((auth) => {
-                  this.authState = auth;
+                  if (auth){ this.authState = auth;
+                  this.userId = auth.uid
+                  this.userIdAuth = auth.uid
+                  this.authServiceState = auth;
                   console.log('AUTH:')
-                  console.log(this.authState)
+                  console.log(this.authState) 
+                }else{
+                  console.log('USER IS NOT LOGGED IN')
+                }
               });
-
-
-    this.user = this.afAuth.authState
-    .switchMap(user => {
-      if (user) {
-        return this.db.object('Users/${user.uid}').valueChanges()
-      } else {               
-        console.log('ERRORROROROR')        
-        //return AngularFireObject.of(null)
-        return 'ERRRR'
-      }
-    })
+   // console.log(userAuth.auth)
+   // console.log(userAuth.auth.currentUser.uid)
+   // this.currentUserRef = db.object('1/Users/'+userAuth.auth.currentUser.uid+'');
+   // this.currentUserItem = this.currentUserRef.valueChanges();
+    //this.currentUserLogsRef = db.object('1/Logs/'+this.userId+'');
+    //this.currentUserLogsItems = this.currentUserLogsRef.valueChanges();
+   //this.user = this.afAuth.authState
+   // .switchMap(user => {
+  //    if (user) {
+  //      return this.db.object('Users/${user.uid}').valueChanges()
+  //    } else {               
+  //      console.log('ERRORROROROR')        
+  ////      //return AngularFireObject.of(null)
+  //      return 'ERRRR'
+  //    }
+   // })
   }
 
   private oAuthLogin(provider) {
@@ -71,9 +85,7 @@ export class AuthService {
     return 'NOTHING HERE'
   }
 
-  signOut() {
-
-    
+  signOut() {   
     this.afAuth.auth.signOut().then(() => {
       console.log('SIGNING OUT')
         this.router.navigate(['/login']);
@@ -85,22 +97,40 @@ export class AuthService {
     return this.authState !== null;
   }
 
-  // Returns current user data
   get currentUser(): any {
     console.log('getting current user')
     return this.authenticated ? this.authState : null;
   }
 
-  // Returns
+  get currentUserLogs(): any {
+    if (!this.userId){ 
+      console.log('GETTING LOGS  - no user id!'); return false
+    }else{
+      this.currentUserLogsRef = this.db.object('1/Logs/'+this.userId+'');
+      this.currentUserLogsItems = this.currentUserLogsRef.valueChanges();
+
+      this.currentUserLogsRefList = this.db.list('1/Logs/'+this.userId+'');
+      this.currentUserLogsItemsList = this.currentUserLogsRef.valueChanges();
+
+      console.log('GETTING LOGS  - no user id!')
+      console.log(this.currentUserLogsItems)
+
+      return
+    } 
+  }
+
   get currentUserObservable(): any {
     console.log('getting current user observable')
-    return this.afAuth.authState
+    console.log(this.authState)
+    return this.authState
+    // return this.authServiceState//
   }
 
   // Returns current user UID
-  get currentUserId(): string {
+  get currentUserId(): Observable<any> {
     console.log('getting current user id')
-    return this.authenticated ? this.authState.uid : '';
+    console.log(this.userId)
+    return  this.userId
   }
 
   // Anonymous User
@@ -112,7 +142,23 @@ export class AuthService {
   get currentUserDisplayName(): string {
     if (!this.authState) { return 'Guest' }
     else if (this.currentUserAnonymous) { return 'Anonymous' }
-    else { return this.authState['displayName'] || 'User without a Name' }
+    else { return this.authState['displayName'] || 'Display name not set' }
+  }
+
+  get currentUserEmail(): string {
+    return this.authState['email']
+  }
+
+  get currentUserSignedUpOn(): string {
+    return this.authState.metadata['creationTime']
+  }
+
+  get currentUserLatsSignIn(): string {
+    return this.authState.metadata['lastSignInTime']
+  }
+
+  get currentUserProfileURL(): string {
+    return this.authState['photoURL']
   }
 
   //// Social Auth ////

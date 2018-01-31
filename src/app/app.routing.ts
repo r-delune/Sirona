@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   { path: 'table', component: LogItemTableComponent, data: { animation: 'dolphin'}},
   { path: 'register', component: RegistrationFormComponent, data: { animation: 'dolphin'}},
   { path: 'profile', component: UserProfileComponent, data: { animation: 'dolphin'}},
-  { path: 'graph', component: UserGraphComponent ,data: { animation: 'dolphin'}},
+  { path: 'graph', component: UserGraphComponent , data: { animation: 'dolphin'}},
   { path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
   { path: 'home', component: UserHomeComponent, data: { animation: 'dolphin'},canActivate: [AuthGuard]},
   //{
