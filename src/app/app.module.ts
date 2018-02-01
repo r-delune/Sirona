@@ -29,11 +29,13 @@ import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { environment } from './environments/environment';
+
 import { UserHomeComponent } from './user-home/user-home.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
+
+import { environment } from './environments/environment';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -50,6 +52,7 @@ firebase.initializeApp(firebaseConfig);
   imports: [
     BrowserModule,
     ReactiveFormsModule,
+    NgxChartsModule,
     HttpModule,
     routing,
     AngularFireModule.initializeApp(environment.firebase),

@@ -19,16 +19,23 @@ import {
   query,
 } from '@angular/animations';
 
-
-
 import {  AngularFirestoreCollection } from 'angularfire2/firestore';
 import { AngularFireList, AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { AngularFirestore } from 'angularfire2/firestore';;
 import * as firebase from 'firebase/app';
-export interface Item { name: string; }
+export interface Item { name: string; userId: string }
 
 declare var jquery:any;
 declare var $ :any;
+
+interface User {
+  uid: string;
+  email: string;
+  photoURL?: string;
+  displayName?: string;
+}
+
+
 
 @Component({
   selector: 'app-registration-form',
@@ -41,6 +48,7 @@ export class RegistrationFormComponent implements OnInit {
   authState
   showNav = true;
   error
+  newUser
 
   constructor(
     private formBuilder: FormBuilder,
@@ -72,13 +80,33 @@ export class RegistrationFormComponent implements OnInit {
     console.log(form)
     console.log(form.email)
     console.log(form.email.toLocaleString())
-    this.error = this.authService.emailSignUp(form.email.toLocaleString(), form.password.toLocaleString())
+    this.error = this.authService.emailSignUp(form.email.toLocaleString(), form.password.toLocaleString(), form.displayName.toLocaleString())
+    .then((user) => {
+
+      console.log('REG FORM: Success')
+      console.log(this.authService)
+
+      const data: User = {
+        uid: this.authService.userId,
+        email: this.authService.userEmail
+      }    
+      
+      const data1 = {
+        email: form.email,
+        displayName: form.displayName,
+        date: form.date
+      }   
+
+      //this.newUser = this.authService.authState.user
+
+      this.datastoreService.addUser(data1)
+    })
+    .catch(error => $(".registrationError").text(error))
+
+    console.log('Attempted to register')
+    console.log(this.error)
+
     $(".registrationError").text(this.error)
-    //.then((user) => {
-    //  this.authState = user
-    //  console.log('signed up siccessfully')
-   // })
-    //.catch(error => $(".registrationError").text(error)))
  }
 
   percentageValidator(control){

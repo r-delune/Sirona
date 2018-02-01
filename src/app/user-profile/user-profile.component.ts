@@ -23,47 +23,47 @@ export class UserProfileComponent {
   usersRef
   userRef
   logRef
-  //user;
   authState
   userID
   currentUserInfo
   userEntryCount;
   imagePath
+  email
+  signedUpOn
+  displayName
 
   constructor(
     private datastoreService: DatastoreService,  
     public authService: AuthService,
     public formBuilder: FormBuilder,
     db: AngularFireDatabase) {
-      this.userEntryCount = this.datastoreService.getUserLogItems.length
-      console.log('userEntryCount')
-      console.log(this.userEntryCount)
-
+      this.userEntryCount = this.datastoreService.getCurrentUserLogItems.length
     }
 
     OnInit () {
-
-
 
       if (this.authService.currentUserProfileURL != null)
       this.imagePath = this.authService.currentUserProfileURL
       else
         this.imagePath = "assets/img/nobody.jpeg";
-      
+    
 
-      console.log('profile has initiated')
-   //   $(".navItem").fadeOut(200);
+      this.email = this.authService.currentUserEmail
+      this.signedUpOn = this.authService.currentUserSignedUpOn
+      this.displayName = this.authService.currentUserDisplayName
+
+      $(".navItem").fadeIn(200);
       this.form = this.formBuilder.group({
         name: this.formBuilder.control(this.authService.currentUserDisplayName),
-        signedUp: this.formBuilder.control(this.authService.currentUserEmail),
-        email: this.formBuilder.control(this.authService.currentUserId)
+        signedUp: this.formBuilder.control(this.authService.currentUserSignedUpOn),
+        email: this.formBuilder.control(this.authService.currentUserEmail)
       })
     }
 
     onSubmit(){
       console.log('updating user info')
       //NEED TO UPDATE FIREBASE USER, OBSERVABLE SHOULD CHANGE USER DATA IN BACKEND
-
+      //
     }
 
     logout(){

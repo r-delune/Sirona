@@ -6,14 +6,16 @@ import * as firebase from 'firebase';
 import { AngularFireObject} from 'angularfire2/database/interfaces';
 import { AngularFireModule} from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
+import { DatastoreService } from './datastore.service';
 
 interface User {
   uid: string;
   email: string;
   photoURL?: string;
   displayName?: string;
-  favoriteColor?: string;
 }
+
+
 
 @Injectable()
 export class AuthService {
@@ -22,9 +24,21 @@ export class AuthService {
   user: Observable<any>;
   currentUserLogsItems: Observable<any>
   authServiceState: any = null;
-  userId
+  
+  users
+
+
+  userId 
+  userEmail
+  userDisplayName
+  userPhotoURL
+  currentUsersRef
+
   currentUserLogsRef
   userIdAuth: any = null;
+  
+  currentUsersItem
+  userItemsList
 
   currentUserLogsRefList
   currentUserLogsItemsList: Observable<any>
@@ -32,40 +46,31 @@ export class AuthService {
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFireDatabase,
               private afs: AngularFireModule,
+
               private router:Router) {
 
-                this.afAuth.authState.subscribe((auth) => {
+              this.currentUsersRef = db.object('Users/'+this.userId+'');
+              this.currentUsersItem = this.currentUsersRef.valueChanges();
+
+              this.afAuth.authState.subscribe((auth) => {
                   if (auth){ this.authState = auth;
                   this.userId = auth.uid
-                  this.userIdAuth = auth.uid
+                  this.userEmail = auth.email
+                  this.userDisplayName = auth.displayName
+                  this.userDisplayName = auth.displayName
+                  this.userPhotoURL = auth.photoURL
                   this.authServiceState = auth;
                   console.log('AUTH:')
                   console.log(this.authState) 
                 }else{
                   console.log('USER IS NOT LOGGED IN')
                 }
-              });
-   // console.log(userAuth.auth)
-   // console.log(userAuth.auth.currentUser.uid)
-   // this.currentUserRef = db.object('1/Users/'+userAuth.auth.currentUser.uid+'');
-   // this.currentUserItem = this.currentUserRef.valueChanges();
-    //this.currentUserLogsRef = db.object('1/Logs/'+this.userId+'');
-    //this.currentUserLogsItems = this.currentUserLogsRef.valueChanges();
-   //this.user = this.afAuth.authState
-   // .switchMap(user => {
-  //    if (user) {
-  //      return this.db.object('Users/${user.uid}').valueChanges()
-  //    } else {               
-  //      console.log('ERRORROROROR')        
-  ////      //return AngularFireObject.of(null)
-  //      return 'ERRRR'
-  //    }
-   // })
+              })
   }
 
   private oAuthLogin(provider) {
 
-    console.log('oAuth lofin')
+    console.log('oAuth login')
 
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
@@ -73,17 +78,28 @@ export class AuthService {
       })
   }
 
-  private updateUserData(user) {
-    const userRef: Observable<any> = this.db.object('Users/${user.uid}').valueChanges()
+   updateUserData(user) {
+
+    console.log(user.userId)
+
+    const userRef: Observable<any> = this.db.object(`Users/${user.userId}`).valueChanges()
+   
+    console.log('userRef')
+    console.log(userRef)
+
+    console.log(this.user)
+
     const data: User = {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL
-    }     
-  
-    return 'NOTHING HERE'
+    }      
+    return data
   }
+
+
+
 
   signOut() {   
     this.afAuth.auth.signOut().then(() => {
@@ -102,20 +118,13 @@ export class AuthService {
     return this.authenticated ? this.authState : null;
   }
 
-  get currentUserLogs(): any {
+  get currentUserLogItems(): Observable<any> {
     if (!this.userId){ 
-      console.log('GETTING LOGS  - no user id!'); return false
+      //console.log('GETTING LOGS  - no user id!'); return false
     }else{
-      this.currentUserLogsRef = this.db.object('1/Logs/'+this.userId+'');
-      this.currentUserLogsItems = this.currentUserLogsRef.valueChanges();
-
-      this.currentUserLogsRefList = this.db.list('1/Logs/'+this.userId+'');
-      this.currentUserLogsItemsList = this.currentUserLogsRef.valueChanges();
-
       console.log('GETTING LOGS  - no user id!')
       console.log(this.currentUserLogsItems)
-
-      return
+      return this.currentUserLogsItemsList
     } 
   }
 
@@ -127,7 +136,7 @@ export class AuthService {
   }
 
   // Returns current user UID
-  get currentUserId(): Observable<any> {
+  get currentUserId(): string {
     console.log('getting current user id')
     console.log(this.userId)
     return  this.userId
@@ -140,9 +149,7 @@ export class AuthService {
 
   // Returns current user display name or Guest
   get currentUserDisplayName(): string {
-    if (!this.authState) { return 'Guest' }
-    else if (this.currentUserAnonymous) { return 'Anonymous' }
-    else { return this.authState['displayName'] || 'Display name not set' }
+    return this.authState['displayName']
   }
 
   get currentUserEmail(): string {
@@ -153,7 +160,7 @@ export class AuthService {
     return this.authState.metadata['creationTime']
   }
 
-  get currentUserLatsSignIn(): string {
+  get currentUserLastSignIn(): string {
     return this.authState.metadata['lastSignInTime']
   }
 
@@ -203,8 +210,15 @@ export class AuthService {
     .catch(error => console.log(error));
   }
 
+  getUserItemsList(): Observable<any[]>{
+    this.users = this.db.list(`Users/${this.userId}`)
+    console.log('MY users ITEMS')
+    console.log(this.users)
+    return this.users;
+  }
+
   //// Email/Password Auth ////
-  emailSignUp(email:string, password:string) {
+  emailSignUp(email:string, password:string, displayName:string) {
 
     console.log('signing up via email:')
     console.log(email)
@@ -213,12 +227,26 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user
-    //    this.updateUserData()
+        this.updateUserData(user)
+       // this.datastoreService.addUser(user)
         console.log('signed up siccessfully')
+
+        this.authState = user
+      
+
         this.router.navigate(['/profile']);
       })
       .catch(error => console.log(error));
   }
+
+   // addUser(user: User){
+   //   console.log('CREATING USER')
+   //   console.log(user)
+   //   this.userItemsList.push(user)
+    //this.allUsersRef.set({ name: item });
+   // }
+
+
 
   emailLogin(email:string, password:string) {
 
@@ -226,14 +254,14 @@ export class AuthService {
     console.log(email)
     console.log(password)
 
-     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-       .then((user) => {
-         this.authState = user
-     //    this.updateUserData()
-         console.log('logged in siccessfully')
-         this.router.navigate(['/profile']);
-       })
-       .catch(error => console.log(error));
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        this.authState = user
+    //    this.updateUserData()
+        console.log('logged in siccessfully')
+        this.router.navigate(['/profile']);
+      })
+      .catch(error => console.log(error));
   }
 
   // Sends email allowing user to reset password
