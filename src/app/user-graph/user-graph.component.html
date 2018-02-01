@@ -1,56 +1,22 @@
 <section>
-<table class='table table-hover'>            
-<thead >
-    <tr >
-      <td style='width: 30px;'><b>Date</b></td>
-      <td><b>Time of Day</b></td>
-      <td><b>General Mood</b></td> 
-      <td><b>Appetite</b></td>
-      <td><b>Energy Level</b></td>
-      <td><b>Motivation</b></td>
-      <td><b>Concentration</b></td>
-      <td><b>Stress Events</b></td>
-      <td><b>Coffee</b></td>
-      <td><b>Supplements</b></td>
-      <td><b>Excercise</b></td>
-      <td><b>Dietary</b></td>
-      <td><b>Sleep Quality</b></td>
-      <td><b>Sleep Difficulty</b></td>
-      <td><b>Sleep</b></td>
-      <td><b>Additional</b></td>
-    </tr>
-</thead>
-<tbody>
-  <tr *ngFor="let item of logItems | async">   
-    <td>{{item.log[0].timeOfDay}}</td> 
-    <td>{{item.timeOfDay}}</td>
-    <td>{{item.generalMood}}</td>
-    <td>{{item.appetite}}</td>
-    <td>{{item.energyLevel}}</td>
-    <td>{{item.motivation}}</td>
-    <td>{{item.concentration}}</td>
-    <td>{{item.stressEvents}}</td>
-    <td>{{item.coffee}}</td>
-    <td>{{item.supplements}}</td>
-    <td>{{item.exerciseNotes}}</td>
-    <td>{{item.Dietary}}</td>
-    <td>{{item.sleepQuality}}</td>
-    <td>{{item.exerciseNotes}}</td>
-    <td>{{item.sleepNotes}}</td>
-    <td>{{item.additionalNotes}}</td>
-  </tr>
-</tbody>
-<h1>{{ logItems | async | json }}</h1>
-
-<ngx-charts-pie-chart
-[scheme]="colorScheme"
-[results]="single"
-[legend]="showLegend"
-[explodeSlices]="explodeSlices"
-[labels]="showLabels"
-[doughnut]="doughnut"
-[gradient]="gradient"
-(select)="onSelect($event)">
-</ngx-charts-pie-chart>
-</table>
+    <div class="container">
+        <div class="row">
+          <div class="col-3">
+              <tree (nodeSelected)="logEvent($event)" [tree]="tree" [settings]='treeSettings'></tree>
+          </div>
+          <router-outlet #route="outlet"></router-outlet>
+          <div class="col-9">
+            <ngx-charts-pie-chart
+            [scheme]="colorScheme"
+            [results]="single"
+            [legend]="showLegend"
+            [explodeSlices]="explodeSlices"
+            [labels]="showLabels"
+            [doughnut]="doughnut"
+            (select)="onSelect($event)"
+            [view]="[width, height]">
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+      </div>
 </section>

@@ -28,15 +28,16 @@ import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
 import { UserHomeComponent } from './user-home/user-home.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
-
+import { NgxChartsModule} from '@swimlane/ngx-charts'
 import { environment } from './environments/environment';
-
+import { UserGraphExcerciseComponent } from './user-graph-excercise/user-graph-excercise.component';
+import { UserGraphMoodComponent } from './user-graph-mood/user-graph-mood.component';
+import { UserGraphDietComponent } from './user-graph-diet/user-graph-diet.component';
+import { TreeModule } from 'ng2-tree';
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
   authDomain: "sirona-7d26e.firebaseapp.com",
@@ -61,7 +62,8 @@ firebase.initializeApp(firebaseConfig);
     AngularFireDatabaseModule,
     NouisliderModule,
     BrowserAnimationsModule,
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    TreeModule
   ],
   declarations: [
     AppComponent,
@@ -75,7 +77,10 @@ firebase.initializeApp(firebaseConfig);
     UserHomeComponent,
     UserGraphComponent,
     UserProfileComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    UserGraphExcerciseComponent,
+    UserGraphMoodComponent,
+    UserGraphDietComponent
   ],
   providers: [
     DatastoreService,
