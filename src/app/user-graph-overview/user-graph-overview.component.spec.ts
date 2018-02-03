@@ -1,21 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { UserGraphComponent } from './user-graph.component';
-import { TreeModule } from 'ng2-tree';
 
+import { UserGraphOverviewComponent } from './user-graph-overview.component';
 
-describe('UserGraphComponent', () => {
-  let component: UserGraphComponent;
-  let fixture: ComponentFixture<UserGraphComponent>;
+describe('UserGraphOverviewComponent', () => {
+  let component: UserGraphOverviewComponent;
+  let fixture: ComponentFixture<UserGraphOverviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserGraphComponent ]
+      declarations: [ UserGraphOverviewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserGraphComponent);
+    fixture = TestBed.createComponent(UserGraphOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

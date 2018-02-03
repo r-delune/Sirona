@@ -32,6 +32,7 @@
     "ng2-tree": "^2.0.0-rc.4",
     "nouislider": "^11.0.3",
     "rxjs": "^5.5.2",
+    "slideout": "^1.0.1",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {

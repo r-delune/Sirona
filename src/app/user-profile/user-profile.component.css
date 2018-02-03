@@ -33,11 +33,11 @@
 {margin-top:20px;
 }
 
-img{max-width:10%}
-
-table {
-    width: 50%;
+img{
+    max-width:30%
 }
+
+
 
 [type=file] {
     width: 20%;

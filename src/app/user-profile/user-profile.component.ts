@@ -31,6 +31,8 @@ export class UserProfileComponent {
   email
   signedUpOn
   displayName
+  photoURL
+
 
   constructor(
     private datastoreService: DatastoreService,  
@@ -46,13 +48,18 @@ export class UserProfileComponent {
       this.imagePath = this.authService.currentUserProfileURL
       else
         this.imagePath = "assets/img/nobody.jpeg";
-    
+
+        console.log('USER PROFIEL PAGE')
+        console.log(this.authService)
 
       this.email = this.authService.currentUserEmail
       this.signedUpOn = this.authService.currentUserSignedUpOn
       this.displayName = this.authService.currentUserDisplayName
+      this.photoURL = this.authService.userPhotoURL
 
-      $(".navItem").fadeIn(200);
+
+      //$(".navItem").fadeIn(200);
+      
       this.form = this.formBuilder.group({
         name: this.formBuilder.control(this.authService.currentUserDisplayName),
         signedUp: this.formBuilder.control(this.authService.currentUserSignedUpOn),

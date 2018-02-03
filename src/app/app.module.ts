@@ -38,6 +38,8 @@ import { UserGraphExcerciseComponent } from './user-graph-excercise/user-graph-e
 import { UserGraphMoodComponent } from './user-graph-mood/user-graph-mood.component';
 import { UserGraphDietComponent } from './user-graph-diet/user-graph-diet.component';
 import { TreeModule } from 'ng2-tree';
+import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-overview.component';
+import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-analysis.component';
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
   authDomain: "sirona-7d26e.firebaseapp.com",
@@ -80,7 +82,9 @@ firebase.initializeApp(firebaseConfig);
     RegistrationFormComponent,
     UserGraphExcerciseComponent,
     UserGraphMoodComponent,
-    UserGraphDietComponent
+    UserGraphDietComponent,
+    UserGraphOverviewComponent,
+    UserGraphAnalysisComponent
   ],
   providers: [
     DatastoreService,

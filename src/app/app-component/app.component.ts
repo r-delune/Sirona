@@ -79,6 +79,7 @@ export class AppComponent {
     isCollapsed:boolean;
     logItemsFromService: Observable<any>;
     userid
+    userGreeting
     
     constructor(db: AngularFireDatabase,
     public afAuth: AngularFireAuth,
@@ -90,7 +91,13 @@ export class AppComponent {
 
       this.afAuth.authState.subscribe((auth) => {
         if(auth) { 
-          this.userid = auth.uid;   
+          this.userid = auth.uid;
+          
+          if (auth.displayName){
+            this.userGreeting = 'Welcome back' +auth.displayName+ ''
+          }else{
+            this.userGreeting = ''
+          }
           console.log('app component auth state is')
           console.log(this.authState)
         }else{
@@ -105,18 +112,19 @@ export class AppComponent {
   
     ngOnInit() {
 
-      $(".navItems").fadeIn(200);
+      //$(".navItems").fadeIn(200);
 
-        $(".button a").click(function(){
+        $(".overlayToggle").click(function(){
           $(".overlay").fadeToggle(200);
          $(this).toggleClass('btn-open').toggleClass('btn-close');
         });
 
         $('.overlay').on('click', function(){
           $(".overlay").fadeToggle(200);   
-          $(".button a").toggleClass('btn-open').toggleClass('btn-close');
+          $(".button .overlayToggle a").toggleClass('btn-open').toggleClass('btn-close');
           this.open = false;
         })
+
     }
 
       getRouteAnimation(outlet) {

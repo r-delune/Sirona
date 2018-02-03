@@ -6,12 +6,11 @@ import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 @Component({
-  selector: 'app-user-graph-diet',
-  templateUrl: './user-graph-diet.component.html',
-  styleUrls: ['./user-graph-diet.component.css']
+  selector: 'app-user-graph-overview',
+  templateUrl: './user-graph-overview.component.html',
+  styleUrls: ['./user-graph-overview.component.css']
 })
-export class UserGraphDietComponent  {
-
+export class UserGraphOverviewComponent  {
   translation: string;
   outerRadius: number;
   innerRadius: number;
@@ -27,7 +26,7 @@ export class UserGraphDietComponent  {
   single: any[];
   multi: any[];
 
-  view: any[] = [1700, 1400];
+  view: any[] = [700, 400];
   showLegend = true;
 
   colorScheme = {
@@ -38,21 +37,18 @@ export class UserGraphDietComponent  {
   showLabels = true;
   explodeSlices = false;
   doughnut = false;
-  
-  constructor(authService: AuthService,
-    private datastoreService: DatastoreService) { 
 
-      this.currentUserLogItems = datastoreService.allUserItems
-      console.log('GRAPH - get usrr items')
-      console.log(this.currentUserLogItems)
-      Object.assign(this, {single, multi})   
-    }
+  constructor(authService: AuthService,
+    private datastoreService: DatastoreService) {   
+
+    this.currentUserLogItems = datastoreService.allUserItems
+    console.log('GRAPH - get usrr items')
+    console.log(this.currentUserLogItems)
+    Object.assign(this, {single, multi})   
+  }
   
   onSelect(event) {
     console.log(event);
   }
-
-  ngOnInit(){
-    console.log('In dietary mode!')
-  }
+  
 }

@@ -11,6 +11,8 @@ import { RegistrationFormComponent } from './registration-form/registration-form
 import { UserGraphExcerciseComponent } from './user-graph-excercise/user-graph-excercise.component';
 import { UserGraphMoodComponent } from './user-graph-mood/user-graph-mood.component';
 import { UserGraphDietComponent } from './user-graph-diet/user-graph-diet.component';
+import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-analysis.component';
+import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-overview.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginFormComponent, data: { animation: 'tiger' } },
@@ -18,22 +20,21 @@ const appRoutes: Routes = [
   { path: 'table', component: LogItemTableComponent, data: { animation: 'dolphin'}},
   { path: 'register', component: RegistrationFormComponent, data: { animation: 'dolphin'}},
   { path: 'profile', component: UserProfileComponent, data: { animation: 'dolphin'}},
-  //{ path: 'graph', component: UserGraphComponent },
+  { path: 'graph', component: UserGraphComponent },
   { path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
   { path: 'home', component: UserHomeComponent, data: { animation: 'dolphin'},canActivate: [AuthGuard]},
- // { path: 'excerciseGraph', component: UserGraphExcerciseComponent},
-  //{ path: 'moodGraph', component: UserGraphMoodComponent, data: { animation: 'tiger' }},
-  //{ path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
+  //[routerLink]="['artist', track.artistId]"
   {
     path: 'graph',
     component: UserGraphComponent,
    // canActivate: [AuthGuard], 
     children: [
-      //{path: 'graph/overview', redirectTo: '/',pathMatch: 'full',},
-      { path: '', redirectTo:'excerciseGraph', pathMatch:"full" },
+      {path: '', redirectTo: 'graph/overview',pathMatch: 'full'},
       {path: 'excerciseGraph', component: UserGraphExcerciseComponent, data: { animation: 'dolphin' }},
       {path: 'moodGraph', component: UserGraphMoodComponent, data: { animation: 'dolphin' }},
-      {path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dolphin' }},  
+      {path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
+      {path: 'overview', component: UserGraphOverviewComponent, data: { animation: 'dolphin' }},
+      {path: 'analysisGraph', component: UserGraphAnalysisComponent, data: { animation: 'dolphin' }},    
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: '/' }

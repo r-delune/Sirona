@@ -1,29 +1,9 @@
-<section>
-    <ul class="list-group">
-        <li class="list-group-item justify-content-between">
-          <a routerLink="/graph">Graph Home</a>
-          <span class="badge badge-default badge-pill">14</span>
-        </li>
-        <li class="list-group-item justify-content-between">
-            <a routerLink="/excerciseGraph">Excercise trends</a>
-          <span class="badge badge-default badge-pill">2</span>
-        </li>
-        <li class="list-group-item justify-content-between">
-          <a routerLink="/moodGraph">Mood trends</a>
-          <span class="badge badge-default badge-pill">1</span>
-        </li>
-        <li class="list-group-item justify-content-between">
-          <a routerLink="/dietGraph">Diet trends</a>
-          <span class="badge badge-default badge-pill">1</span>
-        </li>
-      </ul>
 <ngx-charts-pie-chart
-[scheme]="colorScheme"
-[results]="single"
-[legend]="showLegend"
-[explodeSlices]="explodeSlices"
-[labels]="showLabels"
-[doughnut]="doughnut"
-(select)="onSelect($event)">
+  [scheme]="colorScheme"
+  [results]="single"
+  [legend]="showLegend"
+  [explodeSlices]="explodeSlices"
+  [labels]="showLabels"
+  [doughnut]="doughnut"
+  (select)="onSelect($event)">
 </ngx-charts-pie-chart>
-</section>

@@ -82,3 +82,17 @@ body{
 .chart-legend {
   width: auto;
 }
+
+
+.container{
+	width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.tree .node-value {
+    display: inline-block;
+    color: deepskyblue;
+}

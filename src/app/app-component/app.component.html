@@ -1,34 +1,30 @@
 <section>
   <nav>
-    <ul>        
-      <li><a class='navItem' routerLink="/profile">User</a></li>
-      <li><a class='navItem' routerLink="/table">Table</a></li>
-      <li><a class='navItem' routerLink="/graph">Graph</a></li>
-    </ul>
-    <div class="button navItem">
-      <a class="btn-open" href="#"></a>
+    <div id='navContent'>
+      <div class="buttonHolder">
+          <a href="#" routerLink="/add" class="button plus"></a>
+      </div>
+      <ul>        
+        <li><a class='navItem' routerLink="/profile">User</a></li>
+        <li><a class='navItem' routerLink="/graph">Graph</a></li>
+        <li><a class='navItem overlayToggle'>Info</a></li>
+        <li><a class='navItem' (click)='authService.signOut()' >Logout</a></li>
+      </ul>
     </div>
   </nav>
     <div class="overlay">
       <div class="wrap">
           <h1 class>  <b style='color:green'>Sirona</b> app</h1>
           <ul class="wrap-nav">  
-          <li><a href="#">Graphs</a>
+          <li><a href="#">What is Sirona?</a>
             <ul>
-              <li><a routerLink="/graph">Graph1</a></li>
-              <li><a routerLink="/graph">Graph2</a></li>
+            Sirona is a blah blah   a blah blah   a blah blah   a blah blah   a blah blah   a blah blah   a blah blah  
             </ul>
           </li>
-          <li><a href="#">Table</a>
+          <li><a href="#">How to use Sirona</a>
             <ul>
                 <li><a routerLink="/table">Table 1</a></li>
                 <li><a routerLink="/table">Table 2</a></li>
-              </ul>
-          </li>
-          <li><a href="#">User</a>
-            <ul>
-                <li><a routerLink="/profile">Profile</a></li>
-                <li><a routerLink="/profile">Settings</a></li>
               </ul>
           </li>
         </ul>
@@ -49,17 +45,17 @@
             </div>
           </a>
           <p>
-            <a (click)='authService.signOut()' href="">Logout</a><br>
               Email: <a href="">bdillon@live.ie</a>
           </p>
         </div>
       </div>
     </div>
-    <div class="profile-header-img">
+   <!-- <div class="profile-header-img">
         <img class="img-circle" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" />
         <div class="rank-label-container">
             <span class="label label-default rank-label">100 puntos</span>
-      </div>
+      </div>--><div>
+      <h1 id='userGreeting'>{{userGreeting}}</h1>
     </div>
 
 <div [@routerAnimation]="getRouteAnimation(route)">

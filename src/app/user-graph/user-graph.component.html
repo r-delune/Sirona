@@ -3,20 +3,11 @@
         <div class="row">
           <div class="col-3">
               <tree (nodeSelected)="logEvent($event)" [tree]="tree" [settings]='treeSettings'></tree>
-          </div>
-          <router-outlet #route="outlet"></router-outlet>
-          <div class="col-9">
-            <ngx-charts-pie-chart
-            [scheme]="colorScheme"
-            [results]="single"
-            [legend]="showLegend"
-            [explodeSlices]="explodeSlices"
-            [labels]="showLabels"
-            [doughnut]="doughnut"
-            (select)="onSelect($event)"
-            [view]="[width, height]">
-            </ngx-charts-pie-chart>
+          </div>      
+          <div class="col-9">           
+            <router-outlet></router-outlet>
           </div>
         </div>
       </div>
+
 </section>
