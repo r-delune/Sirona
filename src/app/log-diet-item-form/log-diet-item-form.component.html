@@ -1,0 +1,46 @@
+<section>
+<form [formGroup]='addDietItemForm' (ngSubmit)='onSubmit(form.value)' id='addDietItemForm' role="form" action="" method="post">
+  <div class="row setup-content" id="step-0">
+    <h3>Diet</h3>
+      <div class="col-xs-6">
+        <div class="row">
+          <div class="form-group">
+            <label class="control-label">Appetite:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="appetite"></nouislider>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Cups of coffee drank:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="cupsOfCoffee"></nouislider>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Confectionary:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="kmCycled"></nouislider>
+          </div>
+            <div class="form-group">
+            <label class="control-label">Alcohol Drank:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="kmSwam"></nouislider>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Cigarettes smoked:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="pullUps"></nouislider></div>div>
+          </div>
+            <div class="form-group">     
+            <label class="control-label">Supplments:</label>
+            <input maxlength="100" type="text" class="form-control" formControlName="additionalNotes" placeholder="" />     
+          </div>  
+          <div class="form-group">     
+            <label class="control-label">Additional Note:</label>
+            <input maxlength="100" type="text" class="form-control" formControlName="additionalNotes" placeholder="" />     
+          </div>  
+        </div>     
+    </div>
+  <div class="row setup-content" id="step-0">
+    <div class="col-xs-6">
+      <div class="col-md-12">
+        <h3> Complete </h3>
+        <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>
+</section>

@@ -40,6 +40,11 @@ import { UserGraphDietComponent } from './user-graph-diet/user-graph-diet.compon
 import { TreeModule } from 'ng2-tree';
 import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-overview.component';
 import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-analysis.component';
+import { LogMoodItemFormComponent } from './log-mood-item-form/log-mood-item-form.component';
+import { LogSleepItemFormComponent } from './log-sleep-item-form/log-sleep-item-form.component';
+import { LogDietItemFormComponent } from './log-diet-item-form/log-diet-item-form.component';
+import { LogExcerciseItemFormComponent } from './log-excercise-item-form/log-excercise-item-form.component';
+
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
   authDomain: "sirona-7d26e.firebaseapp.com",
@@ -84,7 +89,11 @@ firebase.initializeApp(firebaseConfig);
     UserGraphMoodComponent,
     UserGraphDietComponent,
     UserGraphOverviewComponent,
-    UserGraphAnalysisComponent
+    UserGraphAnalysisComponent,
+    LogMoodItemFormComponent,
+    LogSleepItemFormComponent,
+    LogDietItemFormComponent,
+    LogExcerciseItemFormComponent
   ],
   providers: [
     DatastoreService,

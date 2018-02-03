@@ -64,7 +64,7 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit() {
 
-    $(".navItem").fadeOut(200);
+   // $(".navItem").fadeOut(200);
 
     this.form = this.formBuilder.group({
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),

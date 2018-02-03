@@ -754,22 +754,8 @@ fieldset[disabled] .form-group.is-focused .radio label {
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
-/*basic reset*/
-* {
-    margin: 0;
-    padding: 0;
-}
 
-html {
-    height: 100%;
-    background: #6441A5; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to left, #6441A5, #2a0845); /* Chrome 10-25, Safari 5.1-6 */
-}
 
-body {
-    font-family: montserrat, arial, verdana;
-    background: transparent;
-}
 
 body {
   margin-top:40px;
@@ -782,7 +768,8 @@ body {
 }
 .stepwizard {
   display: table;
-  width: 50%;
+  width: 80%;
+  margin: auto;
   position: relative;
 }
 .stepwizard-step button[disabled] {
@@ -812,4 +799,14 @@ body {
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 15px;
+}
+
+form {
+  margin: auto;
+  width: 90%;
+}
+
+.col-xs-6{
+  margin: auto;
+  width: 80%;
 }

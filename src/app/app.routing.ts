@@ -13,6 +13,10 @@ import { UserGraphMoodComponent } from './user-graph-mood/user-graph-mood.compon
 import { UserGraphDietComponent } from './user-graph-diet/user-graph-diet.component';
 import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-analysis.component';
 import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-overview.component';
+import { LogMoodItemFormComponent } from './log-mood-item-form/log-mood-item-form.component';
+import { LogSleepItemFormComponent } from './log-sleep-item-form/log-sleep-item-form.component';
+import { LogDietItemFormComponent } from './log-diet-item-form/log-diet-item-form.component';
+import { LogExcerciseItemFormComponent } from './log-excercise-item-form/log-excercise-item-form.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginFormComponent, data: { animation: 'tiger' } },
@@ -23,7 +27,24 @@ const appRoutes: Routes = [
   { path: 'graph', component: UserGraphComponent },
   { path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
   { path: 'home', component: UserHomeComponent, data: { animation: 'dolphin'},canActivate: [AuthGuard]},
+  { path: 'exerciseForm', component: LogExcerciseItemFormComponent, data: { animation: 'dolphin'}},
+  { path: 'dietForm', component: LogDietItemFormComponent , data: { animation: 'dolphin'}},
+  { path: 'sleepForm', component: LogSleepItemFormComponent, data: { animation: 'dolphin'}},
+  { path: 'moodForm', component: LogMoodItemFormComponent, data: { animation: 'dolphin'},canActivate: [AuthGuard]},
+  
   //[routerLink]="['artist', track.artistId]"
+ // {
+ //   path: 'add',
+ //  component: LogItemFormComponent,
+   // canActivate: [AuthGuard], 
+  //  children: [
+  //    {path: '', redirectTo: 'graph/overview',pathMatch: 'full'},
+  //    {path: 'moodForm', component: UserGraphExcerciseComponent, data: { animation: 'dolphin' }},
+ //     {path: 'sleepForm', component: UserGraphMoodComponent, data: { animation: 'dolphin' }},
+  //    {path: 'dietForm', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
+  //    {path: 'exerciseForm', component: UserGraphOverviewComponent, data: { animation: 'dolphin' }},
+  //   ]
+ // },
   {
     path: 'graph',
     component: UserGraphComponent,
