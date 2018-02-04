@@ -46,8 +46,6 @@ export class UserGraphComponent  {
 
   }
 
-
-  // pie
   showLabels = true;
   explodeSlices = false;
   doughnut = false;
@@ -76,6 +74,9 @@ export class UserGraphComponent  {
       }else if (e.node.value === 'Mood'){
         console.log('Moving to moods')
         this.router.navigate(['/graph/moodGraph']);
+      }else if (e.node.value === 'Sleep'){
+        console.log('Moving to Sleep')
+        this.router.navigate(['/graph/sleepGraph']);
       }else if (e.node.value === 'Analysis'){
         console.log('Moving to Dietary')
         this.router.navigate(['/graph/analysisGraph']);
@@ -132,6 +133,14 @@ export class UserGraphComponent  {
         },
         {
           value: 'Mood',
+          children: [
+            {value: 'All'},
+            {value: 'Evening'},
+            {value: 'Morning'}
+          ]
+        },
+        {
+          value: 'Sleep',
           children: [
             {value: 'All'},
             {value: 'Evening'},

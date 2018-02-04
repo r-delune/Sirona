@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
-
 import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
-//import { Item } from '../log-item-form/log-item-form.component';
+import * as firebase from 'firebase/app'; 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './auth.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/toPromise';
+import { DietItem } from '../log-item-form/log-item-form.component';
 
 export class Item {
   body: string;
@@ -44,28 +44,32 @@ export class DatastoreService {
   currentUserExerciseLogsRef
   currentUserLogsRef
   bSubject = new BehaviorSubject("a"); 
-
   moodItems
   sleepItems
   dietItems
   exerciseItems
   userId
   items
-dietItemsSuscription
+  dietItemsSuscription
+  sleepItemsSuscription
+  exerciseItemsSuscription
+  moodItemsSuscription
   userItemsList
   logItemList
-  
   dietItemsTestRef
-  dietItemsTest
-  
+  dietItemsTest 
   dietItemsTestListRef
   dietItemsTestList
   dietItemsTestSuscription
+  dietItemList
+  sleepItemList
+  moodItemList
+  exerciseItemList
 
   constructor(private http: Http, 
     private db: AngularFireDatabase,
     private userAuth: AngularFireAuth,
-    authService: AuthService) {
+    private authService: AuthService) {
     this.allLogsRef = db.object('Logs/');
     this.allLogItems = this.allLogsRef.valueChanges();
     this.allUsersRef = db.object('Users/');
@@ -73,22 +77,33 @@ dietItemsSuscription
 
     userAuth.authState.subscribe((auth) => {
       this.userId = auth.uid
-   //   this.dietItemsTestRef = db.object(`Logs/Diet/${this.userId}`);
-      
-  //    console.log('INSIDE')
-  //    console.log(`Logs/Diet/${this.userId}`)
-  ///    this.dietItems = this.db.list(`Logs/Diet/${this.userId}`)
-  //    console.log(this.dietItems)
-  //    console.log(this.dietItemsTestRef)
+        
+      let subscribe1 = db.object(`Logs/Diet/${this.userId}`).valueChanges().subscribe(
+        data =>{
+          this.dietItemList = data;
+        }
+      );
+
+      let subscribe2 = db.object(`Logs/Exercise/${this.userId}`).valueChanges().subscribe(
+        data =>{
+          console.log('subscribing to exercise items')
+          this.exerciseItemList = data;
+          console.log(data)
+        }
+      );
+
+      let subscribe3 = db.object(`Logs/Mood/${this.userId}`).valueChanges().subscribe(
+        data =>{
+          this.moodItemList = data;
+        }
+      );
+
+      let subscribe4 = db.object(`Logs/Sleep/${this.userId}`).valueChanges().subscribe(
+        data =>{
+          this.sleepItemList = data;
+        }
+      );
     });
-
-   // db.list<Log>('Logs').valueChanges().subscribe(console.log);
-
-    //console.log('HERE!!')
-   // console.log(userAuth)
-   // console.log(userAuth.auth)
-   // console.log('auth user id!!!!')
-   // console.log(authService.currentUserId)
     
     this.currentUserRef = db.object('Users/'+this.userId+'');
     this.currentUserItem = this.currentUserRef.valueChanges();
@@ -100,81 +115,85 @@ dietItemsSuscription
     this.currentUserSleepItems = this.currentUserSleepLogsRef.valueChanges();
     this.currentUserExerciseLogsRef = db.object('Logs/Exercise/'+this.userId+'');
     this.currentUserExerciseItems = this.currentUserExerciseLogsRef.valueChanges();
-    this.currentUserDietLogsRef = db.object(`Logs/Diet/${this.userId}`);
+    this.currentUserDietLogsRef = db.object('Logs/Diet');
     this.currentUserDietItems = this.currentUserDietLogsRef.valueChanges();
 
+    // Get an object, just the data (valuesChanges function), and all subsequent changes
     //this.dietItemsTestRef = db.object(`Logs/Diet/${this.userId}`);
-   // console.log(`Logs/Diet/${this.userId}`)
+    //console.log(`Logs/Diet/${this.userId}`)
     //this.dietItemsTest = this.dietItemsTestRef.valueChanges();
-
-
-   // this.dietItems = this.db.list(`Logs/Diet`)
-   
-  
-   // this.allLogItems.subscribe((items) => {
-     //  console.log('ALL Log items')
-    //  console.log(items)
-     // this.logItems = items.json();
-     //this.logArray = Array.of(this.logItems); 
-  // });
-
-   // this.allUserItems.subscribe((items) => {
-   //   console.log('ALL USER Log items')
-   // console.log(items)
-    // this.logItems = items.json();
+    //this.dietItems = this.db.list(`Logs/Diet`)
+    //this.allLogItems.subscribe((items) => {
+    //console.log('ALL Log items')
+    //console.log(items)
+    //this.logItems = items.json();
     //this.logArray = Array.of(this.logItems); 
-   // });
+    //});
+
+    //this.allUserItems.subscribe((items) => {
+    //console.log('ALL USER Log items')
+    //console.log(items)
+    //this.logItems = items.json();
+    //this.logArray = Array.of(this.logItems); 
+    //});
     
-  //  this.currentUserItem.subscribe((items) => {
-    //  console.log('ALL currentUserItem items')
-    //  console.log(items)
-      // this.logItems = items.json();
-      //this.logArray = Array.of(this.logItems); 
-  //});
+    //this.currentUserItem.subscribe((items) => {
+    //console.log('ALL currentUserItem items')
+    //console.log(items)
+    //this.logItems = items.json();
+    //this.logArray = Array.of(this.logItems); 
+    //});
 
   this.currentUserDietItems.subscribe((items) => {
-   // console.log('ALL currentUserDietItems items')\
-
-    console.log('DIETITEMSUBSCRIPTIONS')
-    console.log(items)
+    //console.log('ALL currentUserDietItems items')\
+   // console.log('DIETITEMSUBSCRIPTIONS')
+    //console.log(items)
     this.dietItemsSuscription = items
-    console.log(this.dietItemsSuscription)
-    // this.logItems = items.json();
+   // console.log(this.dietItemsSuscription)
+    //console.log('INSIDE SUBSCRIBE getUserDietItemsList')
+  //  console.log(this.sleepItemsSuscription[''+this.userId+''])
+   // console.log(this.sleepItemsSuscription[ `Logs/Diet/${this.userId}`])
+   // console.log(this.dietItemsSuscription.userId)   
+   
+    //this.logItems = items.json();
     //this.logArray = Array.of(this.logItems); 
   });
 
-  //this.dietItemsTest.subscribe((items) => {
-    // console.log('ALL currentUserDietItems items')
-  //   console.log('DIETITEMTEST')
-   //  console.log(items)
-   //  this.dietItemsTestSuscription = items
- 
-   //  console.log(this.dietItemsTestSuscription)
-     // this.logItems = items.json();
-     //this.logArray = Array.of(this.logItems); 
- ///  });
+
+
+   //this.dietItemsTest.subscribe((items) => {
+   //console.log('ALL currentUserDietItems items')
+   //console.log('DIETITEMTEST')
+   //console.log(items)
+   //this.dietItemsTestSuscription = items
+   //console.log(this.dietItemsTestSuscription)
+   //this.logItems = items.json();
+   //this.logArray = Array.of(this.logItems); 
+   ///});
 
   this.currentUserMoodItems.subscribe((items) => {
-  //  console.log('ALL currentUserMoodItems items')
-  //  console.log(items)
-    // this.logItems = items.json();
+
+    this.dietItemsSuscription = items
+    //console.log('ALL currentUserMoodItems items')
+    //console.log(items)
+    //this.logItems = items.json();
     //this.logArray = Array.of(this.logItems); 
   });
 
   this.currentUserSleepItems.subscribe((items) => {
-  //  console.log('ALL currentUserSleepItems items')
-  //  console.log(items)
-    // this.logItems = items.json();
+    this.sleepItemsSuscription = items
+    //console.log('ALL currentUserSleepItems items')
+    //console.log(items)
+    //this.logItems = items.json();
     //this.logArray = Array.of(this.logItems); 
   });
 
   this.currentUserExerciseItems.subscribe((items) => {
-  //  console.log('ALL currentUserExerciseItems items')
-  ///  console.log(items)
-    // this.logItems = items.json();
-    //this.logArray = Array.of(this.logItems); 
-  });
+    console.log('subscribing to exercise items 2')
+    this.exerciseItemsSuscription = items
+    console.log(items)
 
+  });
   }
 
 
@@ -186,56 +205,68 @@ dietItemsSuscription
   }
 
   getUserMoodItemsList(): Observable<any[]>{
-    this.moodItems = this.db.list(`Logs/Mood/${this.userId}`)
+   // this.moodItems = this.db.list(`Logs/Mood/${this.userId}`)
    // console.log('getUserMoodItemsList')
    // console.log(this.items)
-    return this.moodItems;
+   console.log('getUserMoodItemsList')
+  // console.log(this.sleepItemsSuscription[this.userId])
+    return this.moodItemList
   }
 
   getUserSleepItemsList(): Observable<any[]>{
-    this.sleepItems = this.db.list(`Logs/Sleep/${this.userId}`)
+   // this.sleepItems = this.db.list(`Logs/Sleep/${this.userId}`)
    // console.log('getUserMoodItemsList')
-   // console.log(this.items)
-    return this.sleepItems;
+    console.log('getUserSleepItemsList')
+   // console.log(this.sleepItemsSuscription[this.userId])
+   
+    return this.sleepItemList
   }
 
   getUserDietItemsList(): Observable<any[]>{
-   // this.dietItems = this.db.list(`Logs/Diet/${this.userId}`)
+    //this.dietItems = this.db.list(`Logs/Diet/${this.userId}`)
     //console.log('getUserMoodItemsList1')
-   // console.log(this.dietItems)
-   // console.log('getUserMoodItemsList2')
-   // console.log(this.currentUserDietItems)
-    console.log('dietItemsSuscription')
-    console.log(this.dietItemsSuscription)
-    console.log('!dietItemsTest!')
-    console.log(this.dietItemsTest)
-    console.log('!dietItemsTestList!')
-    console.log(this.dietItemsTestList)
-    console.log('dietItemsTestSuscription')
-    console.log(this.dietItemsTestSuscription)
-
-   this.dietItemsTestListRef = this.db.list(`Logs/Diet/${this.userId}`)
-   this.dietItemsTestList = this.dietItemsTestRef.valueChanges();
-
+    //console.log(this.dietItems)
+    //console.log('getUserMoodItemsList2')
+    //console.log(this.currentUserDietItems)
+    //console.log('dietItemsSuscription')
+    //console.log(this.dietItemsSuscription)
+    //console.log('!dietItemsTest!')
+    //console.log(this.dietItemsTest)
+    //console.log('!dietItemsTestList!')
+    //console.log(this.dietItemsTestList)
+    //console.log('dietItemsTestSuscription')
+    //console.log(this.dietItemsTestSuscription)
+   // this.dietItemsTestListRef = this.db.list(`Logs/Diet/${this.userId}`)
+   //this.dietItemsTestList = this.dietItemsTestRef.valueChanges();
     console.log('TEST 2! - dietItemsTestList')
     console.log(this.dietItemsTestList)
     console.log(this.dietItemsTestListRef)
-    console.log(this.userId)
-    console.log(this.dietItemsTestRef)
-    
-    
-    return this.currentUserDietItems;
+    //console.log(this.userId)
+    //
+    //console.log(this.dietItemsTestRef)
+    //WILL NEED TO QUERY FIREBASE INSTEAD OF CURRENT METHOD
+    console.log('!!!!!!!!!dietItemsSuscription')
+    console.log(this.dietItemsSuscription)
+   // console.log(this.dietItemsSuscription[this.userId])
+    console.log('dietItemList')
+    console.log(this.dietItemList)   
+    return this.dietItemList
   }
 
   getUserExerciseItemsList(): Observable<any[]>{
-    this.exerciseItems = this.db.list(`Logs/Exercise/${this.userId}`)
+//this.exerciseItems = this.db.list(`Logs/Exercise/${this.userId}`)
     console.log('getUserMoodItemsList')
     console.log(this.items)
-    return this.exerciseItems;
+    console.log('getUserExerciseItemsList')
+    //console.log(this.sleepItemsSuscription[this.userId])
+    console.log('this.exerciseItemList')
+    console.log(this.exerciseItemList)
+
+    return this.exerciseItemList
   }
 
   getUserItemsList(): Observable<any[]>{
-    this.items = this.db.list(`Users/${this.userId}`)
+   // this.items = this.db.list(`Users/${this.userId}`)
     console.log('MY TEST ITEMS')
     console.log(this.items)
     return this.userItemsList;

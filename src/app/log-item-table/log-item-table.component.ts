@@ -22,6 +22,7 @@ export class LogItemTableComponent {
   logItems: Observable<any>;
   logArray;
   user
+  itemRef
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,8 +31,8 @@ export class LogItemTableComponent {
     private activatedRoute: ActivatedRoute,
      authService: AuthService,
     db: AngularFireDatabase) {
-     // this.itemRef = db.object('Users');
-     // this.logItems = this.itemRef.valueChanges();
+      this.itemRef = db.object('Users');
+      this.logItems = this.itemRef.valueChanges();
     }
 
     //tells angular that we want the lookuplist value item

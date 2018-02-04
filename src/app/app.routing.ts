@@ -40,7 +40,7 @@ const appRoutes: Routes = [
       {path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
       {path: 'overview', component: UserGraphOverviewComponent, data: { animation: 'dolphin' }},
       {path: 'analysisGraph', component: UserGraphAnalysisComponent, data: { animation: 'dolphin' }}, 
-      {path: 'sleepForm', component: LogSleepItemFormComponent},   
+      {path: 'sleepGraph', component: LogSleepItemFormComponent, data: { animation: 'dolphin' }},   
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: '/' }

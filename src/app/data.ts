@@ -56,4 +56,65 @@ export var single = [
       ]
     }
   ];
+
+
+  export var data2 = [
+    { 
+      "name": "Morning", 
+      "series" : [
+        { 
+          "name": "Afternoon",
+          "value": 12
+        },
+        { 
+          "name": "Afternoon", 
+          "value": 13
+        }
+      ] 
+    },
+
+    { 
+      "name": "Afternoon", 
+      "series" : [
+        { 
+          "name": "Afternoon", 
+          "value": 14
+        },
+        { 
+          "name": "Afternoon", 
+          "value": 16
+        }
+      ] 
+    },
+    
+    { 
+      "name": "Evening",
+      "series" : [
+        { 
+          "name": "Evening", 
+          "value": 15
+        },
+        { 
+          "name": "Evening", 
+          "value": 14
+        }
+      ] 
+    }
+  ];
+
   
+  export var data = [
+    { 
+      "name": "Morning",
+      "value": 0 
+    },
+    { 
+      "name": "Afternoon",
+      "value": 12
+    },
+    { 
+      "name": "Evening", 
+      "value": 14 
+    }
+  ];
+

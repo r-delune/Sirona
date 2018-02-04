@@ -15,7 +15,6 @@ import {Observable} from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app-component/app.component';
-import { LogItemComponent } from './log-item/log-item.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { FavoriteDirective } from './favorite.directive';
 import { CategoryListPipe } from './category-list.pipe';
@@ -44,6 +43,8 @@ import { LogMoodItemFormComponent } from './log-mood-item-form/log-mood-item-for
 import { LogSleepItemFormComponent } from './log-sleep-item-form/log-sleep-item-form.component';
 import { LogDietItemFormComponent } from './log-diet-item-form/log-diet-item-form.component';
 import { LogExcerciseItemFormComponent } from './log-excercise-item-form/log-excercise-item-form.component';
+import { UserGraphSleepComponent } from './user-graph-sleep/user-graph-sleep.component';
+import { DataInterpretorService } from './services/data-interpretor.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -74,7 +75,6 @@ firebase.initializeApp(firebaseConfig);
   ],
   declarations: [
     AppComponent,
-    LogItemComponent,
     FavoriteDirective,
     CategoryListPipe,
     LogItemFormComponent,
@@ -92,12 +92,14 @@ firebase.initializeApp(firebaseConfig);
     LogMoodItemFormComponent,
     LogSleepItemFormComponent,
     LogDietItemFormComponent,
-    LogExcerciseItemFormComponent
+    LogExcerciseItemFormComponent,
+    UserGraphSleepComponent
   ],
   providers: [
     DatastoreService,
     AuthService,
     AuthGuard,
+    DataInterpretorService,
     { provide: lookupListToken, useValue: lookupLists },
     { provide: XHRBackend, useClass: XHRBackend },
     { provide: APP_BASE_HREF, useValue: '/'}

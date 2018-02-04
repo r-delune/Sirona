@@ -51,7 +51,6 @@ export class LogExcerciseItemFormComponent {
 
   ngOnInit() {
     console.log('EXERCIOSE FORM')
-
     this.addExerciseItemForm = this.formBuilder.group({
       id: this.userId,
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
@@ -77,6 +76,5 @@ export class LogExcerciseItemFormComponent {
       this.datastoreService.addExerciseEntry(this.addExerciseItemForm.value)
       this.router.navigate(['/add'])
     }
-
-}
+  }
 }
