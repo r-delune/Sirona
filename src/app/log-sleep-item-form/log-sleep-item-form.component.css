@@ -435,7 +435,7 @@ label.control-label {
 
 .form-group {
   padding-bottom: 7px;
-  margin: 27px 0 0 0;
+
 }
 .form-group .form-control {
   margin-bottom: 7px;
@@ -802,3 +802,68 @@ form {
   margin: auto;
   width: 80%;
 }
+.form-group{
+  width: 40%;
+}
+
+.noUi-target{
+  padding: 5px 40px 5px 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ng2-nouislider{
+  padding: 5px 40px 5px 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+}
+
+.noUi-base{
+  padding: 5px 40px 5px 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+}
+
+.noUi-origin{
+  padding: 5px 40px 5px 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+}
+
+/*
+.noUi-connect{
+  padding: 5px 40px 5px 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+}
+
+.noUi-target {
+  padding: 0 17px;
+}
+.noUi-base:before,
+.noUi-base:after {
+  width: 17px;
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: block;
+}
+.noUi-base:before {
+  left: -17px;
+}
+.noUi-base:after {
+  left: 100%;
+}
+
+.noUi-target	This class is added to the element you call  .noUiSlider() on. Has  border, background and other styling properties to establish the slider design and background.
+.noUi-base	The slider bar. Serves as the calculating point for the slider handles, and has no visible styling.
+.noUi-origin	The elements connected to the base, defining the handle locations.
+.noUi-handle	The actual, visible handles. Style these any way you like!
+.noUi-connect	Styling class for setting properties related to the slider connect segment.
+.noUi-state-tap	This class is added when the slider bar is tapped or clicked. A slider with this call will reject any user input. noUiSlider will remove this class after 300ms, leaving that timespan to perform visual animations.
+[disabled]*/

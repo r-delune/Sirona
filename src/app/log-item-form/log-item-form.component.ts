@@ -14,6 +14,14 @@ import { AuthService } from '../services/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { ActivatedRouteSnapshot } from '@angular/router/src/router_state';
+
+
+import { LogMoodItemFormComponent } from '../log-mood-item-form/log-mood-item-form.component';
+import { LogSleepItemFormComponent } from '../log-sleep-item-form/log-sleep-item-form.component';
+import { LogDietItemFormComponent } from '../log-diet-item-form/log-diet-item-form.component';
+import { LogExcerciseItemFormComponent } from '../log-excercise-item-form/log-excercise-item-form.component';
+
+
 declare var jquery:any;
 declare var $ :any;
 
@@ -186,7 +194,7 @@ export class LogItemFormComponent {
 
 
     console.log('NAVIGATING TO MOOD FORM')
-    this.router.navigate(['moodForm']);
+    this.router.navigate(['/moodForm']);
 
   }
 

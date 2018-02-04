@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app-component/app.component';
 import { LogItemComponent } from './log-item/log-item.component';
-import { LogItemListComponent } from './log-item-list/log-item-list.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { FavoriteDirective } from './favorite.directive';
 import { CategoryListPipe } from './category-list.pipe';
@@ -24,6 +23,7 @@ import { LogItemTableComponent } from './log-item-table/log-item-table.component
 import { LogItemFormComponent } from './log-item-form/log-item-form.component';
 import { DatastoreService } from './services/datastore.service';
 import { AuthService } from './services/auth.service';
+import { AuthGuard  } from './services/auth-gaurd.service';
 import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
@@ -75,7 +75,6 @@ firebase.initializeApp(firebaseConfig);
   declarations: [
     AppComponent,
     LogItemComponent,
-    LogItemListComponent,
     FavoriteDirective,
     CategoryListPipe,
     LogItemFormComponent,
@@ -98,13 +97,14 @@ firebase.initializeApp(firebaseConfig);
   providers: [
     DatastoreService,
     AuthService,
+    AuthGuard,
     { provide: lookupListToken, useValue: lookupLists },
     { provide: XHRBackend, useClass: XHRBackend },
     { provide: APP_BASE_HREF, useValue: '/'}
   ],
   bootstrap: [
     AppComponent
-  ],
+  ]
   
 })
 

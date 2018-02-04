@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
@@ -29,14 +29,18 @@ export class LogMoodItemFormComponent {
   addMoodItemForm
   userId
 
-  constructor(private formBuilder: FormBuilder, private angularAuth: AngularFireAuth,
-    private router: Router) { 
+  constructor(private formBuilder: FormBuilder, private angularAuth: AngularFireAuth, 
+    private router: Router, 
+    private datastoreService: DatastoreService, 
+    private db: AngularFireDatabase,
+    authService: AuthService,
+    private angularAth: AngularFireAuth,
+  ) {  
     this.angularAuth.authState.subscribe((user) => {
       this.userId = user.uid;
     })
   }
 
-  
   someRange2config: any = {
     behaviour: 'drag',
     start: [0, 100],
@@ -46,11 +50,7 @@ export class LogMoodItemFormComponent {
     }
   };
 
-
-
   ngOnInit() {
-
-
     console.log('MOOD FORM')
 
     this.addMoodItemForm = this.formBuilder.group({
@@ -65,13 +65,13 @@ export class LogMoodItemFormComponent {
       extEffectOnMood: this.formBuilder.control('No Entry'),
       additionalNotes: this.formBuilder.control('No Entry')
     })
-
   }
 
-  onSubmitMood(moodItem: MoodItem) {
-    console.log('submitting sleep form')
-    console.log(moodItem)
-    //this.saveLogItem(this.logLengthID, item);
-   // this.datastoreService.addLogItem(item)
-  }
+
+  onSubmit() {
+    if (this.addMoodItemForm.valid) {
+      this.datastoreService.addMoodEntry(this.addMoodItemForm.value)
+      this.router.navigate(['/add'])
+    }
+}
 }

@@ -28,8 +28,6 @@ export class LogDietItemFormComponent{
 
   addDietItemForm
   userId
-
-  
   someRange2config: any = {
     behaviour: 'drag',
     start: [0, 100],
@@ -39,8 +37,12 @@ export class LogDietItemFormComponent{
     }
   };
 
-
-  constructor(private formBuilder: FormBuilder, private angularAuth: AngularFireAuth, private router: Router
+  constructor(private formBuilder: FormBuilder, private angularAuth: AngularFireAuth, 
+    private router: Router, 
+    private datastoreService: DatastoreService, 
+    private db: AngularFireDatabase,
+    authService: AuthService,
+    private angularAth: AngularFireAuth,
   ) { 
     this.angularAuth.authState.subscribe((user) => {
       this.userId = user.uid;
@@ -58,17 +60,16 @@ export class LogDietItemFormComponent{
       cupsOfCoffee: this.formBuilder.control('No Entry'),
       confectionary: this.formBuilder.control('No Entry'),
       alcoholDrank: this.formBuilder.control('No Entry'),
-      cigarrettesSmoked: this.formBuilder.control('No Entry'),
+      cigarettesSmoked: this.formBuilder.control('No Entry'),
       supplements: this.formBuilder.control('No Entry'),
-      dietaryNotes: this.formBuilder.control('No Entry'),
+      additionalNotes: this.formBuilder.control('No Entry'),
     })
-
   }
 
-  onSubmitDiet(dietItem: DietItem) {
-    console.log('submitting diet form')
-    console.log(dietItem)
-    //this.saveLogItem(this.logLengthID, item);
-   // this.datastoreService.addLogItem(item)
+  onSubmit() {
+    if (this.addDietItemForm.valid) {
+      this.datastoreService.addDietEntry(this.addDietItemForm.value)
+      this.router.navigate(['/add'])
+    }
   }
 }

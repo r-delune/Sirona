@@ -34,17 +34,34 @@ export class DatastoreService {
   allLogsRef;
   currentUserRef
   currentUserItem
+  currentUserMoodItems
+  currentUserMoodLogsRef
+  currentUserSleepItems
+  currentUserSleepLogsRef
+  currentUserDietItems
+  currentUserDietLogsRef
+  currentUserExerciseItems
+  currentUserExerciseLogsRef
   currentUserLogsRef
   bSubject = new BehaviorSubject("a"); 
 
+  moodItems
+  sleepItems
+  dietItems
+  exerciseItems
   userId
   items
-
+dietItemsSuscription
   userItemsList
   logItemList
+  
+  dietItemsTestRef
+  dietItemsTest
+  
+  dietItemsTestListRef
+  dietItemsTestList
+  dietItemsTestSuscription
 
-  
-  
   constructor(private http: Http, 
     private db: AngularFireDatabase,
     private userAuth: AngularFireAuth,
@@ -56,64 +73,165 @@ export class DatastoreService {
 
     userAuth.authState.subscribe((auth) => {
       this.userId = auth.uid
+   //   this.dietItemsTestRef = db.object(`Logs/Diet/${this.userId}`);
+      
+  //    console.log('INSIDE')
+  //    console.log(`Logs/Diet/${this.userId}`)
+  ///    this.dietItems = this.db.list(`Logs/Diet/${this.userId}`)
+  //    console.log(this.dietItems)
+  //    console.log(this.dietItemsTestRef)
     });
 
-    db.list<Log>('Logs').valueChanges().subscribe(console.log);
-  
+   // db.list<Log>('Logs').valueChanges().subscribe(console.log);
 
-    console.log('HERE!!')
-    console.log(userAuth)
-    console.log(userAuth.auth)
-    console.log('auth user id!!!!')
-    console.log(authService.currentUserId)
+    //console.log('HERE!!')
+   // console.log(userAuth)
+   // console.log(userAuth.auth)
+   // console.log('auth user id!!!!')
+   // console.log(authService.currentUserId)
     
     this.currentUserRef = db.object('Users/'+this.userId+'');
     this.currentUserItem = this.currentUserRef.valueChanges();
     this.currentUserLogsRef = db.object('Logs/'+this.userId+'');
     this.currentUserLogsItems = this.currentUserLogsRef.valueChanges();
+    this.currentUserMoodLogsRef = db.object('Logs/Mood'+this.userId+'');
+    this.currentUserMoodItems = this.currentUserMoodLogsRef.valueChanges();
+    this.currentUserSleepLogsRef = db.object('Logs/Sleep/'+this.userId+'');
+    this.currentUserSleepItems = this.currentUserSleepLogsRef.valueChanges();
+    this.currentUserExerciseLogsRef = db.object('Logs/Exercise/'+this.userId+'');
+    this.currentUserExerciseItems = this.currentUserExerciseLogsRef.valueChanges();
+    this.currentUserDietLogsRef = db.object(`Logs/Diet/${this.userId}`);
+    this.currentUserDietItems = this.currentUserDietLogsRef.valueChanges();
+
+    //this.dietItemsTestRef = db.object(`Logs/Diet/${this.userId}`);
+   // console.log(`Logs/Diet/${this.userId}`)
+    //this.dietItemsTest = this.dietItemsTestRef.valueChanges();
 
 
-  //  this.items = db.list(`1/Logs/${this.userId}`)
-
-   // console.log('MY TEST ITEMS')
-   // console.log(this.items)
-
-
-    this.allLogItems.subscribe((items) => {
-       console.log('ALL Log items')
-      console.log(items)
+   // this.dietItems = this.db.list(`Logs/Diet`)
+   
+  
+   // this.allLogItems.subscribe((items) => {
+     //  console.log('ALL Log items')
+    //  console.log(items)
      // this.logItems = items.json();
      //this.logArray = Array.of(this.logItems); 
-   });
+  // });
 
-    this.allUserItems.subscribe((items) => {
-      console.log('ALL USER Log items')
-    console.log(items)
+   // this.allUserItems.subscribe((items) => {
+   //   console.log('ALL USER Log items')
+   // console.log(items)
     // this.logItems = items.json();
     //this.logArray = Array.of(this.logItems); 
-    });
+   // });
     
-    this.currentUserItem.subscribe((items) => {
-      console.log('ALL currentUserItem items')
-      console.log(items)
+  //  this.currentUserItem.subscribe((items) => {
+    //  console.log('ALL currentUserItem items')
+    //  console.log(items)
       // this.logItems = items.json();
       //this.logArray = Array.of(this.logItems); 
+  //});
+
+  this.currentUserDietItems.subscribe((items) => {
+   // console.log('ALL currentUserDietItems items')\
+
+    console.log('DIETITEMSUBSCRIPTIONS')
+    console.log(items)
+    this.dietItemsSuscription = items
+    console.log(this.dietItemsSuscription)
+    // this.logItems = items.json();
+    //this.logArray = Array.of(this.logItems); 
   });
 
-   this.currentUserLogsItems.subscribe((items) => {
-      console.log('ALL currentUserLogsItems Log items')
-      console.log(items)
-      // this.logItems = items.json();
-      //this.logArray = Array.of(this.logItems); 
-   });
+  //this.dietItemsTest.subscribe((items) => {
+    // console.log('ALL currentUserDietItems items')
+  //   console.log('DIETITEMTEST')
+   //  console.log(items)
+   //  this.dietItemsTestSuscription = items
+ 
+   //  console.log(this.dietItemsTestSuscription)
+     // this.logItems = items.json();
+     //this.logArray = Array.of(this.logItems); 
+ ///  });
+
+  this.currentUserMoodItems.subscribe((items) => {
+  //  console.log('ALL currentUserMoodItems items')
+  //  console.log(items)
+    // this.logItems = items.json();
+    //this.logArray = Array.of(this.logItems); 
+  });
+
+  this.currentUserSleepItems.subscribe((items) => {
+  //  console.log('ALL currentUserSleepItems items')
+  //  console.log(items)
+    // this.logItems = items.json();
+    //this.logArray = Array.of(this.logItems); 
+  });
+
+  this.currentUserExerciseItems.subscribe((items) => {
+  //  console.log('ALL currentUserExerciseItems items')
+  ///  console.log(items)
+    // this.logItems = items.json();
+    //this.logArray = Array.of(this.logItems); 
+  });
+
   }
 
 
   getLogItemsList(): Observable<any[]>{
     this.items = this.db.list(`Logs/${this.userId}`)
-    console.log('MY TEST ITEMS')
-    console.log(this.items)
+   // console.log('MY TEST ITEMS')
+   // console.log(this.items)
     return this.logItemList;
+  }
+
+  getUserMoodItemsList(): Observable<any[]>{
+    this.moodItems = this.db.list(`Logs/Mood/${this.userId}`)
+   // console.log('getUserMoodItemsList')
+   // console.log(this.items)
+    return this.moodItems;
+  }
+
+  getUserSleepItemsList(): Observable<any[]>{
+    this.sleepItems = this.db.list(`Logs/Sleep/${this.userId}`)
+   // console.log('getUserMoodItemsList')
+   // console.log(this.items)
+    return this.sleepItems;
+  }
+
+  getUserDietItemsList(): Observable<any[]>{
+   // this.dietItems = this.db.list(`Logs/Diet/${this.userId}`)
+    //console.log('getUserMoodItemsList1')
+   // console.log(this.dietItems)
+   // console.log('getUserMoodItemsList2')
+   // console.log(this.currentUserDietItems)
+    console.log('dietItemsSuscription')
+    console.log(this.dietItemsSuscription)
+    console.log('!dietItemsTest!')
+    console.log(this.dietItemsTest)
+    console.log('!dietItemsTestList!')
+    console.log(this.dietItemsTestList)
+    console.log('dietItemsTestSuscription')
+    console.log(this.dietItemsTestSuscription)
+
+   this.dietItemsTestListRef = this.db.list(`Logs/Diet/${this.userId}`)
+   this.dietItemsTestList = this.dietItemsTestRef.valueChanges();
+
+    console.log('TEST 2! - dietItemsTestList')
+    console.log(this.dietItemsTestList)
+    console.log(this.dietItemsTestListRef)
+    console.log(this.userId)
+    console.log(this.dietItemsTestRef)
+    
+    
+    return this.currentUserDietItems;
+  }
+
+  getUserExerciseItemsList(): Observable<any[]>{
+    this.exerciseItems = this.db.list(`Logs/Exercise/${this.userId}`)
+    console.log('getUserMoodItemsList')
+    console.log(this.items)
+    return this.exerciseItems;
   }
 
   getUserItemsList(): Observable<any[]>{
@@ -133,28 +251,44 @@ export class DatastoreService {
        return this.allLogItems
   }
 
-  getCurrentUserLogItems(): Observable<any> {
-    console.log('RETURNING USER LOG ITEMS') 
+  getAllCurrentUserLogItems(): Observable<any> {
+    console.log('RETURNING All USER LOG ITEMS') 
     return this.currentUserLogsItems
   }
 
+  getUserMoodItems(): Observable<any> {
+    console.log('getUserMoodItems') 
+    return this.currentUserMoodItems
+  }
+
+  getUserSleepLogItems(): Observable<any> {
+    console.log('getUserSleepLogItems') 
+    return this.currentUserSleepItems
+  }
+  getUserDietLogItems(): Observable<any> {
+    console.log('getUserDietLogItems') 
+    return this.currentUserDietItems
+  }
+  getUserExerciseLogItems(): Observable<any> {
+    console.log('getUserExerciseLogItems') 
+    return this.currentUserExerciseItems
+  }
+
   getAllUserInfo(): Observable<any> {
-    console.log('RETURNING ALL USER INFO')
-    console.log(this.allUserItems)
+  console.log('RETURNING ALL USER INFO')
+  console.log(this.allUserItems)
    return this.allUserItems
   }
 
   getCurrentUserInfo(): Observable<any> {
-       console.log('RETURNING CURRENT USE INFO')
-       console.log(this.currentUserItem)
-      return this.currentUserItem
+    console.log('RETURNING CURRENT USE INFO')
+    console.log(this.currentUserItem)
+    return this.currentUserItem
   }
 
   addUser(user){
     console.log('CREATING USER')
     console.log(user)
-    
-  //old way
     const afList = this.db.list(`Users/${this.userId}`);
     afList.push({ user });
     user.userId = this.userId
@@ -180,22 +314,32 @@ export class DatastoreService {
    this.allUsersRef.remove();
   }
 
-  addLogItem(logItem) {
-    console.log('ADDING LOG ITEM')
-    console.log(logItem)
-   // this.logItemList.push(logItem)
+  addMoodEntry(moodEntry) {
+    console.log('ADDING moodEntry ITEM')
+    console.log(moodEntry)
+    const afList = this.db.list(`Logs/Mood/${this.userId}`);
+    afList.push({ moodEntry });
+  }
 
-    ///old way
-    const afList = this.db.list(`Logs/${this.userId}`);
-    afList.push({ logItem });
+  addSleepEntry(sleepEntry) {
+    console.log('ADDING sleepEntry ITEM')
+    console.log(sleepEntry)
+    const afList = this.db.list(`Logs/Sleep/${this.userId}`);
+    afList.push({ sleepEntry });
+  }
 
-    
+  addDietEntry(dietEntry) {
+    console.log('ADDING dietEntry ITEM')
+    console.log(dietEntry)
+    const afList = this.db.list(`Logs/Diet/${this.userId}`);
+    afList.push({ dietEntry });
+  }
 
-
-
-    //const listObservable = afList.snapshotChanges();
-   // listObservable.subscribe();
-    //this.allLogsRef.set({ name: logItem });
+  addExerciseEntry(exerciseEntry) {
+    console.log('ADDING exerciseEntry ITEM')
+    console.log(exerciseEntry)
+    const afList = this.db.list(`Logs/Exercise/${this.userId}`);
+    afList.push({ exerciseEntry });
   }
 
   updateLogItem(newSize: string) {

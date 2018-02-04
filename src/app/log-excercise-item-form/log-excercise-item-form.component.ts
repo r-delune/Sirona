@@ -28,8 +28,6 @@ export class LogExcerciseItemFormComponent {
 
   addExerciseItemForm
   userId
-
-  
   someRange2config: any = {
     behaviour: 'drag',
     start: [0, 100],
@@ -39,8 +37,12 @@ export class LogExcerciseItemFormComponent {
     }
   };
 
-  
-  constructor(private formBuilder: FormBuilder, private angularAuth: AngularFireAuth, private router: Router
+  constructor(private formBuilder: FormBuilder, private angularAuth: AngularFireAuth, 
+    private router: Router, 
+    private datastoreService: DatastoreService, 
+    private db: AngularFireDatabase,
+    authService: AuthService,
+    private angularAth: AngularFireAuth,
   ) { 
     this.angularAuth.authState.subscribe((user) => {
       this.userId = user.uid;
@@ -48,7 +50,6 @@ export class LogExcerciseItemFormComponent {
   }
 
   ngOnInit() {
-
     console.log('EXERCIOSE FORM')
 
     this.addExerciseItemForm = this.formBuilder.group({
@@ -68,7 +69,14 @@ export class LogExcerciseItemFormComponent {
     console.log('submitting diet form')
     console.log(excerciseItem)
     //this.saveLogItem(this.logLengthID, item);
-   // this.datastoreService.addLogItem(item)
+    //this.datastoreService.addLogItem(item)
   }
 
+  onSubmit() {
+    if (this.addExerciseItemForm.valid) {
+      this.datastoreService.addExerciseEntry(this.addExerciseItemForm.value)
+      this.router.navigate(['/add'])
+    }
+
+}
 }

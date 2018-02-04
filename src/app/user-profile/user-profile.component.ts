@@ -32,14 +32,17 @@ export class UserProfileComponent {
   signedUpOn
   displayName
   photoURL
-
+  userEntry
 
   constructor(
     private datastoreService: DatastoreService,  
     public authService: AuthService,
     public formBuilder: FormBuilder,
     db: AngularFireDatabase) {
-      this.userEntryCount = this.datastoreService.getCurrentUserLogItems.length
+     // this.userEntry = this.datastoreService.getCurrentUserLogItems())
+      //this.userEntryCount = this.userEntry.length()
+      //this.userEntry = this.datastoreService.getCurrentUserLogItems())
+      this.userEntryCount = 0
     }
 
     OnInit () {

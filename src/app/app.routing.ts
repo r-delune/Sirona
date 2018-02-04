@@ -1,7 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { LogItemFormComponent } from './log-item-form/log-item-form.component';
-import { LogItemListComponent } from './log-item-list/log-item-list.component';
 import { LogItemTableComponent } from './log-item-table/log-item-table.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
@@ -25,37 +24,23 @@ const appRoutes: Routes = [
   { path: 'register', component: RegistrationFormComponent, data: { animation: 'dolphin'}},
   { path: 'profile', component: UserProfileComponent, data: { animation: 'dolphin'}},
   { path: 'graph', component: UserGraphComponent },
-  { path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
+  //{ path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
   { path: 'home', component: UserHomeComponent, data: { animation: 'dolphin'},canActivate: [AuthGuard]},
   { path: 'exerciseForm', component: LogExcerciseItemFormComponent, data: { animation: 'dolphin'}},
   { path: 'dietForm', component: LogDietItemFormComponent , data: { animation: 'dolphin'}},
-  { path: 'sleepForm', component: LogSleepItemFormComponent, data: { animation: 'dolphin'}},
-  { path: 'moodForm', component: LogMoodItemFormComponent, data: { animation: 'dolphin'},canActivate: [AuthGuard]},
-  
-  //[routerLink]="['artist', track.artistId]"
- // {
- //   path: 'add',
- //  component: LogItemFormComponent,
-   // canActivate: [AuthGuard], 
-  //  children: [
-  //    {path: '', redirectTo: 'graph/overview',pathMatch: 'full'},
-  //    {path: 'moodForm', component: UserGraphExcerciseComponent, data: { animation: 'dolphin' }},
- //     {path: 'sleepForm', component: UserGraphMoodComponent, data: { animation: 'dolphin' }},
-  //    {path: 'dietForm', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
-  //    {path: 'exerciseForm', component: UserGraphOverviewComponent, data: { animation: 'dolphin' }},
-  //   ]
- // },
+  { path: 'sleepForm', component: LogSleepItemFormComponent},
+  { path: 'moodForm', component: LogMoodItemFormComponent},
   {
     path: 'graph',
     component: UserGraphComponent,
-   // canActivate: [AuthGuard], 
     children: [
       {path: '', redirectTo: 'graph/overview',pathMatch: 'full'},
       {path: 'excerciseGraph', component: UserGraphExcerciseComponent, data: { animation: 'dolphin' }},
       {path: 'moodGraph', component: UserGraphMoodComponent, data: { animation: 'dolphin' }},
       {path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
       {path: 'overview', component: UserGraphOverviewComponent, data: { animation: 'dolphin' }},
-      {path: 'analysisGraph', component: UserGraphAnalysisComponent, data: { animation: 'dolphin' }},    
+      {path: 'analysisGraph', component: UserGraphAnalysisComponent, data: { animation: 'dolphin' }}, 
+      {path: 'sleepForm', component: LogSleepItemFormComponent},   
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: '/' }

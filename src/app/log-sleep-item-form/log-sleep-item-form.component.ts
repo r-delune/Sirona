@@ -37,6 +37,7 @@ export class LogSleepItemFormComponent {
 
   constructor(private formBuilder: FormBuilder,
   private angularAuth: AngularFireAuth,
+    private datastoreService: DatastoreService, 
   private router: Router) { 
     this.angularAuth.authState.subscribe((user) => {
       this.userId = user.uid;
@@ -75,10 +76,10 @@ export class LogSleepItemFormComponent {
     })
   }
 
-  onSubmitSleep(sleepItem: SleepItem) {
-    console.log('submitting sleep form')
-    console.log(sleepItem)
-    //this.saveLogItem(this.logLengthID, item);
-   // this.datastoreService.addLogItem(item)
-  }
+  onSubmit() {
+    if (this.addSleepItemForm.valid) {
+      this.datastoreService.addSleepEntry(this.addSleepItemForm.value)
+      this.router.navigate(['/add'])
+    }
+}
 }
