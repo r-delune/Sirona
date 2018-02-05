@@ -14,14 +14,12 @@ import {DataInterpretorService} from '../services/data-interpretor.service'
 export class UserGraphMoodComponent  {
   logItems
   currentUserLogItems
- 
+
   single: any[];
   multi: any[];
-
   view: any[] = [700, 400];
   // options
   showLegend = true;
-
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
@@ -32,38 +30,27 @@ export class UserGraphMoodComponent  {
   doughnut = false;
   totalData
   data1
-
   data: any[];
   data2: any[];
-
-  
+  generalMoodData
   
   constructor(authService: AuthService,
     private dataInterpretorService: DataInterpretorService) { 
-
       this.totalData = this.dataInterpretorService.getUserLogTimesByType('Mood')
       this.data1 = this.totalData.data1
       this.data2 = this.totalData.data2
 
-      //Object.assign(this, {data, data2})   
-    }
+      this.generalMoodData = this.dataInterpretorService.getGeneralMoodTrend()
+      console.log('generalMoodData')
+      console.log(this.generalMoodData)
+  }
   
   onSelect(event) {
     console.log(event);
   }
 
   ngOnInit(){
-    console.log('In dietary mode!')
-
-
-   // this.logItems = this.datastoreService.getUserDietItemsList('Mood')
-    
-    console.log('FINAL ARRAY')
-    console.log(this.logItems)
-
-    //this.logItemsList = this.datastoreService.getUserMoodItems()
-    //console.log(this.logItemsList)
-
+  
   }
 
 }

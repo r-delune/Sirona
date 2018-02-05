@@ -16,6 +16,11 @@ import { LogMoodItemFormComponent } from './log-mood-item-form/log-mood-item-for
 import { LogSleepItemFormComponent } from './log-sleep-item-form/log-sleep-item-form.component';
 import { LogDietItemFormComponent } from './log-diet-item-form/log-diet-item-form.component';
 import { LogExcerciseItemFormComponent } from './log-excercise-item-form/log-excercise-item-form.component';
+import { UserGraphSleepComponent } from './user-graph-sleep/user-graph-sleep.component';
+import { UserGraphSleepQualityComponent } from './user-graph-sleep-quality/user-graph-sleep-quality.component';
+import { UserGraphGeneralMoodComponent } from './user-graph-general-mood/user-graph-general-mood.component';
+import { UserGraphAppetiteLevelComponent } from './user-graph-appetite-level/user-graph-appetite-level.component';
+import { UserGraphEnergyLevelComponent } from './user-graph-energy-level/user-graph-energy-level.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginFormComponent, data: { animation: 'tiger' } },
@@ -40,7 +45,11 @@ const appRoutes: Routes = [
       {path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
       {path: 'overview', component: UserGraphOverviewComponent, data: { animation: 'dolphin' }},
       {path: 'analysisGraph', component: UserGraphAnalysisComponent, data: { animation: 'dolphin' }}, 
-      {path: 'sleepGraph', component: LogSleepItemFormComponent, data: { animation: 'dolphin' }},   
+      {path: 'sleepGraph', component: UserGraphSleepComponent, data: { animation: 'dolphin' }},   
+      {path: 'sleepQualityGraph', component: UserGraphSleepQualityComponent, data: { animation: 'dolphin' }},
+      {path: 'generalMoodGraph', component: UserGraphGeneralMoodComponent, data: { animation: 'dolphin' }}, 
+      {path: 'appetiteLevelGraph', component: UserGraphAppetiteLevelComponent, data: { animation: 'dolphin' }},
+      {path: 'energyLevelGraph', component: UserGraphEnergyLevelComponent, data: { animation: 'dolphin' }}
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: '/' }

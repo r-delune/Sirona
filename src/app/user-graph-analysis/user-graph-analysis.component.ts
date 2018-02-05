@@ -4,6 +4,7 @@ import { DatastoreService } from '../services/datastore.service';
 import { BrowserModule} from '@angular/platform-browser';
 import { single, multi} from '../data';
 import { NgxChartsModule} from '@swimlane/ngx-charts';
+import { DataInterpretorService } from '../services/data-interpretor.service'
 
 @Component({
   selector: 'app-user-graph-analysis',
@@ -15,7 +16,7 @@ export class UserGraphAnalysisComponent{
   single: any[];
   multi: any[];
   view: any[] = [700, 400];
-logItems
+  logItems
   // options
   showXAxis = true;
   showYAxis = true;
@@ -32,9 +33,24 @@ logItems
 
   // line, area
   autoScale = true;
+  currentUserLogItems
+  totalData
+  data1
+  data2
+  appetiteData
+  generalMoodData
+  sleepQualityData
+  energyLevelData
+
+  correlationOptionAData
   
-  constructor(private datastoreService: DatastoreService) {
-    Object.assign(this, {single, multi})   
+  constructor(authService: AuthService,
+    private datastoreService: DatastoreService,
+    private dataInterpretorService: DataInterpretorService) { 
+
+      this.correlationOptionAData = this.dataInterpretorService.correlateDataOption1()
+      console.log('correlationOptionAData')
+      console.log(this.correlationOptionAData)
   }
   
   onSelect(event) {
@@ -42,16 +58,5 @@ logItems
   }
 
   ngOnInit(){
-    console.log('In dietary mode!')
-
-
-    this.logItems = this.datastoreService.getAllLogItems()
-    
-    console.log('FINAL ARRAY')
-    console.log(this.logItems)
-
-    //this.logItemsList = this.datastoreService.getUserMoodItems()
-    //console.log(this.logItemsList)
-
   }
 }

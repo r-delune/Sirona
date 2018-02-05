@@ -41,8 +41,8 @@ export class UserGraphComponent  {
   // options
   showLegend = false;
 
-   treeSettings: Ng2TreeSettings = {
-    rootIsVisible: false
+  treeSettings: Ng2TreeSettings = {
+  rootIsVisible: false
 
   }
 
@@ -53,37 +53,37 @@ export class UserGraphComponent  {
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private router: Router) { 
-      this.currentUserLogItems = datastoreService.allUserItems
-      console.log('GRAPH - get usrr items')
-      console.log(this.currentUserLogItems)
-      Object.assign(this, {single, multi})  
+      //this.currentUserLogItems = datastoreService.allUserItems
+     // console.log('GRAPH - get usrr items')
+      //console.log(this.currentUserLogItems)
+      //Object.assign(this, {single, multi})  
   }
 
    public logEvent(e: NodeEvent): void {
     console.log(e);
     console.log(e.node.value);
       if (e.node.value === 'Overview'){
-        console.log('Moving to ovierview')
         this.router.navigate(['/graph/overview']);
-      }else if (e.node.value === 'Excercise'){
-        console.log('Moving to excercise')
+      }else if (e.node.value === 'Excercise Entries'){
         this.router.navigate(['/graph/excerciseGraph']);
-      }else if (e.node.value === 'Dietary'){
-        console.log('Moving to Dietary')
+      }else if (e.node.value === 'Dietary Entries'){
         this.router.navigate(['/graph/dietGraph']);
-      }else if (e.node.value === 'Mood'){
-        console.log('Moving to moods')
+      }else if (e.node.value === 'Mood Entries'){
         this.router.navigate(['/graph/moodGraph']);
-      }else if (e.node.value === 'Sleep'){
-        console.log('Moving to Sleep')
-        this.router.navigate(['/graph/sleepGraph']);
-      }else if (e.node.value === 'Analysis'){
-        console.log('Moving to Dietary')
+      }else if (e.node.value === 'Sleep Entries'){
+        this.router.navigate(['/graph/sleepQualityGraph']);
+      }else if (e.node.value === 'Correlation A'){
         this.router.navigate(['/graph/analysisGraph']);
+      }else if (e.node.value === 'General Mood'){
+        this.router.navigate(['/graph/generalMoodGraph']);
+      }else if (e.node.value === 'Appetite Level'){
+        this.router.navigate(['/graph/appetiteLevelGraph']);
+      }else if (e.node.value === 'Sleep Quality'){
+        this.router.navigate(['/graph/sleepQuality']);
+      }else if (e.node.value === 'Energy Level'){
+        this.router.navigate(['/graph/energyLevelGraph']);
       }
     }
-    
-
     
     public tree: TreeModel = 
     {
@@ -116,72 +116,51 @@ export class UserGraphComponent  {
           value: 'Overview',
         },
         {
-          value: 'Dietary',
+          value: 'Diet',
           children: [
-            {value: 'All'},
-            {value: 'Evening'},
-            {value: 'Morning'}
+            {value: 'Dietary Entries'},
+            {value: 'Appetite Level'},
           ]
         },
         {
           value: 'Excercise',
           children: [
-            {value: 'All'},
-            {value: 'Evening'},
-            {value: 'Morning'}
+            {value: 'Excercise Entries'},
+            {value: 'Energy Level'},
           ]
         },
         {
           value: 'Mood',
           children: [
-            {value: 'All'},
-            {value: 'Evening'},
-            {value: 'Morning'}
+            {value: 'Mood Entries'},
+            {value: 'General Mood'},
           ]
         },
         {
           value: 'Sleep',
           children: [
-            {value: 'All'},
-            {value: 'Evening'},
-            {value: 'Morning'}
+            {value: 'Sleep Entries'},
+            {value: 'Sleep Quality'},
           ]
         },
         {
           value: 'Analysis',
           children: [
-            {value: 'All'},
-            {value: 'Evening'},
-            {value: 'Morning'}
+            {value: 'Correlation A'},
           ]
         }
     ]}
-  
-      
-    
 
-      handleSelected($event){
-        console.log(event)
-        console.log($event)
-        // switch(event.returnValue) {
-        // case event.returnValue == 'Login':
-            //code block
-        //      break;
-        //  case n:
-           // code block
-    //        break;
-       // default:
-           // code block
-    }
-
-  
+  handleSelected($event){
+    console.log(event)
+    console.log($event)
+  }
+ 
   onSelect(event) {
     console.log(event);
   }
 
   ngOnOnit(){
     $('#tree1').treed();
-
-
   }
 }

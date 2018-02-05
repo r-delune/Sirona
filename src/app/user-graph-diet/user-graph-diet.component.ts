@@ -60,8 +60,8 @@ export class UserGraphDietComponent  {
   translation: string;
   outerRadius: number;
   innerRadius: number;
- data: any;
- data2: any;
+  data: any;
+  data2: any;
   domain: any;
   dims: any;
   margin = [20, 20, 20, 20];
@@ -108,6 +108,7 @@ export class UserGraphDietComponent  {
   timeOfDayArrayListMulti: any[];
   totalData
   data1
+  appetiteData
 
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
@@ -118,15 +119,17 @@ export class UserGraphDietComponent  {
       this.data1 = this.totalData.data1
       this.data2 = this.totalData.data2
 
+      this.appetiteData = this.dataInterpretorService.getAppetiteTrend()
+      console.log('appetiteData')
+      console.log(this.appetiteData)
       //Object.assign(this, {data, data2})   
     }
-  
 
-     // console.log('In dietary mode!')
-    //CHANGE SLIDER TO SINGLE,
-    //CHANGE DATE TO TIMEOFeNTRY
-    //DATE SHOULD BE 24HR
-   //THIS SHOULD BE A SEPERATE FUNCTION
+  // console.log('In dietary mode!')
+  //CHANGE SLIDER TO SINGLE,
+  //CHANGE DATE TO TIMEOFeNTRY
+  //DATE SHOULD BE 24HR
+  //THIS SHOULD BE A SEPERATE FUNCTION
   
   onSelect(event) {
     console.log(event);
@@ -134,62 +137,5 @@ export class UserGraphDietComponent  {
 
   ngOnInit(){
 
-/*
-    this.logItems = this.datastoreService.getUserDietItemsList()
-    console.log('FINAL ARRAY')
-    console.log(this.logItems)
-    this.morningCount = 10
-    this.afternoonCount = 10
-    this.eveningCount = 10
-    this.nightCount = 10
-
-    $.each(this.logItems, function(key, value) {
-      var myDate = new Date(value.dietEntry.date);
-      var minutes = myDate.getMinutes();
-      var hours = myDate.getHours();
-
-      console.log('HOURS');
-      console.log(hours);
-
-      if (hours > 6 && hours < 12){
-        this.morningCount = this.morningCount+1
-        console.log('adding ' + this.morningCount)
-      }else if (hours > 12 && hours < 17){
-        this.afternoonCount = this.afternoonCount+1
-        console.log('adding ' + this.afternoonCount)
-      }else if (hours > 17 && hours < 21){
-        this.eveningCount = this.eveningCount+1
-        console.log('adding ' + this.eveningCount)
-      }else if (hours > 21 || hours < 6){
-        console.log(this.nightCount)
-        this.nightCount = this.nightCount+1
-        console.log('adding ' + this.nightCount)
-      }
-  });
-
-
-
-    var data = [
-      { "name": "Morning", "value": this.morningCount },
-      { "name": "Afternoon", "value": this.afternoonCount },
-      { "name": "Evening", "value": this.eveningCount },
-      { "name": "Night", "value": this.nightCount }
-    ];
-
-
-    var data2 = [
-      { name: "Morning", series : [{ "name": "Afternoon", "value": this.morningCount },{ "name": "Afternoon", "value": this.morningCount }] },
-      { name: "Afternoon", series : [{ "name": "Afternoon", "value": this.afternoonCount },{ "name": "Afternoon", "value": this.afternoonCount }] },
-      { name: "Evening", series : [{ "name": "Evening", "value": this.eveningCount },{ "name": "Evening", "value": this.eveningCount }] },
-      { name: "Night", series : [{ "name": "Night", "value": this.nightCount },{ "name": "Night", "value": this.nightCount }] },
-    ];
-
-    console.log(single)
-    console.log(multi)
-   // console.log('timeOfDayArrayList')
-   // console.log(timeOfDayArrayList)
-   // console.log('timeOfDayArrayListMulti')
-   // console.log(timeOfDayArrayListMulti)
-    Object.assign(this, single, multi)*/
   }
 }

@@ -18,33 +18,37 @@ import { AppComponent } from './app-component/app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { FavoriteDirective } from './favorite.directive';
 import { CategoryListPipe } from './category-list.pipe';
-import { LogItemTableComponent } from './log-item-table/log-item-table.component';
-import { LogItemFormComponent } from './log-item-form/log-item-form.component';
 import { DatastoreService } from './services/datastore.service';
 import { AuthService } from './services/auth.service';
 import { AuthGuard  } from './services/auth-gaurd.service';
+import { DataInterpretorService } from './services/data-interpretor.service';
 import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserHomeComponent } from './user-home/user-home.component';
-import { UserGraphComponent } from './user-graph/user-graph.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { NgxChartsModule} from '@swimlane/ngx-charts'
 import { environment } from './environments/environment';
-import { UserGraphExcerciseComponent } from './user-graph-excercise/user-graph-excercise.component';
-import { UserGraphMoodComponent } from './user-graph-mood/user-graph-mood.component';
-import { UserGraphDietComponent } from './user-graph-diet/user-graph-diet.component';
 import { TreeModule } from 'ng2-tree';
-import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-overview.component';
-import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-analysis.component';
+import { LogItemTableComponent } from './log-item-table/log-item-table.component';
+import { LogItemFormComponent } from './log-item-form/log-item-form.component';
 import { LogMoodItemFormComponent } from './log-mood-item-form/log-mood-item-form.component';
 import { LogSleepItemFormComponent } from './log-sleep-item-form/log-sleep-item-form.component';
 import { LogDietItemFormComponent } from './log-diet-item-form/log-diet-item-form.component';
 import { LogExcerciseItemFormComponent } from './log-excercise-item-form/log-excercise-item-form.component';
+import { UserGraphSleepQualityComponent } from './user-graph-sleep-quality/user-graph-sleep-quality.component';
+import { UserGraphGeneralMoodComponent } from './user-graph-general-mood/user-graph-general-mood.component';
+import { UserGraphAppetiteLevelComponent } from './user-graph-appetite-level/user-graph-appetite-level.component';
+import { UserGraphExcerciseComponent } from './user-graph-excercise/user-graph-excercise.component';
+import { UserGraphMoodComponent } from './user-graph-mood/user-graph-mood.component';
+import { UserGraphDietComponent } from './user-graph-diet/user-graph-diet.component';
+import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-overview.component';
+import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-analysis.component';
 import { UserGraphSleepComponent } from './user-graph-sleep/user-graph-sleep.component';
-import { DataInterpretorService } from './services/data-interpretor.service';
+import { UserGraphComponent } from './user-graph/user-graph.component';
+import { UserGraphEnergyLevelComponent } from './user-graph-energy-level/user-graph-energy-level.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -93,7 +97,11 @@ firebase.initializeApp(firebaseConfig);
     LogSleepItemFormComponent,
     LogDietItemFormComponent,
     LogExcerciseItemFormComponent,
-    UserGraphSleepComponent
+    UserGraphSleepComponent,
+    UserGraphSleepQualityComponent,
+    UserGraphGeneralMoodComponent,
+    UserGraphAppetiteLevelComponent,
+    UserGraphEnergyLevelComponent
   ],
   providers: [
     DatastoreService,

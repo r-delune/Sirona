@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'
 import { DatastoreService } from '../services/datastore.service';
-import {BrowserModule} from '@angular/platform-browser';
-import {single, multi} from '../data';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { BrowserModule} from '@angular/platform-browser';
+import { single, multi} from '../data';
+import { NgxChartsModule} from '@swimlane/ngx-charts';
+import { DataInterpretorService} from '../services/data-interpretor.service'
 
 @Component({
   selector: 'app-user-graph-overview',
@@ -38,8 +39,24 @@ export class UserGraphOverviewComponent  {
   explodeSlices = false;
   doughnut = false;
 
+
+  totalData
+  data1
+  appetiteData
+  data2
+
   constructor(authService: AuthService,
-    private datastoreService: DatastoreService) {   
+    private datastoreService: DatastoreService,
+    private dataInterpretorService: DataInterpretorService) {   
+
+    this.currentUserLogItems = datastoreService.allUserItems
+    this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
+    this.data1 = this.totalData.data1
+    this.data2 = this.totalData.data2
+
+    this.appetiteData = this.dataInterpretorService.getAppetiteTrend()
+    console.log('appetiteData')
+    console.log(this.appetiteData)
 
     this.currentUserLogItems = datastoreService.allUserItems
     console.log('GRAPH - get usrr items')
