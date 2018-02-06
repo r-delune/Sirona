@@ -56,14 +56,12 @@ export class LogSleepItemFormComponent {
     range: {
       min: 0,
       max: 100
-    }
+    },
+    step: 1
   };
 
-
   ngOnInit() {
-
     console.log('SLEEP FORM')
-
     this.addSleepItemForm = this.formBuilder.group({
       userId: this.userId,
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),

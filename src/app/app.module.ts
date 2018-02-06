@@ -13,14 +13,14 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 import { AppComponent } from './app-component/app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { FavoriteDirective } from './favorite.directive';
 import { CategoryListPipe } from './category-list.pipe';
 import { DatastoreService } from './services/datastore.service';
 import { AuthService } from './services/auth.service';
-import { AuthGuard  } from './services/auth-gaurd.service';
+import { AuthGuardService  } from './services/auth-gaurd.service';
 import { DataInterpretorService } from './services/data-interpretor.service';
 import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
@@ -75,7 +75,8 @@ firebase.initializeApp(firebaseConfig);
     NouisliderModule,
     BrowserAnimationsModule,
     NgbModule.forRoot(),
-    TreeModule
+    TreeModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -106,10 +107,9 @@ firebase.initializeApp(firebaseConfig);
   providers: [
     DatastoreService,
     AuthService,
-    AuthGuard,
+    AuthGuardService,
     DataInterpretorService,
     { provide: lookupListToken, useValue: lookupLists },
-    { provide: XHRBackend, useClass: XHRBackend },
     { provide: APP_BASE_HREF, useValue: '/'}
   ],
   bootstrap: [

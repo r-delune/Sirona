@@ -42,8 +42,7 @@ export class UserGraphComponent  {
   showLegend = false;
 
   treeSettings: Ng2TreeSettings = {
-  rootIsVisible: false
-
+    rootIsVisible: false
   }
 
   showLabels = true;
@@ -62,6 +61,11 @@ export class UserGraphComponent  {
    public logEvent(e: NodeEvent): void {
     console.log(e);
     console.log(e.node.value);
+
+    ///CHANGE: COLOR OF NODES
+    //CHANGE: CLOSE TREE ON STARTUP
+
+
       if (e.node.value === 'Overview'){
         this.router.navigate(['/graph/overview']);
       }else if (e.node.value === 'Excercise Entries'){
@@ -71,7 +75,7 @@ export class UserGraphComponent  {
       }else if (e.node.value === 'Mood Entries'){
         this.router.navigate(['/graph/moodGraph']);
       }else if (e.node.value === 'Sleep Entries'){
-        this.router.navigate(['/graph/sleepQualityGraph']);
+        this.router.navigate(['/graph/sleepGraph']);
       }else if (e.node.value === 'Correlation A'){
         this.router.navigate(['/graph/analysisGraph']);
       }else if (e.node.value === 'General Mood'){
@@ -79,7 +83,7 @@ export class UserGraphComponent  {
       }else if (e.node.value === 'Appetite Level'){
         this.router.navigate(['/graph/appetiteLevelGraph']);
       }else if (e.node.value === 'Sleep Quality'){
-        this.router.navigate(['/graph/sleepQuality']);
+        this.router.navigate(['/graph/sleepQualityGraph']);
       }else if (e.node.value === 'Energy Level'){
         this.router.navigate(['/graph/energyLevelGraph']);
       }
@@ -155,6 +159,8 @@ export class UserGraphComponent  {
     console.log(event)
     console.log($event)
   }
+
+  //CHANGE HOVER OVER CHART
  
   onSelect(event) {
     console.log(event);

@@ -1,31 +1,33 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Component, Input  } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { AuthService} from './auth.service'
 import { Observable } from 'rxjs/Observable';
+import { HttpClientModule } from '@angular/common/http'; import { HttpModule } from '@angular/http';
+import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
+import { Console } from '@angular/core/src/console';
+
 @Injectable()
-export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {
+export class AuthGuardService implements CanActivate {
+    constructor(private authService: AuthService) {
+    }
 
-    console.log('AUTH GAURD ACTUVATED!')
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+        return this.checkLogin();
+    }
+    checkLogin(): boolean {
+      console.log('AUTH GAURAD CHECKING LOGIN')
+      console.log(this.authService)
+      console.log(this.authService.userId)
+      
+        if (this.authService.userId) {
+          console.log('Logged in')
+            return true;
+        }
 
-
-  }
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | boolean {
-      return this.auth.user
-           .take(1)
-           .map(user => !!user)
-           .do(loggedIn => {
-             if (!loggedIn) {
-               console.log('access denied')
-                this.router.navigate(['/login']);
-             }else{
-                console.log('Logged in!')
-             }
-         })
-  }
+        console.log('Not Logged in')
+        return false;
+    }
 }

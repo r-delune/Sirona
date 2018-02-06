@@ -2,26 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'
 import { DatastoreService } from '../services/datastore.service';
 import {BrowserModule} from '@angular/platform-browser';
-//import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { DataInterpretorService} from '../services/data-interpretor.service'
 
 declare var jquery:any;
 declare var $ :any;
-//export class mySingle {
-//  morning: number;
-///  afternoon: number; 
-//  evening: number;
-///  night: number; 
-//}
 
-  // this.timeOfEntryGraph({"name" : "Morning" , "value" : this.morningCount})
-
-  export class mySingle {
-    name: string;
-    value: number
-  }
+export class mySingle {
+  name: string;
+  value: number
+}
 
 export class myMulti {
   name: string;
@@ -45,15 +36,11 @@ export class myMulti {
   ] 
 }
 
-
 @Component({
   selector: 'app-user-graph-diet',
   templateUrl: './user-graph-diet.component.html',
   styleUrls: ['./user-graph-diet.component.css']
 })
-
-
-
 
 export class UserGraphDietComponent  {
 
@@ -113,19 +100,16 @@ export class UserGraphDietComponent  {
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
-
       this.currentUserLogItems = datastoreService.allUserItems
       this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
       this.data1 = this.totalData.data1
       this.data2 = this.totalData.data2
-
       this.appetiteData = this.dataInterpretorService.getAppetiteTrend()
+      
       console.log('appetiteData')
       console.log(this.appetiteData)
-      //Object.assign(this, {data, data2})   
     }
 
-  // console.log('In dietary mode!')
   //CHANGE SLIDER TO SINGLE,
   //CHANGE DATE TO TIMEOFeNTRY
   //DATE SHOULD BE 24HR
@@ -133,9 +117,5 @@ export class UserGraphDietComponent  {
   
   onSelect(event) {
     console.log(event);
-  }
-
-  ngOnInit(){
-
   }
 }

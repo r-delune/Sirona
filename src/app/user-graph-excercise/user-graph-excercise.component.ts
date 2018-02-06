@@ -19,7 +19,7 @@ export class UserGraphExcerciseComponent {
   single: any[];
   multi: any[];
 
-  data: any[];
+  data1: any[];
   data2: any[];
 
   excerciseData1: any[];
@@ -40,34 +40,22 @@ export class UserGraphExcerciseComponent {
   
   totalExerciseData
   totalData
-  data1
+  //data1
+  energyLevelData
 
+  
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
-
-      this.currentUserLogItems = datastoreService.allUserItems
-      console.log('GRAPH - get usrr items')
-      console.log(this.currentUserLogItems)
-      console.log(single)
-      console.log(multi)
-      console.log(data)
-      console.log(data2)
       this.totalData = this.dataInterpretorService.getUserLogTimesByType('Exercise')
       this.data1 = this.totalData.data1
-      this.data2 = this.totalData.data2
       console.log('this.excerciseData')
-      console.log(this.excerciseData1)
-      console.log(this.excerciseData2)
+      console.log(this.data1)
 
-      //Object.assign(this, {data, data2})   
+      //CHANGE: DATA1 TO SINGLE ARRAY
     }
   
   onSelect(event) {
     console.log(event);
-  }
-
-  ngOnInit(){
-
   }
 }

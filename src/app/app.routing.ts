@@ -4,7 +4,7 @@ import { LogItemFormComponent } from './log-item-form/log-item-form.component';
 import { LogItemTableComponent } from './log-item-table/log-item-table.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
-import { AuthGuard } from './authGuard.component';
+import { AuthGuardService } from './services/auth-gaurd.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { UserGraphExcerciseComponent } from './user-graph-excercise/user-graph-excercise.component';
@@ -23,27 +23,28 @@ import { UserGraphAppetiteLevelComponent } from './user-graph-appetite-level/use
 import { UserGraphEnergyLevelComponent } from './user-graph-energy-level/user-graph-energy-level.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginFormComponent, data: { animation: 'tiger' } },
-  { path: 'add', component: LogItemFormComponent, data: { animation: 'dolphin'} },
-  { path: 'table', component: LogItemTableComponent, data: { animation: 'dolphin'}},
-  { path: 'register', component: RegistrationFormComponent, data: { animation: 'dolphin'}},
-  { path: 'profile', component: UserProfileComponent, data: { animation: 'dolphin'}},
-  { path: 'graph', component: UserGraphComponent },
+  { path: 'login', component: LoginFormComponent,canActivate: [AuthGuardService], data: { animation: 'tiger' } },
+  { path: 'add', component: LogItemFormComponent, canActivate: [AuthGuardService],data: { animation: 'dolphin'} },
+  { path: 'table', component: LogItemTableComponent,canActivate: [AuthGuardService], data: { animation: 'dolphin'}},
+  { path: 'register', component: RegistrationFormComponent, canActivate: [AuthGuardService],data: { animation: 'dolphin'}},
+  { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService],data: { animation: 'dolphin'}},
+  //{ path: 'graph', component: UserGraphComponent },
   //{ path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
-  { path: 'home', component: UserHomeComponent, data: { animation: 'dolphin'},canActivate: [AuthGuard]},
-  { path: 'exerciseForm', component: LogExcerciseItemFormComponent, data: { animation: 'dolphin'}},
-  { path: 'dietForm', component: LogDietItemFormComponent , data: { animation: 'dolphin'}},
-  { path: 'sleepForm', component: LogSleepItemFormComponent},
-  { path: 'moodForm', component: LogMoodItemFormComponent},
+  { path: 'home', component: UserHomeComponent,canActivate: [AuthGuardService], data: { animation: 'dolphin'}},
+  { path: 'exerciseForm', component: LogExcerciseItemFormComponent, canActivate: [AuthGuardService],data: { animation: 'dolphin'}},
+  { path: 'dietForm', component: LogDietItemFormComponent , canActivate: [AuthGuardService],data: { animation: 'dolphin'}},
+  { path: 'sleepForm', component: LogSleepItemFormComponent, canActivate: [AuthGuardService],},
+  { path: 'moodForm', component: LogMoodItemFormComponent, canActivate: [AuthGuardService],},
   {
     path: 'graph',
     component: UserGraphComponent,
+    canActivate: [AuthGuardService],
     children: [
       {path: '', redirectTo: 'graph/overview',pathMatch: 'full'},
       {path: 'excerciseGraph', component: UserGraphExcerciseComponent, data: { animation: 'dolphin' }},
       {path: 'moodGraph', component: UserGraphMoodComponent, data: { animation: 'dolphin' }},
       {path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
-      {path: 'overview', component: UserGraphOverviewComponent, data: { animation: 'dolphin' }},
+      {path: 'overview', component: UserGraphOverviewComponent, canActivate: [AuthGuardService], data: { animation: 'dolphin' }},
       {path: 'analysisGraph', component: UserGraphAnalysisComponent, data: { animation: 'dolphin' }}, 
       {path: 'sleepGraph', component: UserGraphSleepComponent, data: { animation: 'dolphin' }},   
       {path: 'sleepQualityGraph', component: UserGraphSleepQualityComponent, data: { animation: 'dolphin' }},
@@ -52,7 +53,7 @@ const appRoutes: Routes = [
       {path: 'energyLevelGraph', component: UserGraphEnergyLevelComponent, data: { animation: 'dolphin' }}
     ]
   },
-  { path: '', pathMatch: 'full', redirectTo: '/' }
+  { path: '**', pathMatch: 'full', redirectTo: '/' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);

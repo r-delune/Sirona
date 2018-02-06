@@ -1,7 +1,7 @@
 <ngx-charts-line-chart
 [view]="view"
 [scheme]="colorScheme"
-[results]="sleepQualityData"
+[results]="multi"
 [gradient]="gradient"
 [xAxis]="showXAxis"
 [yAxis]="showYAxis"
@@ -11,5 +11,9 @@
 [xAxisLabel]="xAxisLabel"
 [yAxisLabel]="yAxisLabel"
 [autoScale]="autoScale"
+[timeline]="timeline"
+[animations]='animations'
+[tooltipDisabled]='tooltipDisabled'
+[referenceLines]='referenceLines'
 (select)="onSelect($event)">
 </ngx-charts-line-chart>

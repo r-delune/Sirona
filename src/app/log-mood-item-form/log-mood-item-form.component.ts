@@ -7,17 +7,9 @@ import { lookupListToken } from '../providers';
 import { NgModule } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { DatastoreService } from '../services/datastore.service'
-import { AngularFirestoreCollection, AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
-import { AuthService } from '../services/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireList } from 'angularfire2/database/interfaces';
 declare var jquery:any;
 declare var $ :any;
-
-
-export class MoodItem { body: string; }
 
 @Component({
   selector: 'app-log-mood-item-form',
@@ -31,11 +23,7 @@ export class LogMoodItemFormComponent {
 
   constructor(private formBuilder: FormBuilder, private angularAuth: AngularFireAuth, 
     private router: Router, 
-    private datastoreService: DatastoreService, 
-    private db: AngularFireDatabase,
-    authService: AuthService,
-    private angularAth: AngularFireAuth,
-  ) {  
+    private datastoreService: DatastoreService) {  
     this.angularAuth.authState.subscribe((user) => {
       this.userId = user.uid;
     })
@@ -47,12 +35,12 @@ export class LogMoodItemFormComponent {
     range: {
       min: 0,
       max: 100
-    }
+    },
+    step: 1
   };
 
   ngOnInit() {
     console.log('MOOD FORM')
-
     this.addMoodItemForm = this.formBuilder.group({
       id: this.userId,
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
@@ -67,11 +55,10 @@ export class LogMoodItemFormComponent {
     })
   }
 
-
   onSubmit() {
     if (this.addMoodItemForm.valid) {
       this.datastoreService.addMoodEntry(this.addMoodItemForm.value)
       this.router.navigate(['/add'])
     }
-}
+  }
 }

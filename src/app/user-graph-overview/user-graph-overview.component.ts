@@ -52,16 +52,6 @@ export class UserGraphOverviewComponent  {
     this.currentUserLogItems = datastoreService.allUserItems
     this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
     this.data1 = this.totalData.data1
-    this.data2 = this.totalData.data2
-
-    this.appetiteData = this.dataInterpretorService.getAppetiteTrend()
-    console.log('appetiteData')
-    console.log(this.appetiteData)
-
-    this.currentUserLogItems = datastoreService.allUserItems
-    console.log('GRAPH - get usrr items')
-    console.log(this.currentUserLogItems)
-    Object.assign(this, {single, multi})   
   }
   
   onSelect(event) {

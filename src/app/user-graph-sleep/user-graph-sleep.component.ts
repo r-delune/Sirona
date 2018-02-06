@@ -36,13 +36,15 @@ export class UserGraphSleepComponent implements OnInit {
   totalData
   // line, area
   autoScale = true;
+  sleepQualityData
   
   constructor(private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
 
-    this.totalData = this.dataInterpretorService.getUserLogTimesByType('Mood')
+    this.totalData = this.dataInterpretorService.getUserLogTimesByType('Sleep')
+    console.log('this.totalData.data1Sleep')
+    console.log(this.totalData)
     this.data1 = this.totalData.data1
-    this.data2 = this.totalData.data2
   }
   
   onSelect(event) {

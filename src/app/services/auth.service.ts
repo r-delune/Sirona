@@ -44,32 +44,27 @@ export class AuthService {
   currentUserLogsItemsList: Observable<any>
 
   constructor(private afAuth: AngularFireAuth,
-              private db: AngularFireDatabase,
-              private afs: AngularFireModule,
-
-              private router:Router) {
-
-              this.currentUsersRef = db.object('Users/'+this.userId+'');
-              this.currentUsersItem = this.currentUsersRef.valueChanges();
-
-              this.afAuth.authState.subscribe((auth) => {
-                  if (auth){ this.authState = auth;
-                  this.userId = auth.uid
-                  this.userEmail = auth.email
-                  this.userDisplayName = auth.displayName
-                  this.userDisplayName = auth.displayName
-                  this.userPhotoURL = auth.photoURL
-                  this.authServiceState = auth;
-                  console.log('AUTH:')
-                  console.log(this.authState) 
-                }else{
-                  console.log('USER IS NOT LOGGED IN')
-                }
-              })
+    private db: AngularFireDatabase,
+    private afs: AngularFireModule,
+    private router:Router){
+      this.currentUsersRef = db.object('Users/'+this.userId+'');
+      this.currentUsersItem = this.currentUsersRef.valueChanges();
+      this.afAuth.authState.subscribe((auth) => {
+      if (auth){ this.authState = auth;
+        this.userId = auth.uid
+        this.userEmail = auth.email
+        this.userDisplayName = auth.displayName
+        this.userDisplayName = auth.displayName
+        this.userPhotoURL = auth.photoURL
+        this.authServiceState = auth;
+        console.log(this.authState) 
+      }else{
+        console.log('USER IS NOT LOGGED IN')
+      }
+    })
   }
 
   private oAuthLogin(provider) {
-
     console.log('oAuth login')
 
     return this.afAuth.auth.signInWithPopup(provider)
@@ -78,15 +73,11 @@ export class AuthService {
       })
   }
 
-   updateUserData(user) {
-
+  updateUserData(user) {
     console.log(user.userId)
-
     const userRef: Observable<any> = this.db.object(`Users/${user.userId}`).valueChanges()
-   
     console.log('userRef')
     console.log(userRef)
-
     console.log(this.user)
 
     const data: User = {
@@ -129,7 +120,6 @@ export class AuthService {
     console.log('getting current user observable')
     console.log(this.authState)
     return this.authState
-    // return this.authServiceState//
   }
 
   // Returns current user UID
@@ -168,10 +158,8 @@ export class AuthService {
   //// Social Auth ////
 
   googleLogin() {
-    console.log('logginf in via google')
-    //const provider = new firebase.auth.GoogleAuthProvider()
+    console.log('logging in via google')
     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-    //return this.socialSignIn(provider);
   }
 
   facebookLogin() {
@@ -225,31 +213,16 @@ export class AuthService {
       .then((user) => {
         this.authState = user
         this.updateUserData(user)
-       // this.datastoreService.addUser(user)
         console.log('signed up siccessfully')
-
         this.authState = user
-      
-
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/graph/overview']);
       })
       .catch(error => console.log(error));
   }
 
-   // addUser(user: User){
-   //   console.log('CREATING USER')
-   //   console.log(user)
-   //   this.userItemsList.push(user)
-    //this.allUsersRef.set({ name: item });
-   // }
-
-
-
   emailLogin(email:string, password:string) {
 
     console.log('signing in via email:')
-    console.log(email)
-    console.log(password)
 
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {

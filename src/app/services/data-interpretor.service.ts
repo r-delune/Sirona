@@ -15,12 +15,20 @@ declare var $ :any;
 
 export class Item {
   name: string;
-  value: number
+  value: number;
+  min : number;
+  max :number;
 }
 
 export class MultiItem {
   name: string;
-  series: Item
+  series: any
+}
+
+//fi
+export class MultiItem2 {
+  name: string;
+  series: Array<Item>
 }
 
 @Injectable()
@@ -40,6 +48,7 @@ export class DataInterpretorService {
   generalMoodData
   sleepQualityData 
   energyLevelData
+  
 
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
@@ -49,59 +58,145 @@ export class DataInterpretorService {
   getGeneralMoodTrend(){
     console.log('getGeneralMoodTrend')
     let data =  {} as Item;
-    let array= [];
+    let singleArray= [];
+    let multiArray = {} as MultiItem;
     this.currentUserMoodItems = this.datastoreService.getUserMoodItemsList()
     $.each(this.currentUserMoodItems, function(key, value) { 
-      if (value.moodEntry.date){data.name = value.moodEntry.date}else{data.name = 'TEMP'}  
-      data.name = value.moodEntry.date
-      console.log(value.moodEntry)
-      data.value = value.moodEntry.generalMood[1]
-      array.push(data)
+      var myDate = new Date(value.moodEntry.date);
+      var year = myDate.getFullYear();
+      var month = myDate.getMonth(); 
+      var day = myDate.getUTCDate(); 
+      var date = day+'/'+month+'/'+year
+      if (date){data.name = date}else{data.name = 'TEMP'}  
+      data.value = Math.round(value.moodEntry.generalMood[1]);
+      if (data.value == NaN){   
+        console.log('Skipping ' + data.name)
+        console.log(data.value) 
+      }else{
+        data.min = 0
+        data.max = 100
+        singleArray.push(data)
+      }
     })
-    return array;
+
+    multiArray.name = 'General Mood'
+    multiArray.series = singleArray
+
+    return {singleArray, multiArray};
   }
+
+  //CHANGE: RENAME GRAPH CLASSES + ADD TO FOLDERS
 
   getAppetiteTrend(){
     console.log('getAppetiteTrend')
     let data =  {} as Item;
-    let array= [];
+    let singleArray= [];
+    let multiArray = {} as MultiItem;
     this.currentUserDietItems = this.datastoreService.getUserDietItemsList()
+    
     $.each(this.currentUserDietItems, function(key, value) {
-      if (value.dietEntry.date){data.name = value.dietEntry.date}else{data.name = 'TEMP'}  
-      data.name = value.dietEntry.date
-      data.value = value.dietEntry.appetiteLevel[1]
-      array.push(data)
+      var myDate = new Date(value.dietEntry.date);
+      var year = myDate.getFullYear();
+      var month = myDate.getMonth(); 
+      var day = myDate.getUTCDate(); 
+      var date = day+'/'+month+'/'+year
+      if (date){data.name = date}else{data.name = 'TEMP'}  
+      //data.value = value.dietEntry.appetite[1]
+      //TEMPORARY 
+      data.value = Math.round(value.dietEntry.appetite[1]);
+      if (data.value == NaN){   
+        console.log('Skipping ' + data.name)
+        console.log(data.value) 
+      }else{
+        data.min = 0
+        data.max = 100
+        singleArray.push(data)
+      }
     })
-    return array;
+
+    multiArray.name = 'Appetite Trend'
+    multiArray.series = singleArray
+
+    return {singleArray, multiArray};
   }
+
+  //CHANGE: GETTREND SHOULD BE CONSOLIDATED TO ONE FUNCTION
 
   getSleepQualityTrend(){
     console.log('getSleepQualityTrend')
     let data =  {} as Item;
-    let array= [];
+    let singleArray= [];
+    let multiArray = {} as MultiItem;
+    //return sleepQualityDataArray
     this.currentUserSleepItems = this.datastoreService.getUserSleepItemsList()
     $.each(this.currentUserSleepItems, function(key, value) {
-      if (value.sleepEntry.date){data.name = value.sleepEntry.date}else{data.name = 'TEMP'}  
-      data.name = value.sleepEntry.date
-      data.value = value.sleepEntry.sleepQuality[1]
-      array.push(data)
+      var myDate = new Date(value.sleepEntry.date);
+      var year = myDate.getFullYear();
+      var month = myDate.getMonth(); 
+      var day = myDate.getUTCDate(); 
+      var date = day+'/'+month+'/'+year
+      if (date){data.name = date}else{data.name = 'TEMP'}  
+      //data.value = value.sleepEntry.sleepQuality[1]
+      data.value = Math.round(value.sleepEntry.sleepQuality[1]);
+      if (data.value == NaN){   
+        console.log('Skipping ' + data.name)
+        console.log(data.value) 
+      }else{
+        data.min = 0
+        data.max = 100
+        singleArray.push(data)
+      }  
     })
-    return array;
+
+    multiArray.name = 'Sleep Trends'
+    multiArray.series = singleArray
+
+    return {singleArray, multiArray};
+  }
+
+  //CHANGE: ALLOW FOR THIS FUNCTION TO BE USED INSIDE OTHERS
+  shortenTimeStamp(fullDateTime){
+    var myDate = new Date(fullDateTime);
+    var year = myDate.getFullYear();
+    var month = myDate.getMonth(); 
+    var date = myDate.getUTCDate(); 
+    var dateOnly = date+'/'+month+'/'+year
+    return dateOnly
   }
 
   getEnergyLevelTrend(){
     console.log('getEnergyLevelTrend')
     let data =  {} as Item;
-    let array= [];
+    let singleArray= [];
+    let multiArray = {} as MultiItem;
     this.currentUserExerciseItems = this.datastoreService.getUserExerciseItemsList()
     $.each(this.currentUserExerciseItems, function(key, value) {
-      if (value.exerciseEntry.date){data.name = value.exerciseEntry.date}else{data.name = 'TEMP'}  
-      data.value = value.exerciseEntry.energyLevel[1]
-      array.push(data)
+        var myDate = new Date(value.exerciseEntry.date);
+        var year = myDate.getFullYear();
+        var month = myDate.getMonth(); 
+        var day = myDate.getUTCDate(); 
+        var date = day+'/'+month+'/'+year
+        if (date){data.name = date}else{data.name = 'TEMP'}  
+        //data.value = value.exerciseEntry.energyLevel[1]
+        //CHANGE - ENERGY LEVEL SHOULD BE PART OF EXERCISE DATA, AS STAMINA
+        data.value = Math.round(value.exerciseEntry.kmRan[1]);
+        if (data.value == NaN){   
+          console.log('Skipping ' + data.name)
+          console.log(data.value) 
+        }else{
+          data.min = 0
+          data.max = 100
+          singleArray.push(data)
+        }
     })
-    return array
+
+    multiArray.name = 'Energy Level trends'
+    multiArray.series = singleArray
+
+    return {singleArray, multiArray};
   }
 
+  //CHANGE: REMOVE JQUERY AS IT IS UNNECCESARY
 
   getUserLogTimesByType(type){
     this.type = type
@@ -124,7 +219,7 @@ export class DataInterpretorService {
     this.nightLogCount = 10
 
     $.each(this.logItems, function(key, value) {
-      //very inefficient. considering changing data model i.i removing sleepEntry node
+      //CHANGE: very inefficient. considering changing data model i.i removing sleepEntry node
       if (this.type == 'Diet'){
         var myDate = new Date(value.dietEntry.date);
         var minutes = myDate.getMinutes();
@@ -162,8 +257,6 @@ export class DataInterpretorService {
       }
     });
 
-    //create object above
-    //determine diffenrence between two arrays
     var data1 = [
       { "name": "Morning", "value": this.morningLogCount},
       { "name": "Afternoon","value": this.afternoonLogCount},
@@ -180,6 +273,9 @@ export class DataInterpretorService {
     return {data1, data2}
   }
 
+  //CHANGE 404 PAGE, RELINK TO GRAPH
+  //CHANGE: THESE FUNCTIONS SHEOULD BE PART OF TREND FUNCT
+
   correlateDataOption1(){
     this.appetiteData = this.getAppetiteTrend()
     this.generalMoodData = this.getGeneralMoodTrend()
@@ -187,25 +283,49 @@ export class DataInterpretorService {
     this.energyLevelData = this.getEnergyLevelTrend()
   
     let data = {} as Item;
-    let dataArray = {} as MultiItem;
+    let appetiteDataArray = {} as MultiItem;
+    let generalMoodDataArray = {} as MultiItem;
+    let sleepQualityArray = {} as MultiItem;
+    let energyLevelArray = {} as MultiItem;
     let array= [];
 
-    dataArray.name = 'Appetite'
-    dataArray.series = this.appetiteData
-    array.push(dataArray)
+    //CHANGE: DATA TO BE GROUPED BY EXACT DATE, MAYBE FILTER BY TIME OF DAY
 
-    dataArray.name = 'General Mood'
-    dataArray.series = this.generalMoodData
-    array.push(dataArray)
+    console.log(this.appetiteData)
+    console.log(this.generalMoodData)
+    console.log(this.sleepQualityData)
+    console.log(this.energyLevelData)
 
-    dataArray.name = 'Sleep Quality'
-    dataArray.series = this.sleepQualityData
-    array.push(dataArray)
+    appetiteDataArray.name = 'Appetite'
+    appetiteDataArray.series = this.appetiteData.singleArray
+    array.push(appetiteDataArray)
 
-    dataArray.name = 'Energy Level'
-    dataArray.series = this.energyLevelData
-    array.push(dataArray)
+    generalMoodDataArray.name = 'General Mood'
+    generalMoodDataArray.series = this.generalMoodData.singleArray
+    array.push(generalMoodDataArray)
+
+    sleepQualityArray.name = 'Sleep Quality'
+    sleepQualityArray.series = this.sleepQualityData.singleArray
+    array.push(sleepQualityArray)
+
+    energyLevelArray.name = 'Energy Level'
+    energyLevelArray.series = this.energyLevelData.singleArray
+    array.push(energyLevelArray)
+
+    console.log('correlationArray')
+    console.log(array)
 
     return array
+  }
+
+  //CHANGE TRUNCATE DATE IN DISPLAY
+
+  validateIsNumber(value){
+    var num = Math.round(value);
+    if (num == NaN){   
+      return false
+    }else{
+      return num
+    }
   }
 }

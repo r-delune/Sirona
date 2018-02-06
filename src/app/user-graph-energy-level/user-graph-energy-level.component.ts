@@ -5,6 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {DataInterpretorService} from '../services/data-interpretor.service'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-user-graph-energy-level',
@@ -14,12 +15,31 @@ import {DataInterpretorService} from '../services/data-interpretor.service'
 export class UserGraphEnergyLevelComponent {
 
   energyLevelData
+  single: any[];
+  multi: any[];
+  view: any[] = [700, 400];
+  logItems
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Country';
+  showYAxisLabel = true;
+  yAxisLabel = 'Population';
+
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+  data
 
   constructor(private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
 
-    this.energyLevelData = this.dataInterpretorService.getEnergyLevelTrend()
-    console.log('sleepQualityData')
+    this.data = this.dataInterpretorService.getEnergyLevelTrend()
+    this.energyLevelData = this.data.multiArray
+    console.log('energyLevelData')
     console.log(this.energyLevelData)
   }
 }

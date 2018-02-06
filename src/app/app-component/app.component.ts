@@ -69,70 +69,52 @@ declare var $ :any;
 
 export class AppComponent {
 
-    itemRef: AngularFireObject<any>;
-    item: Observable<any>;
-    logItems;
-    userItems;
-    authState: any = null;
-    authenticated
-    open;
-    isCollapsed:boolean;
-    logItemsFromService: Observable<any>;
-    userid
-    userGreeting
+authState: any = null;
+open;
+isCollapsed:boolean;
+userid
+userGreeting
     
-    constructor(db: AngularFireDatabase,
-    public afAuth: AngularFireAuth,
-    private router: Router,
-    private datastoreService: DatastoreService,
-    public authService : AuthService) {
-      
-      this.isCollapsed = true;
+constructor(db: AngularFireDatabase,
+public afAuth: AngularFireAuth,
+private router: Router,
+private datastoreService: DatastoreService,
+public authService : AuthService) {
+    
+this.isCollapsed = true;
 
-      this.afAuth.authState.subscribe((auth) => {
-        if(auth) { 
-          this.userid = auth.uid;
-          
-          if (auth.displayName){
-            this.userGreeting = 'Welcome back' +auth.displayName+ ''
-          }else{
-            this.userGreeting = ''
-          }
-          console.log('app component auth state is')
-          console.log(this.authState)
-        }else{
-          console.log('APPC - tried to log inbut couldnt')
-          console.log(this.afAuth)
-          console.log(authService)
-          console.log(this.afAuth.authState)
-
-          this.router.navigate(['/login']);
-        }
-      })}
-  
-    ngOnInit() {
-
-      //$(".navItems").fadeIn(200);
-
-        $(".overlayToggle").click(function(){
-          $(".overlay").fadeToggle(200);
-         $(this).toggleClass('btn-open').toggleClass('btn-close');
-        });
-
-        $('.overlay').on('click', function(){
-          $(".overlay").fadeToggle(200);   
-          $(".button .overlayToggle a").toggleClass('btn-open').toggleClass('btn-close');
-          this.open = false;
-        })
-
+this.afAuth.authState.subscribe((auth) => {
+  if(auth) { 
+    this.userid = auth.uid;
+    
+    if (auth.displayName){
+      this.userGreeting = 'Welcome back' +auth.displayName+ ''
+    }else{
+      this.userGreeting = ''
     }
+  }  
+})}
 
-      getRouteAnimation(outlet) {
-        return outlet.activatedRouteData.animation
-      }
+ngOnInit() {
+  //$(".navItems").fadeIn(200);
+    $(".overlayToggle").click(function(){
+      $(".overlay").fadeToggle(200);
+      $(this).toggleClass('btn-open').toggleClass('btn-close');
+    });
 
-      logout(){
-        console.log('app component logging out')
-      }
+    $('.overlay').on('click', function(){
+      $(".overlay").fadeToggle(200);   
+      $(".button .overlayToggle a").toggleClass('btn-open').toggleClass('btn-close');
+      this.open = false;
+    })
+  }
+
+  getRouteAnimation(outlet) {
+    return outlet.activatedRouteData.animation
+  }
+
+  logout(){
+    console.log('app component logging out')
+  }
 }
  

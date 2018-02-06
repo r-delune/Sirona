@@ -37,12 +37,10 @@ export class UserGraphMoodComponent  {
   constructor(authService: AuthService,
     private dataInterpretorService: DataInterpretorService) { 
       this.totalData = this.dataInterpretorService.getUserLogTimesByType('Mood')
+      console.log('getUserLogTimesByType')
+      console.log(this.totalData)
       this.data1 = this.totalData.data1
       this.data2 = this.totalData.data2
-
-      this.generalMoodData = this.dataInterpretorService.getGeneralMoodTrend()
-      console.log('generalMoodData')
-      console.log(this.generalMoodData)
   }
   
   onSelect(event) {
