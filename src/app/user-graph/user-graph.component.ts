@@ -5,6 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { TreeModel, NodeEvent, Ng2TreeSettings } from 'ng2-tree';
+import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 declare var jquery:any;
 declare var $ :any;
@@ -55,7 +56,8 @@ export class UserGraphComponent  {
       //this.currentUserLogItems = datastoreService.allUserItems
      // console.log('GRAPH - get usrr items')
       //console.log(this.currentUserLogItems)
-      //Object.assign(this, {single, multi})  
+      //Object.assign(this, {single, multi}) 
+      $(".navItem").fadeIn(200); 
   }
 
    public logEvent(e: NodeEvent): void {
@@ -98,10 +100,10 @@ export class UserGraphComponent  {
         'leftMenu': true,
        // 'isCollapsedOnInit' : true,
         'cssClasses': {
-          'expanded': 'fa fa-caret-down fa-lg',
-          'collapsed': 'fa fa-caret-right fa-lg',
-          'leaf': 'fa fa-lg',
-          'empty': 'fa fa-caret-right disabled'
+          'expanded': 'fa fa-caret-down fa-lg nodeExpanded',
+          'collapsed': 'fa fa-caret-right fa-lg nodeCollapsed',
+          'leaf': 'fa fa-lg nodeCollapsed',
+          'empty': 'fa fa-caret-right disabled nodeCollapsed'
         },
         'templates': {
           'node': '<i class="fa fa-folder-o fa-lg"></i>',
@@ -155,6 +157,23 @@ export class UserGraphComponent  {
         }
     ]}
 
+    @ViewChild('treeComponent') treeComponent;
+
+    handleCreated($event){
+      console.log('created node')
+      //const oopNodeController = this.treeComponent.getControllerByNodeId(2);
+    }
+
+    handleExpanded($event){
+      console.log('node exaopnded')
+
+      console.log($event)
+      const oopNodeController = this.treeComponent.getControllerByNodeId(2);
+      oopNodeController.select();
+      oopNodeController.collapse();
+      oopNodeController.expand();
+    }
+
   handleSelected($event){
     console.log(event)
     console.log($event)
@@ -167,6 +186,7 @@ export class UserGraphComponent  {
   }
 
   ngOnOnit(){
+    $(".navItem").fadeIn(200); 
     $('#tree1').treed();
   }
 }

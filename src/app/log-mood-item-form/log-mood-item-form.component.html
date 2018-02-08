@@ -5,23 +5,25 @@
         <div class="row">
           <div class="form-group">
             <label class="control-label">General mood:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="generalMood"></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" [connect]="true" formControlName="generalMood"></nouislider>
           </div>
           <div class="form-group">
             <label class="control-label">Energy Level</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="energyLevel"></nouislider>
+           <!-- <nouislider #slider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" [connect]="false" formControlName="energyLevel"></nouislider>-->
+           <div id='slider'></div>
+           <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" [connect]="false" formControlName="energyLevel"></nouislider>
           </div>
           <div class="form-group">
             <label class="control-label">Motivation Level</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="motivationLevel"></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" formControlName="motivationLevel"></nouislider>
           </div>
           <div class="form-group">
             <label class="control-label">Concentration ability:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="concentrationLevel"></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" formControlName="concentrationLevel"></nouislider>
           </div>
           <div class="form-group">
               <label class="control-label">Anxiety Level:</label>
-              <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="anxietyLevel"></nouislider>
+              <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" formControlName="anxietyLevel"></nouislider>
           </div>
           <div class="form-group">
               <label class="control-label">Tag stress events:</label>
@@ -29,7 +31,7 @@
           </div>  
           <div class="form-group">
               <label class="control-label">Estimated effect on overall mood:</label>
-              <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="extEffectOnMood"></nouislider>  
+              <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" formControlName="extEffectOnMood"></nouislider>  
           </div>                  
           <div class="form-group">
             <label class="control-label">Tag additonal</label>

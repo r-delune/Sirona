@@ -62,6 +62,7 @@ export class LoginFormComponent {
   form;
   showNav = true;
   error
+  jsonErr
 
   constructor(
     private formBuilder: FormBuilder,
@@ -70,7 +71,7 @@ export class LoginFormComponent {
   ) { }
 
   ngOnInit() {
-    //$(".navItem").fadeOut(200);
+    $(".navItem").fadeOut(200);
     this.form = this.formBuilder.group({
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
       email: this.formBuilder.control(''),
@@ -78,6 +79,7 @@ export class LoginFormComponent {
     })
   }
 
+  //CHANGE: NEST LOGIN/REGISTER FOR COOL ANIMATION, GLOW TXT, FLIP TEXT FROM LOGIN/REGISTER
   percentageValidator(control){
     return { 
     'inputValue': {
@@ -96,7 +98,17 @@ export class LoginFormComponent {
 
   onSubmit(form){
     this.error = this.authService.emailLogin(form.email.toLocaleString(), form.password.toLocaleString()) 
-    $(".registrationError").text(this.error)
+    //.catch(error => {
+     // console.log('Error handler')
+    //  console.log(error)
+    //  $(".loginError").text(error.message)
+   // })
+
+   if (form.email == "" || form.name == ""){
+    console.log('form is invalid'); 
+    console.log(form); 
+    $(".loginError").text('Invalid login.')
+  }
   }
 }
 

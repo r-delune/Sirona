@@ -11,23 +11,20 @@ import { Console } from '@angular/core/src/console';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-    constructor(private authService: AuthService) {
+    constructor(private authService: AuthService,
+    private router: Router) {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        return this.checkLogin();
-    }
-    checkLogin(): boolean {
-      console.log('AUTH GAURAD CHECKING LOGIN')
-      console.log(this.authService)
-      console.log(this.authService.userId)
-      
-        if (this.authService.userId) {
-          console.log('Logged in')
-            return true;
-        }
 
-        console.log('Not Logged in')
-        return false;
+          if (this.authService.authenticated) {
+                console.log('AUTH SERVICE PASSED')
+              return true;
+          }else{
+  
+            console.log('AUTH SERVICE DENIED')
+          this.router.navigate(['/login'])
+          return false;
+          }
     }
 }

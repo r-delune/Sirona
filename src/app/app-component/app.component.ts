@@ -20,7 +20,6 @@ import { AngularFireAction } from '@angular/cli'
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/switchMap';
-import { Item } from '../log-item-form/log-item-form.component';
 import { AngularFireList } from 'angularfire2/database/interfaces';
 import { DatastoreService } from '../services/datastore.service';
 import { AuthService } from '../services/auth.service';
@@ -96,21 +95,29 @@ this.afAuth.authState.subscribe((auth) => {
 })}
 
 ngOnInit() {
-  //$(".navItems").fadeIn(200);
+  
     $(".overlayToggle").click(function(){
       $(".overlay").fadeToggle(200);
-      $(this).toggleClass('btn-open').toggleClass('btn-close');
+     // $(this).toggleClass('btn-open')
+      $(".navItem").fadeOut(200);
     });
 
     $('.overlay').on('click', function(){
       $(".overlay").fadeToggle(200);   
-      $(".button .overlayToggle a").toggleClass('btn-open').toggleClass('btn-close');
+     // $(".button .overlayToggle a").toggleClass('btn-open')
       this.open = false;
+      $(".navItem").fadeIn(200);
     })
   }
 
   getRouteAnimation(outlet) {
     return outlet.activatedRouteData.animation
+  }
+
+  addEntryButton(){
+    console.log('clicked add entry button')
+
+  
   }
 
   logout(){

@@ -16,7 +16,7 @@ html{
 }
 
 #signUpButton{
-    left: 115px;
+   /* left: 115px; */
     position: relative;
 }
 
@@ -151,4 +151,23 @@ html{
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100%
+}
+
+.formButton{
+	color: #fff;
+	bottom: 15px;
+	position:relative;
+}
+
+.seperator{
+	
+	position:relative;
+	padding: 0px 60px 60px;
+	bottom: 17px;
+}
+
+.loginError{
+	color:#fff;
+	position: RELATIVE;
+	top: 15PX;
 }

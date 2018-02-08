@@ -5,7 +5,6 @@ import { NgControl } from '@angular/forms';
 import { HttpModule, XHRBackend } from '@angular/http';
 import { NouisliderModule } from 'ng2-nouislider';
 import { FormsModule, FormControlDirective } from '@angular/forms';
-
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -26,14 +25,11 @@ import { lookupListToken, lookupLists } from './providers';
 import { routing } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UserHomeComponent } from './user-home/user-home.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { NgxChartsModule} from '@swimlane/ngx-charts'
 import { environment } from './environments/environment';
 import { TreeModule } from 'ng2-tree';
-import { LogItemTableComponent } from './log-item-table/log-item-table.component';
-import { LogItemFormComponent } from './log-item-form/log-item-form.component';
 import { LogMoodItemFormComponent } from './log-mood-item-form/log-mood-item-form.component';
 import { LogSleepItemFormComponent } from './log-sleep-item-form/log-sleep-item-form.component';
 import { LogDietItemFormComponent } from './log-diet-item-form/log-diet-item-form.component';
@@ -49,6 +45,7 @@ import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-ana
 import { UserGraphSleepComponent } from './user-graph-sleep/user-graph-sleep.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
 import { UserGraphEnergyLevelComponent } from './user-graph-energy-level/user-graph-energy-level.component';
+import { LogItemFormComponent } from './log-item-form/log-item-form.component';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -82,10 +79,7 @@ firebase.initializeApp(firebaseConfig);
     AppComponent,
     FavoriteDirective,
     CategoryListPipe,
-    LogItemFormComponent,
-    LogItemTableComponent,
     LoginFormComponent,
-    UserHomeComponent,
     UserGraphComponent,
     UserProfileComponent,
     RegistrationFormComponent,
@@ -96,6 +90,7 @@ firebase.initializeApp(firebaseConfig);
     UserGraphAnalysisComponent,
     LogMoodItemFormComponent,
     LogSleepItemFormComponent,
+    LogItemFormComponent,
     LogDietItemFormComponent,
     LogExcerciseItemFormComponent,
     UserGraphSleepComponent,

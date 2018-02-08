@@ -1,8 +1,8 @@
 <section>
   <nav>
-    <div id='navContent'>
-      <div class="buttonHolder">
-          <a href="#" routerLink="/add" class="button plus"></a>
+    <div id='navContent'>  
+      <div class="navItem buttonHolder">
+          <a (click)='addEntryButton' href="#" routerLink="/add" class="button plus"></a>
       </div>
       <ul>        
         <li><a class='navItem' routerLink="/profile">User</a></li>
@@ -14,7 +14,7 @@
   </nav>
     <div class="overlay">
       <div class="wrap">
-          <h1 class>  <b style='color:green'>Sirona</b> app</h1>
+          <h1 class>  <b style='color:green'>Sirona</b> information</h1>
           <ul class="wrap-nav">  
           <li><a href="#">What is Sirona?</a>
             <ul>
@@ -45,7 +45,7 @@
             </div>
           </a>
           <p>
-              Email: <a href="">bdillon@live.ie</a>
+            Email: <a href="">bdillon@live.ie</a>
           </p>
         </div>
       </div>

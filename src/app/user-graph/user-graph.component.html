@@ -2,8 +2,10 @@
     <div class="container">
         <div class="row">
           <div class="col-4">
-              <tree (nodeSelected)="logEvent($event)" [tree]="tree" [settings]='treeSettings'></tree>
-          </div>      
+            <div id='treeContainer'>
+              <tree (nodeSelected)="logEvent($event)" (nodeExpanded)="handleExpanded($event)" #treeComponent (nodeCreated)="handleCreated($event)" [tree]="tree" [settings]='treeSettings'></tree>
+            </div>      
+            </div>      
           <div class="col-8">           
             <router-outlet></router-outlet>
           </div>

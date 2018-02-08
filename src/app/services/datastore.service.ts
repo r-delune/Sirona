@@ -8,7 +8,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './auth.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
-import { DietItem } from '../log-item-form/log-item-form.component';
 export class Item {body: string;}
 export class User {body: string;userId: string }
 export class Log { body: string; }
@@ -56,7 +55,11 @@ export class DatastoreService {
   sleepItemList
   moodItemList
   exerciseItemList
-
+  userData
+  userList
+  allUsersList
+  //CHANGE: OBJETCS TO LISTS
+  userDataObject
   constructor(private http: Http, 
     private db: AngularFireDatabase,
     private userAuth: AngularFireAuth,
@@ -67,8 +70,15 @@ export class DatastoreService {
     this.allUserItems = this.allUsersRef.valueChanges();
 
     userAuth.authState.subscribe((auth) => {
-      this.userId = auth.uid
-        
+
+      console.log('Datastore, subscribe/userAuth/authservie - ')
+      console.log(auth)
+      console.log(userAuth)
+      console.log(authService)
+
+      try { this.userId = auth.uid;console.log(`Users/${this.userId}`)} catch{console.log('Datastore resubscribing but no uid found')} 
+      
+
       let subscribe1 = db.object(`Logs/Diet/${this.userId}`).valueChanges().subscribe(
         data =>{
           this.dietItemList = data;
@@ -90,6 +100,35 @@ export class DatastoreService {
       let subscribe4 = db.object(`Logs/Sleep/${this.userId}`).valueChanges().subscribe(
         data =>{
           this.sleepItemList = data;
+        }
+      );
+
+      let subscribe5 = db.object(`Users/${this.userId}`).valueChanges().subscribe(
+        data =>{
+          
+          console.log('USER List')
+          console.log(data)
+          this.userData = data;
+        }
+      );
+
+      let subscribe6 = db.object(`Users`).valueChanges().subscribe(
+        data =>{
+          console.log(`Users/${this.userId}`)
+          console.log('ALL USER Data observer')
+          try { console.log(this.authService)} catch{console.log('ALL USR data resubscribing but no uid found')} 
+          console.log(data)
+          this.allUsersList = data;
+        }
+
+      );
+
+      let subscribe7 = db.list(`Users/${this.userId}`).valueChanges().subscribe(
+        data =>{  
+          console.log('USER INFO observer')
+          console.log(data[0])
+          try { console.log(this.authService)} catch{console.log('USR info resubscribing but no uid found')} 
+          this.userDataObject = data[0]
         }
       );
     });
@@ -131,8 +170,8 @@ export class DatastoreService {
   }
 
   onInit() {
-    console.log('initialised datastore') 
-    this.getLogItemsList()
+    //console.log('initialised datastore') 
+   // this.getLogItemsList()
   }
 
   getAllLogItems(): Observable<any> {
@@ -140,10 +179,20 @@ export class DatastoreService {
        return this.allLogItems
   }
 
-  getAllCurrentUserLogItems(): Observable<any> {
+  getAllCurrentUserLogItems(){
     console.log('RETURNING All USER LOG ITEMS') 
-    return this.currentUserLogsItems
+
+    let allUserLogs= {
+      'exercise' : this.exerciseItemList,
+      'diet' : this.dietItemList, 
+      'sleep' : this.sleepItemList, 
+      'mood' : this.moodItemList
+    }
+
+    return allUserLogs
   }
+
+/*
 
   getUserMoodItems(): Observable<any> {
     console.log('getUserMoodItems') 
@@ -167,42 +216,37 @@ export class DatastoreService {
     console.log('getUserExerciseLogItems') 
     return this.currentUserExerciseItems
   }
-
+*/
   getAllUserInfo(): Observable<any> {
   console.log('RETURNING ALL USER INFO')
   console.log(this.allUserItems)
    return this.allUserItems
   }
 
-  getCurrentUserInfo(): Observable<any> {
-    console.log('RETURNING CURRENT USE INFO')
-    console.log(this.currentUserItem)
-    return this.currentUserItem
+  //CHANGE: ADD ASYNC PIPES
+  getUserData(): Observable<any> {
+    console.log('getUserData')
+    console.log('USER DATA2')
+    console.log(this.userData)
+    console.log('USER LIST2')
+    console.log(this.userList)
+  
+    return this.userDataObject.userData
   }
 
-  addUser(user){
-    console.log('CREATING USER')
+  //CHANGE: PLACE USER IMAGE ON SIDE
+
+  updateUser(user) {
+    console.log('UPDATING user ITEM')
     console.log(user)
-    const afList = this.db.list(`Users/${this.userId}`);
-    afList.push({ user });
-    user.userId = this.userId
-    //new way
-    //const afList = this.db.list(`Users/`);
-    //afList.push({ user });
-   // this.currentUserItem.push(user)
-    //this.allUsersRef.set({ name: user });
-    //this.userItemsList.push(user)
-    //this.allUsersRef.push( user).then((item) => { console.log('success - item key is: ' + item.key); console.log(item) });
-   //this.allUsersRef.set({ name: item });
-  }
-
-  updateUser(newSize: string) {
-    console.log('UPDATING LOG ITEM')
-    this.allUsersRef.update({ size: newSize });
+    const userDBInfo = this.db.list(`Users/${this.userId}`);
+    console.log(userDBInfo) 
+   // userDBInfo.set( user);
+  //  this.allUsersRef.update({ size: newSize });
   }
 
   deleteUser(logItem) {
-   console.log('DELETING LOG ITEM')
+   console.log('DELETING USER')
    console.log(logItem)
    this.allUsersRef.remove();
   }

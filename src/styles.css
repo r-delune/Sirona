@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@import "nouislider/distribute/nouislider.css";
 
 body {
     background: linear-gradient(#780206, #780206);
@@ -15,3 +15,10 @@ h1{
     text-align: center;
     color: green;
 }
+
+.formButtons{
+    color:white
+}
+
+
+

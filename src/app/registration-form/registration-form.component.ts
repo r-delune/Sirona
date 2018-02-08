@@ -35,8 +35,6 @@ interface User {
   displayName?: string;
 }
 
-
-
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
@@ -49,6 +47,7 @@ export class RegistrationFormComponent implements OnInit {
   showNav = true;
   error
   newUser
+  jsonErr
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,7 +63,7 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit() {
 
-   // $(".navItem").fadeOut(200);
+    $(".navItem").fadeOut(200);
 
     this.form = this.formBuilder.group({
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
@@ -78,37 +77,43 @@ export class RegistrationFormComponent implements OnInit {
   onRegister(form) {
     console.log('submitting form')
     console.log(form)
-    console.log(form.email)
-    console.log(form.email.toLocaleString())
+
+    if (form.email == "" || form.name == "" || form.displayName == "" ){
+      console.log('form is invalid'); 
+      console.log(form); 
+      $(".registrationError").text('Please complete form.'); 
+      return
+    }
+
+   // console.log(form.email)
+   // console.log(form.email.toLocaleString())
     this.error = this.authService.emailSignUp(form.email.toLocaleString(), form.password.toLocaleString(), form.displayName.toLocaleString())
     .then((user) => {
-
       console.log('REG FORM: Success')
-      console.log(this.authService)
-
-      const data: User = {
-        uid: this.authService.userId,
-        email: this.authService.userEmail
-      }    
-      
-      const data1 = {
-        email: form.email,
-        displayName: form.displayName,
-        date: form.date
-      }   
-
-      //this.newUser = this.authService.authState.user
-
-      this.datastoreService.addUser(data1)
+      console.log('user')
+      console.log(user)
+      //CHANGE: USE OBJECT FORMAT
     })
-    .catch(error => $(".registrationError").text(error))
+    .catch(error => 
+      {
+        $(".registrationError").text(error)
+        console.log('Attempted to register')
+        console.log(this.error)
+        this.jsonErr = JSON.stringify(this.error)
+        console.log(this.jsonErr)
+        console.log(this.error.a)
+        console.log(this.error.code)
+        console.log(this.error[7])
+        console.log(this.error.i)
+        console.log(this.error.message)
+        $(".registrationError").text(this.error.message)
+      })
 
-    console.log('Attempted to register')
-    console.log(this.error)
+      console.log('FINAL ')
+      console.log(this.error)
+  }
 
-    $(".registrationError").text(this.error)
- }
-
+ //CHANGE: PROVIDE RROR HANDLING
   percentageValidator(control){
     return { 
     'inputValue': {
@@ -116,7 +121,4 @@ export class RegistrationFormComponent implements OnInit {
     max: 0
     }}
   }
-
-    
-
 }

@@ -13,9 +13,9 @@ interface User {
   email: string;
   photoURL?: string;
   displayName?: string;
+  signedUpOn: Date,
+  lastSignIn: Date
 }
-
-
 
 @Injectable()
 export class AuthService {
@@ -27,7 +27,9 @@ export class AuthService {
   
   users
 
-
+  signInErr
+  signUpErr
+  err
   userId 
   userEmail
   userDisplayName
@@ -42,25 +44,31 @@ export class AuthService {
 
   currentUserLogsRefList
   currentUserLogsItemsList: Observable<any>
+  auth
+
+  private isLoggedIn: Boolean;
+  private user_displayName: String;
+  private user_email: String;
+  
 
   constructor(private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
     private afs: AngularFireModule,
     private router:Router){
-      this.currentUsersRef = db.object('Users/'+this.userId+'');
-      this.currentUsersItem = this.currentUsersRef.valueChanges();
+     // this.currentUsersRef = db.object('Users/'+this.userId+'');
+     // this.currentUsersItem = this.currentUsersRef.valueChanges();
       this.afAuth.authState.subscribe((auth) => {
-      if (auth){ this.authState = auth;
-        this.userId = auth.uid
-        this.userEmail = auth.email
-        this.userDisplayName = auth.displayName
-        this.userDisplayName = auth.displayName
-        this.userPhotoURL = auth.photoURL
-        this.authServiceState = auth;
-        console.log(this.authState) 
-      }else{
-        console.log('USER IS NOT LOGGED IN')
-      }
+        console.log('AUTH SERVICE auth is')
+        console.log(auth)
+        if(auth == null){
+          console.log('No user found')
+          this.router.navigate(['/login'])
+        }else{
+          //CHANGE: COMPLETE THIS
+          this.isLoggedIn = true;
+         // this.user_displayName = auth.google.displayName;
+         // this.user_email = auth.google.email;
+        }
     })
   }
 
@@ -73,22 +81,6 @@ export class AuthService {
       })
   }
 
-  updateUserData(user) {
-    console.log(user.userId)
-    const userRef: Observable<any> = this.db.object(`Users/${user.userId}`).valueChanges()
-    console.log('userRef')
-    console.log(userRef)
-    console.log(this.user)
-
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL
-    }      
-    return data
-  }
-  
   signOut() {   
     this.afAuth.auth.signOut().then(() => {
       console.log('SIGNING OUT')
@@ -98,6 +90,7 @@ export class AuthService {
       
   get authenticated(): boolean {
     console.log('checking if authenticated')
+    console.log(this.authState)
     return this.authState !== null;
   }
 
@@ -138,7 +131,7 @@ export class AuthService {
   get currentUserDisplayName(): string {
     return this.authState['displayName']
   }
-
+  //CHANGE: 
   get currentUserEmail(): string {
     return this.authState['email']
   }
@@ -208,32 +201,92 @@ export class AuthService {
     console.log('signing up via email:')
     console.log(email)
     console.log(password)
+    
 
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+   return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((user) => {
-        this.authState = user
-        this.updateUserData(user)
         console.log('signed up siccessfully')
+        console.log('NEW USER')
+        console.log(user)
         this.authState = user
-        this.router.navigate(['/graph/overview']);
+        
+        var userData = {
+          uid: user.uid,
+          email: user.email,
+          signedUpOn: new Date(Date.now()).toLocaleString(),
+          displayName: displayName,
+          photoURL: "/assets/images/nobody.jpg"
+        }     
+
+        const afList = this.db.list(`Users/${user.uid}`);
+        afList.push({ userData });
+
+        this.updateUserData(userData)
+        this.emailLogin(user.email,password) 
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        console.log(error)
+      });
   }
 
+
+  //CHANGE: UPDATE DATA NOT WORKING
+  updateUserData(userData) {
+    
+    console.log('UPDATING USER DATA')
+    console.log(userData)
+    
+    if (userData.displayName){
+      console.log('updating display name to ' + userData.displayName)
+    //  const itemRef = this.db.object(`Users/${userData.uid}`)[0];
+    //  itemRef.update({ displayName: userData.displayName });
+    }
+
+    if (userData.photoURL){
+      console.log('updating display name to ' + userData.photoURL)
+    //  const itemRef = this.db.object(`Users/${userData.uid}`);
+    //  itemRef.update({ photoURL: userData.photoURL });
+    }
+
+    if (userData.lastSignIn){
+      console.log('updating display name to ' + userData.lastSignIn)
+    //  const itemRef = this.db.object(`Users/${userData.uid}`);
+    //  itemRef.update({ lastSignIn: userData.lastSignIn });
+    }
+  }
+
+  //CHANGE: REMOVE OTHER LOGIN FUCNTIONS
   emailLogin(email:string, password:string) {
 
     console.log('signing in via email:')
 
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+    this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((user) => {
         this.authState = user
-    //    this.updateUserData()
+
+        let userData = {
+          lastSignIn: Date.now().toLocaleString()
+        } 
+        //CHANGE: ALLOW FOR LAST SIGN IN DATE
+        //this.updateUserData(userData)
         console.log('logged in siccessfully')
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/graph/overview']);
       })
-      .catch(error => console.log(error));
+      
+      .catch(error => 
+        {
+          console.log('PRBLM:' + error); 
+          this.err = error
+        });
+
+    console.log('this.err')
+    console.log(this.err)
+    
+    return this.err;
   }
 
+
+  //CHANGE: MAYBE ONLY USE PROVIDEDATA FUNCTION IN ANGULARAUTH
   // Sends email allowing user to reset password
   resetPassword(email: string) {
     var auth = firebase.auth();

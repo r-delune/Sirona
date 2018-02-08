@@ -7,7 +7,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './auth.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
-import { DietItem } from '../log-item-form/log-item-form.component';
 import { DatastoreService } from '../services/datastore.service';
 
 declare var jquery:any;
@@ -122,12 +121,23 @@ export class DataInterpretorService {
 
   //CHANGE: GETTREND SHOULD BE CONSOLIDATED TO ONE FUNCTION
 
+  countUserTotalEntries(){
+    let allUserEntries = this.datastoreService.getAllCurrentUserLogItems()
+    var count = 0;
+
+    $.each(allUserEntries, function(key, value) {
+      for(var prop in value) {
+        ++count;
+      }
+    })
+    return count
+  }
+
   getSleepQualityTrend(){
     console.log('getSleepQualityTrend')
     let data =  {} as Item;
     let singleArray= [];
     let multiArray = {} as MultiItem;
-    //return sleepQualityDataArray
     this.currentUserSleepItems = this.datastoreService.getUserSleepItemsList()
     $.each(this.currentUserSleepItems, function(key, value) {
       var myDate = new Date(value.sleepEntry.date);
@@ -281,7 +291,8 @@ export class DataInterpretorService {
     this.generalMoodData = this.getGeneralMoodTrend()
     this.sleepQualityData = this.getSleepQualityTrend()
     this.energyLevelData = this.getEnergyLevelTrend()
-  
+    
+ 
     let data = {} as Item;
     let appetiteDataArray = {} as MultiItem;
     let generalMoodDataArray = {} as MultiItem;
@@ -303,7 +314,7 @@ export class DataInterpretorService {
     generalMoodDataArray.name = 'General Mood'
     generalMoodDataArray.series = this.generalMoodData.singleArray
     array.push(generalMoodDataArray)
-
+   //CHANGE: ADD TO ARRAYS DYNAMICALLY
     sleepQualityArray.name = 'Sleep Quality'
     sleepQualityArray.series = this.sleepQualityData.singleArray
     array.push(sleepQualityArray)

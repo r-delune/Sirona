@@ -5,8 +5,7 @@
                 <div class="box-body">
                     <div class="col-sm-6">
                         <div  align="center"> 
-                            <img [src]="userPhotoURL" class="img-circle img-responsive"  alt="assets/img/nobody.jpg" onerror=this.src="assets/img/nobody.jpg"/><span>
-                            <div style="color:#999;"><input id="profile-image-upload" class="hidden" type="file"></div></span>
+                            <img bind-src="myImage" class="profileImg img-circle img-responsive"/>
                         </div>
                     <div class=" col-md-9 col-lg-9 "> 
                         <table class="table table-user-information">
@@ -30,7 +29,7 @@
 
                             </tbody>
                         </table>       
-                    <a (click)='logout()' class="btn btn-primary">Logout</a>
+                    <input type="file" (change)="onChange($event)"/>
                 </div>
             </div>
         </div>

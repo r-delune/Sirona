@@ -4,6 +4,7 @@
   display: block;
   padding: 5px;
 }
+
 ul {
   list-style-type: none;
   text-align: center 
@@ -11,7 +12,6 @@ ul {
 ul li {
   margin: 5px 0;
   padding-right: 3%;
-
 }
 
 header {
@@ -23,14 +23,12 @@ header {
 
 button {
   align-items: center;
-
 }
 
 label {
   color: #1d6b0d;
   font-weight:bold;
 }
-
 
 input, select {
   background-color: #29394b;
@@ -82,14 +80,10 @@ button[type=submit]:disabled {
 }
 
 .container {
-
-
   margin: auto;
   width: 90%;
   padding: 0;
-
 }
-
 
 .form-control {
   height: 36px;
@@ -664,7 +658,6 @@ select.form-control[multiple], .form-group.is-focused select.form-control[multip
   z-index: 100;
 }
 
-
 .radio label {
   cursor: pointer;
   padding-left: 35px;
@@ -768,6 +761,7 @@ body {
   opacity: 1 !important;
   filter: alpha(opacity=100) !important;
 }
+
 .stepwizard-row:before {
   top: 14px;
   bottom: 0;
@@ -776,13 +770,14 @@ body {
   width: 100%;
   height: 1px;
   background-color: #ccc;
-  z-order: 0;
 }
+
 .stepwizard-step {
   display: table-cell;
   text-align: center;
   position: relative;
 }
+
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -816,54 +811,16 @@ form {
   padding: 5px 40px 5px 5px;
   margin-top: 0;
   margin-bottom: 0;
-
 }
 
 .noUi-base{
   padding: 5px 40px 5px 5px;
   margin-top: 0;
   margin-bottom: 0;
-
 }
 
 .noUi-origin{
   padding: 5px 40px 5px 5px;
   margin-top: 0;
   margin-bottom: 0;
-
 }
-
-/*
-.noUi-connect{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
-
-}
-
-.noUi-target {
-  padding: 0 17px;
-}
-.noUi-base:before,
-.noUi-base:after {
-  width: 17px;
-  content: "";
-  position: absolute;
-  top: 0;
-  height: 100%;
-  display: block;
-}
-.noUi-base:before {
-  left: -17px;
-}
-.noUi-base:after {
-  left: 100%;
-}
-
-.noUi-target	This class is added to the element you call  .noUiSlider() on. Has  border, background and other styling properties to establish the slider design and background.
-.noUi-base	The slider bar. Serves as the calculating point for the slider handles, and has no visible styling.
-.noUi-origin	The elements connected to the base, defining the handle locations.
-.noUi-handle	The actual, visible handles. Style these any way you like!
-.noUi-connect	Styling class for setting properties related to the slider connect segment.
-.noUi-state-tap	This class is added when the slider bar is tapped or clicked. A slider with this call will reject any user input. noUiSlider will remove this class after 300ms, leaving that timespan to perform visual animations.
-[disabled]*/

@@ -96,3 +96,26 @@ body{
     display: inline-block;
     color: deepskyblue;
 }
+
+tree-internal .tree .node-value {
+    display: inline-block;
+    color: aliceblue;
+}
+
+ul.rootless {
+    padding: 20px;
+}
+
+.treeContainer{
+
+    padding: 1px 2px 4px 3px;
+
+}
+
+.nodeCollapsed{
+    color:deepskyblue
+}
+
+.nodeExpanded{
+    color:deepskyblue
+}

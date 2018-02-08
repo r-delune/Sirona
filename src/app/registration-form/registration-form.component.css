@@ -12,9 +12,7 @@ body{
 }
 
 html{
-
 	background: linear-gradient(#780206, #780206);	
-
 }
 
 #signInButton{
@@ -30,10 +28,10 @@ html{
 	bottom: -40px;
 	width: auto;
 	height: auto;
-	/*background-image: url(http://ginva.com/wp-content/uploads/2012/07/city-skyline-wallpapers-008.jpg);*/
 	background-size: cover;
 	-webkit-filter: blur(5px);
 	z-index: 0;
+	color:white
 }
 
 
@@ -54,7 +52,7 @@ html{
 .header{
 	position: absolute;
 	top: calc(50% - 35px);
-	left: calc(50% - 255px);
+	left: calc(50% - 285px);
 	z-index: 2;
 }
 
@@ -157,3 +155,18 @@ html{
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100%
   }
+
+  .registrationError{
+	  color:#fff;
+	  position: RELATIVE;
+	  top: 15PX;
+  }
+
+  .formButton{
+    color:#fff
+	}
+
+.seperator{
+	position:relative;
+	padding: 0px 60px 60px;
+}

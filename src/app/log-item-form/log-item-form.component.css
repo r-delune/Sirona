@@ -796,3 +796,27 @@ form {
   margin: auto;
   width: 80%;
 }
+
+.container{
+  margin: auto;
+  width: 60%;
+  padding: 0;
+}
+
+h3{
+  padding:70px;
+  margin:auto;
+  color:#fff;
+}
+
+button{
+
+  position: relative;
+    margin: auto;
+    align-items: center;
+}
+
+.col-md-2 {
+  margin: auto;
+  text-align: center;
+}
