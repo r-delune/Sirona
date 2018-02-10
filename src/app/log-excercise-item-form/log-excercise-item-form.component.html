@@ -1,7 +1,8 @@
 <form [formGroup]='addExerciseItemForm' (ngSubmit)='onSubmit(form)' id='addExerciseItemForm' role="form" action="" method="post">
 <div class="row setup-content" id="step-0">
 <h3>Exercise</h3>
-  <div class="col-xs-6">
+  <div class=
+  "col-xs-6">
     <div class="row">
       <div class="form-group">
         <label class="control-label">Kilometers Ran:</label>
@@ -25,18 +26,14 @@
         <label class="control-label">No of pull-ups:</label>
         <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="pullUps"></nouislider>
       </div>
-      <div class="form-group">     
+      <!--<div class="form-group">     
         <label class="control-label">Additional Notes:</label>
         <input maxlength="100" type="text" class="form-control" formControlName="additionalNotes" placeholder="in litres" />     
-      </div> 
-    </div>     
-  </div>
-  <div class="row setup-content">
-    <div class="col-xs-6">
-      <div class="col-md-12">
-        <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
+      </div> -->
+      <div class="form-group">     
+        <button class="btn btn-success btn-lg saveFormButton" type="submit">Submit</button>
       </div>
-    </div>
+    </div>     
   </div>
 </div>
 </form>

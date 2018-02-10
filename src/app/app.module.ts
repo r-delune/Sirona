@@ -37,7 +37,6 @@ import { LogExcerciseItemFormComponent } from './log-excercise-item-form/log-exc
 import { UserGraphSleepQualityComponent } from './user-graph-sleep-quality/user-graph-sleep-quality.component';
 import { UserGraphGeneralMoodComponent } from './user-graph-general-mood/user-graph-general-mood.component';
 import { UserGraphAppetiteLevelComponent } from './user-graph-appetite-level/user-graph-appetite-level.component';
-import { UserGraphExcerciseComponent } from './user-graph-excercise/user-graph-excercise.component';
 import { UserGraphMoodComponent } from './user-graph-mood/user-graph-mood.component';
 import { UserGraphDietComponent } from './user-graph-diet/user-graph-diet.component';
 import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-overview.component';
@@ -83,7 +82,6 @@ firebase.initializeApp(firebaseConfig);
     UserGraphComponent,
     UserProfileComponent,
     RegistrationFormComponent,
-    UserGraphExcerciseComponent,
     UserGraphMoodComponent,
     UserGraphDietComponent,
     UserGraphOverviewComponent,
@@ -97,7 +95,7 @@ firebase.initializeApp(firebaseConfig);
     UserGraphSleepQualityComponent,
     UserGraphGeneralMoodComponent,
     UserGraphAppetiteLevelComponent,
-    UserGraphEnergyLevelComponent
+    UserGraphEnergyLevelComponent,
   ],
   providers: [
     DatastoreService,

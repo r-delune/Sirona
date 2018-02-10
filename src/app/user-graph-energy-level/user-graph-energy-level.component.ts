@@ -25,21 +25,27 @@ export class UserGraphEnergyLevelComponent {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Level';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Date';
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
   data
+  totalData
+  animations= true
+  timeline = true
+  tooltipDisabled = true
+  referenceLines = [{name: 'High', value: '80'},{name: 'OK', value: '50'},{name: 'Low', value: '20'}]
+
 
   constructor(private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
 
-    this.data = this.dataInterpretorService.getEnergyLevelTrend()
-    this.energyLevelData = this.data.multiArray
+    this.totalData = this.dataInterpretorService.getEnergyLevelTrend()
+    this.data = this.totalData.multiArray
     console.log('energyLevelData')
-    console.log(this.energyLevelData)
+    console.log(this.data)
   }
 }

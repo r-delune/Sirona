@@ -66,6 +66,8 @@ export class AuthService {
         }else{
           //CHANGE: COMPLETE THIS
           this.isLoggedIn = true;
+          console.log('User found - moving to graph')
+          this.router.navigate(['/graph/overview'])
          // this.user_displayName = auth.google.displayName;
          // this.user_email = auth.google.email;
         }
@@ -260,29 +262,12 @@ export class AuthService {
 
     console.log('signing in via email:')
 
-    this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.authState = user
 
-        let userData = {
-          lastSignIn: Date.now().toLocaleString()
-        } 
-        //CHANGE: ALLOW FOR LAST SIGN IN DATE
-        //this.updateUserData(userData)
-        console.log('logged in siccessfully')
-        this.router.navigate(['/graph/overview']);
-      })
-      
-      .catch(error => 
-        {
-          console.log('PRBLM:' + error); 
-          this.err = error
-        });
 
-    console.log('this.err')
-    console.log(this.err)
+  //  console.log('this.err')
+  //  console.log(this.err)
     
-    return this.err;
+    return 'Hello'
   }
 
 

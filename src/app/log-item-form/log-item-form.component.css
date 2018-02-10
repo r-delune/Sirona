@@ -1,9 +1,14 @@
-@import "nouislider/distribute/nouislider.css";
 
 :host {
   display: block;
   padding: 5px;
 }
+
+
+.col-md-2 {
+  padding:20px
+  }
+
 ul {
   list-style-type: none;
   text-align: center 

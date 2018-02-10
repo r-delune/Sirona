@@ -1,7 +1,8 @@
+<div *ngIf="data; else noDataMessage">
 <ngx-charts-line-chart
 [view]="view"
 [scheme]="colorScheme"
-[results]="getAppetiteMultiTrend"
+[results]="data"
 [gradient]="gradient"
 [xAxis]="showXAxis"
 [yAxis]="showYAxis"
@@ -17,3 +18,5 @@
 [referenceLines]='referenceLines'
 (select)="onSelect($event)">
 </ngx-charts-line-chart>
+</div>
+<ng-template #noDataMessage><div class='noDataMessage'>Make an entry to plot data to graph!</div></ng-template>

@@ -48,7 +48,7 @@ export class LogSleepItemFormComponent {
 
   }
 
-
+//CHANGE: CONSOLIDATE CHART "ALL" FUNCTION
 
   someRange2config: any = {
     behaviour: 'drag',
@@ -65,12 +65,12 @@ export class LogSleepItemFormComponent {
     this.addSleepItemForm = this.formBuilder.group({
       userId: this.userId,
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
-      hoursSleptOn : this.formBuilder.control('No Entry'),
-      noOfHoursSlept : this.formBuilder.control('No Entry'),
-      sleepQuality : this.formBuilder.control('No Entry'),
-      sleepDifficulty: this.formBuilder.control('No Entry'),
-      sleepNotes: this.formBuilder.control('No Entry'),
-      natureOfDreams: this.formBuilder.control('No Entry'),
+      //hoursSleptOn : this.formBuilder.control('No Entry'),
+      noOfHoursSlept : this.formBuilder.control(null),
+      sleepQuality : this.formBuilder.control(null),
+      sleepDifficulty: this.formBuilder.control(null),
+      //sleepNotes: this.formBuilder.control('No Entry'),
+      //natureOfDreams: this.formBuilder.control('No Entry'),
     })
   }
 

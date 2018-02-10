@@ -30,17 +30,17 @@ export class UserGraphMoodComponent  {
   doughnut = false;
   totalData
   data1
-  data: any[];
+  data
   data2: any[];
   generalMoodData
-  
+  tooltipDisabled=true
   constructor(authService: AuthService,
     private dataInterpretorService: DataInterpretorService) { 
       this.totalData = this.dataInterpretorService.getUserLogTimesByType('Mood')
       console.log('getUserLogTimesByType')
-      console.log(this.totalData)
-      this.data1 = this.totalData.data1
-      this.data2 = this.totalData.data2
+      this.data = this.totalData.data1
+      console.log(this.data)
+     // this.data2 = this.totalData.data2
   }
   
   onSelect(event) {
@@ -50,5 +50,4 @@ export class UserGraphMoodComponent  {
   ngOnInit(){
   
   }
-
 }

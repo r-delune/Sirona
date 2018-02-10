@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { LogDietItemFormComponent } from './log-diet-item-form.component';
 
 describe('LogDietItemFormComponent', () => {

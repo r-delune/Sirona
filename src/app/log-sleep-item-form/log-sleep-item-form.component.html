@@ -3,34 +3,34 @@
     <h3>Sleep</h3>
       <div class="col-xs-6">
         <div class="row">
-          <div class="form-group">
+          <!--<div class="form-group">
             <label class="control-label">Slept between the hours of:</label>
             <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="hoursSleptOn"></nouislider>
-          </div>
+          </div>-->
           <div class="form-group">
-            <label class="control-label">Rate your sleep</label>
+            <label class="control-label">Quality of sleep</label>
             <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="sleepQuality"></nouislider>
           </div>
           <div class="form-group">
-            <label class="control-label">How difficult was it to get to sleep?</label>
+            <label class="control-label">Difficulty sleeping</label>
             <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="sleepDifficulty"></nouislider>
           </div>
           <div class="form-group">
+            <label class="control-label">No of hours slept</label>
+            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="noOfHoursSlept"></nouislider>
+          </div>
+         <!-- <div class="form-group">
             <label class="control-label">Tag Dream themes:</label>
             <input maxlength="100" type="text" class="form-control" formControlName="natureOfDreams" placeholder="in litres" />     
           </div>
           <div class="form-group">
             <label class="control-label">Tag additional info</label>
             <input maxlength="100" type="text" class="form-control" formControlName="sleepNotes" placeholder="" />     
+          </div>-->
+          <div class="form-group">     
+            <button class="btn btn-success btn-lg saveFormButton" type="submit">Submit</button>
           </div>
         </div>
       </div>     
-    </div>
-  <div class="row setup-content" id="step-0">
-    <div class="col-xs-6">
-      <div class="col-md-12">
-        <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
-      </div>
-    </div>
-  </div>   
+    </div> 
 </form>

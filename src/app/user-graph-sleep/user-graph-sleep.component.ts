@@ -17,16 +17,18 @@ export class UserGraphSleepComponent implements OnInit {
   multi: any[];
   view: any[] = [700, 400];
   logItems
-
+  tooltipDisabled=true
   // options
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
+  gradient = true;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Level';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Date';
+  showLabels = true
+  currentUserLogItems
 
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -37,14 +39,15 @@ export class UserGraphSleepComponent implements OnInit {
   // line, area
   autoScale = true;
   sleepQualityData
-  
+  data
   constructor(private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
 
     this.totalData = this.dataInterpretorService.getUserLogTimesByType('Sleep')
     console.log('this.totalData.data1Sleep')
     console.log(this.totalData)
-    this.data1 = this.totalData.data1
+    this.data = this.totalData.data1
+    console.log(this.totalData.data1)
   }
   
   onSelect(event) {

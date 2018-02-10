@@ -1,9 +1,15 @@
-@import "nouislider/distribute/nouislider.css";
 
 :host {
   display: block;
   padding: 5px;
 }
+.col-md-2 {
+  padding:20px
+  }
+
+.col-md-2 {
+  padding:20px
+  }
 
 ul {
   list-style-type: none;
@@ -243,7 +249,6 @@ button[type=submit]:disabled {
   background-repeat: no-repeat;
   background-position: center bottom, center calc(100% - 1px);
   background-color: transparent;
-  transition: background 0s ease-out;
   float: none;
   box-shadow: none;
   border-radius: 0;
@@ -801,26 +806,13 @@ form {
   width: 40%;
 }
 
-.noUi-target{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
-}
+.form-group{
 
-.ng2-nouislider{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.noUi-base{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.noUi-origin{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
+  width: 60%;
+  font-size: 11px;
+  line-height: 1.07143;
+  color: #AAAAAA;
+  font-weight: 400;
+  padding: 0px;
+  margin: 5px 0 0 0;
 }

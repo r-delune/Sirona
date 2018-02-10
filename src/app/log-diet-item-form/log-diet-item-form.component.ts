@@ -10,6 +10,7 @@ import { DatastoreService } from '../services/datastore.service'
 import * as firebase from 'firebase/app';
 import { AuthService } from '../services/auth.service';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { single, multi} from '../data';
 declare var jquery:any;
 declare var $ :any;
 
@@ -42,25 +43,32 @@ export class LogDietItemFormComponent{
     this.angularAuth.authState.subscribe((user) => {
       this.userId = user.uid;
     })
+
+ 
   }
   
   ngOnInit() {
     console.log('DIET FORM')    
     this.addDietItemForm = this.formBuilder.group({
-      id: this.userId,
+      //id: this.userId,
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
-      appetite: this.formBuilder.control('No Entry'),
-      cupsOfCoffee: this.formBuilder.control('No Entry'),
-      confectionary: this.formBuilder.control('No Entry'),
-      alcoholDrank: this.formBuilder.control('No Entry'),
-      cigarettesSmoked: this.formBuilder.control('No Entry'),
-      supplements: this.formBuilder.control('No Entry'),
-      additionalNotes: this.formBuilder.control('No Entry'),
+      appetite: this.formBuilder.control(null),
+      cupsOfCoffee: this.formBuilder.control(null),
+      confectionary: this.formBuilder.control(null),
+      alcoholDrank: this.formBuilder.control(null),
+      kmRan: this.formBuilder.control(null),
+      kmWalked: this.formBuilder.control(null),
+      kmCycled : this.formBuilder.control(null)
+    //  cigarettesSmoked: this.formBuilder.control(null)
+    //  supplements: this.formBuilder.control,
+    //  additionalNotes: this.formBuilder.control,
     })
   }
 
   onSubmit() {
     if (this.addDietItemForm.valid) {
+
+      console.log(this.addDietItemForm)
       this.datastoreService.addDietEntry(this.addDietItemForm.value)
       this.router.navigate(['/add'])
     }

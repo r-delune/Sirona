@@ -804,34 +804,22 @@ form {
   width: 80%;
 }
 
-
 .form-group{
-  width: 40%;
+  width: 90%;
+  font-size: 11px;
+  line-height: 1.07143;
+  color: #AAAAAA;
+  font-weight: 400;
+  padding: 0px;
+  margin: 5px 0 0 0;
 }
 
-.noUi-target{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
+label.control-label{
+  font-size: 11px;
+  line-height: 1.07143;
+  color: #AAAAAA;
+  font-weight: 400;
+  padding: 10px;
+  margin: 16px 0 0 0;
 }
 
-.ng2-nouislider{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
-
-}
-
-.noUi-base{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
-
-}
-
-.noUi-origin{
-  padding: 5px 40px 5px 5px;
-  margin-top: 0;
-  margin-bottom: 0;
-
-}

@@ -24,28 +24,35 @@ export class UserGraphAppetiteLevelComponent {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Level';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Date';
   getAppetiteMultiTrend
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
   data
+  multiArray
 
   animations= true
   timeline = true
   tooltipDisabled = true
   referenceLines = [{name: 'High', value: '80'},{name: 'OK', value: '50'},{name: 'Low', value: '20'}]
-
+  singleArray
 
   //CHANGE apettite to apetitelvel
   constructor(private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
 
-    this.data = this.dataInterpretorService.getAppetiteTrend()
-    this.getAppetiteMultiTrend = this.data.multiArray
-    console.log('getAppetiteMultiTrend')
-    console.log(this.getAppetiteMultiTrend)
+    this.data = this.dataInterpretorService.getDietTrends()
+    console.log('data')
+    console.log(this.data)
+    //this.singleArray = this.data.singleArray
+    //console.log('singleArray')
+    //console.log(this.singleArray)
+
+    Object.assign(this, {single, multi})  
+
+    console.log(multi)
   }
 }

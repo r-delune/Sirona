@@ -14,6 +14,7 @@ import {
   transition,
   query,
 } from '@angular/animations';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 export interface Item { name: string; }
 declare var jquery:any;
@@ -67,11 +68,13 @@ export class LoginFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     public authService: AuthService, 
-    private router: Router
+    private router: Router,
+    private afAuth: AngularFireAuth
   ) { }
 
   ngOnInit() {
-    $(".navItem").fadeOut(200);
+    //CHANGE: FADE OUT MENU BEFORE LOGIN
+   $(".navItem").fadeOut(200);
     this.form = this.formBuilder.group({
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
       email: this.formBuilder.control(''),
@@ -97,18 +100,48 @@ export class LoginFormComponent {
   }
 
   onSubmit(form){
-    this.error = this.authService.emailLogin(form.email.toLocaleString(), form.password.toLocaleString()) 
+
+    if (form.email == "" || form.name == ""){
+      console.log('form is invalid'); 
+      console.log(form); 
+      $(".loginError").text('Invalid login.')
+      return
+    }
+
+
+   // this.error = this.authService.emailLogin(form.email.toLocaleString(), form.password.toLocaleString()) 
+    
+   this.afAuth.auth.signInWithEmailAndPassword(form.email.toLocaleString(), form.password.toLocaleString())
+   .then((user) => {
+    // this.authState = user
+
+    // let userData = {
+   //    lastSignIn: Date.now().toLocaleString()
+    // } 
+     //CHANGE: ALLOW FOR LAST SIGN IN DATE
+     //this.updateUserData(userData)
+     console.log('logged in siccessfully')
+     this.router.navigate(['/graph/overview']);
+   })
+   
+   .catch(error => 
+     {
+     //  console.log('PRBLM:' + error); 
+     //  this.err = error;
+     //  return error
+      $(".loginError").text(error.message)
+     });
+
+    console.log('RETURN')
+    console.log(this.error)    
+    $.each(this.error, function(key, value) {
+      console.log(key);  console.log(value)    
+  })
     //.catch(error => {
      // console.log('Error handler')
     //  console.log(error)
     //  $(".loginError").text(error.message)
    // })
-
-   if (form.email == "" || form.name == ""){
-    console.log('form is invalid'); 
-    console.log(form); 
-    $(".loginError").text('Invalid login.')
-  }
   }
 }
 

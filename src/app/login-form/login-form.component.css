@@ -171,3 +171,7 @@ html{
 	position: RELATIVE;
 	top: 15PX;
 }
+
+.myTree {
+    padding: 60px;
+}

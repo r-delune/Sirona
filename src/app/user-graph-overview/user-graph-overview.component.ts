@@ -5,7 +5,8 @@ import { BrowserModule} from '@angular/platform-browser';
 import { single, multi} from '../data';
 import { NgxChartsModule} from '@swimlane/ngx-charts';
 import { DataInterpretorService} from '../services/data-interpretor.service'
-
+declare var jquery:any;
+declare var $ :any;
 @Component({
   selector: 'app-user-graph-overview',
   templateUrl: './user-graph-overview.component.html',
@@ -20,6 +21,8 @@ export class UserGraphOverviewComponent  {
   dims: any;
   margin = [20, 20, 20, 20];
   legendOptions: any;
+
+  tooltipDisabled=true
 
   logItems = []
   currentUserLogItems
@@ -39,7 +42,6 @@ export class UserGraphOverviewComponent  {
   explodeSlices = false;
   doughnut = false;
 
-
   totalData
   data1
   appetiteData
@@ -48,14 +50,27 @@ export class UserGraphOverviewComponent  {
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) {   
-
-    this.currentUserLogItems = datastoreService.allUserItems
-    this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
-    this.data1 = this.totalData.data1
+      $(".navItem").fadeIn(200);
+      this.currentUserLogItems = datastoreService.allUserItems
+      this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
+      this.data = this.totalData.data1
+      console.log('overview')
+      console.log(this.data ) 
   }
   
   onSelect(event) {
     console.log(event);
   }
+
+  customColors = [
+    {
+      name: "Morning",
+      value: '#fff'
+    },
+    {
+      name: "Evening",
+      value: '#00ff00'
+    }
+];
   
 }

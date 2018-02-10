@@ -48,13 +48,13 @@ export class LogExcerciseItemFormComponent {
     this.addExerciseItemForm = this.formBuilder.group({
       id: this.userId,
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
-      kmRan: this.formBuilder.control('No Entry'),
-      kmWalked: this.formBuilder.control('No Entry'),
-      kmCycled : this.formBuilder.control('No Entry'),
-      kmSwam : this.formBuilder.control('No Entry'),
-      pressUps: this.formBuilder.control('No Entry'),
-      pullUps: this.formBuilder.control('No Entry'),
-      additionalNotes: this.formBuilder.control('No Entry'),
+      kmRan: this.formBuilder.control(null),
+      kmWalked: this.formBuilder.control(null),
+      kmCycled : this.formBuilder.control(null),
+      kmSwam : this.formBuilder.control(null),
+      pressUps: this.formBuilder.control(null),
+      pullUps: this.formBuilder.control(null),
+      //additionalNotes: this.formBuilder.control('No Entry'),
     })
   }
 

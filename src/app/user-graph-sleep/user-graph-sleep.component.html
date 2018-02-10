@@ -1,9 +1,11 @@
+<div *ngIf="data; else noDataMessage">
 <ngx-charts-pie-chart
   [scheme]="colorScheme"
-  [results]="data1"
+  [results]="data"
   [legend]="showLegend"
   [explodeSlices]="explodeSlices"
   [labels]="showLabels"
   [doughnut]="doughnut"
   (select)="onSelect($event)">
-</ngx-charts-pie-chart>
+</ngx-charts-pie-chart></div>
+<ng-template #noDataMessage><div class='noDataMessage'>Make an entry to plot data to graph!</div></ng-template>

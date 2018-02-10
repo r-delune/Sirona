@@ -1,24 +1,47 @@
-@import "nouislider/distribute/nouislider.css";
+@import "~nouislider/distribute/nouislider.css";
 
-body {
-    background: linear-gradient(#780206, #780206);
+  .noDataMessage{
+    position: relative;
+    margin: auto;
+    padding: 120px 0px 0px;
+    width: 50%;
+
+  }
+
+  .noUi-horizontal {
+    height: 3px;
 }
 
-html {
-    background: linear-gradient(#780206, #780206);
+.noUi-horizontal .noUi-handle {
+  width: 14px;
+  height: 34px;
+  left: -17px;
+  top: -17px;
 }
 
-h1{
-    position: absolute;
-    top:50%;
-    right:40%;
-    text-align: center;
-    color: green;
+.noUi-handle {
+  border: 1px solid #D9D9D9;
+  border-radius: 26px;
+  background: #000;
+  cursor: default;
+  -webkit-box-shadow: inset 0 0 1px #FFF, inset 0 1px 7px #EBEBEB, 0 3px 6px -3px #BBB;
+  box-shadow: inset 5 0 1px #FFF, inset 0 1px 17px #EBEBEB, 0 3px 6px -3px #BBB;
 }
 
-.formButtons{
-    color:white
+.noUi-handle:before, .noUi-handle:after {
+  display: none;
 }
 
-
-
+.saveFormButton {
+  background-color: #45bf94;
+  border: 0;
+  /* padding: 10px; */
+  font-size: 1em;
+  border-radius: 4px;
+  color: #ffffff;
+  position: relative;
+  cursor: pointer;
+  margin: auto;
+  width: 50%;
+  display: block;
+}

@@ -13,41 +13,37 @@ import { DataInterpretorService } from '../services/data-interpretor.service'
 })
 export class UserGraphAnalysisComponent{
 
+  single: any[];
+  multi: any[];
+
   view: any[] = [700, 400];
-  logItems
+
   // options
   showXAxis = true;
   showYAxis = true;
-  gradient = true;
+  gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Date';
+  xAxisLabel = 'Level';
   showYAxisLabel = true;
-  yAxisLabel = 'Level';
+  yAxisLabel = 'Date';
+  referenceLines = [ {name: 'Low', value: 20}, {name: 'OK', value: 40}, {name: 'Great', value: "60"}]
+
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
   // line, area
   autoScale = true;
-  currentUserLogItems
-  totalData
-  data1
-  data2
-  appetiteData
-  generalMoodData
-  sleepQualityData
-  energyLevelData
   data
-  correlationOptionAData
-  
+
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
 
-      this.data = this.dataInterpretorService.correlateDataOption1()
-      console.log('data')
-      console.log(this.data)
+    this.data = this.dataInterpretorService.correlateDataOption1()
+    console.log('analysis data')
+    console.log(this.data)
   }
   
   onSelect(event) {

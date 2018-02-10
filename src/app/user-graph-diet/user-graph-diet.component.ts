@@ -96,18 +96,17 @@ export class UserGraphDietComponent  {
   totalData
   data1
   appetiteData
-
+  tooltipDisabled=true
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
       this.currentUserLogItems = datastoreService.allUserItems
       this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
-      this.data1 = this.totalData.data1
-      this.data2 = this.totalData.data2
-      this.appetiteData = this.dataInterpretorService.getAppetiteTrend()
+      this.data = this.totalData.data1
       
-      console.log('appetiteData')
-      console.log(this.appetiteData)
+      console.log('appetiteData time data')
+      console.log(this.data)
+      console.log(this.data.series)
     }
 
   //CHANGE SLIDER TO SINGLE,

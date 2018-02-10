@@ -29,6 +29,11 @@
     border-top: 0;
 }
 
+.table{
+
+    color: black;
+}
+
 .toppad
 {margin-top:20px;
 }
@@ -40,4 +45,9 @@ img{
 
 [type=file] {
     width: 20%;
+}
+
+
+body{
+    color:black
 }

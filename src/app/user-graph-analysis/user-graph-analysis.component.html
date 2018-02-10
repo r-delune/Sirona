@@ -1,15 +1,19 @@
-<ngx-charts-line-chart
-[view]="view"
-[scheme]="colorScheme"
-[results]="data"
-[gradient]="gradient"
-[xAxis]="showXAxis"
-[yAxis]="showYAxis"
-[legend]="showLegend"
-[showXAxisLabel]="showXAxisLabel"
-[showYAxisLabel]="showYAxisLabel"
-[xAxisLabel]="xAxisLabel"
-[yAxisLabel]="yAxisLabel"
-[autoScale]="autoScale"
-(select)="onSelect($event)">
-</ngx-charts-line-chart>
+<div *ngIf="data; else noDataMessage">
+    <ngx-charts-line-chart
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="data"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [autoScale]="autoScale"
+      [referenceLines]="referenceLines"
+      (select)="onSelect($event)">
+    </ngx-charts-line-chart>
+</div>
+<ng-template #noDataMessage><div class='noDataMessage'>Insufficient data to draw analysis graph!</div></ng-template>

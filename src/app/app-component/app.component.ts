@@ -72,7 +72,6 @@ authState: any = null;
 open;
 isCollapsed:boolean;
 userid
-userGreeting
     
 constructor(db: AngularFireDatabase,
 public afAuth: AngularFireAuth,
@@ -85,12 +84,6 @@ this.isCollapsed = true;
 this.afAuth.authState.subscribe((auth) => {
   if(auth) { 
     this.userid = auth.uid;
-    
-    if (auth.displayName){
-      this.userGreeting = 'Welcome back' +auth.displayName+ ''
-    }else{
-      this.userGreeting = ''
-    }
   }  
 })}
 
@@ -98,30 +91,19 @@ ngOnInit() {
   
     $(".overlayToggle").click(function(){
       $(".overlay").fadeToggle(200);
-     // $(this).toggleClass('btn-open')
-      $(".navItem").fadeOut(200);
     });
 
     $('.overlay').on('click', function(){
       $(".overlay").fadeToggle(200);   
-     // $(".button .overlayToggle a").toggleClass('btn-open')
       this.open = false;
       $(".navItem").fadeIn(200);
     })
+
+    $(".navItem").fadeIn(200);
   }
 
   getRouteAnimation(outlet) {
     return outlet.activatedRouteData.animation
-  }
-
-  addEntryButton(){
-    console.log('clicked add entry button')
-
-  
-  }
-
-  logout(){
-    console.log('app component logging out')
   }
 }
  

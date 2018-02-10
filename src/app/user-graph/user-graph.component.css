@@ -6,7 +6,7 @@ body{
     font-size: 1.4rem;
     line-height: 2rem;
     letter-spacing: 0.01rem;
-    color: #212121;
+    color:white;
     background-color: #f5f5f5;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -106,10 +106,8 @@ ul.rootless {
     padding: 20px;
 }
 
-.treeContainer{
-
-    padding: 1px 2px 4px 3px;
-
+#treeContainer{
+    padding: 16px 0px 0px 34px;
 }
 
 .nodeCollapsed{
@@ -118,4 +116,14 @@ ul.rootless {
 
 .nodeExpanded{
     color:deepskyblue
+}
+
+.advanced-pie-legend-wrapper{
+
+    color:white
+}
+
+.tree .node-value {
+    display: inline-block;
+    color: white;
 }

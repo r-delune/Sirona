@@ -40,22 +40,8 @@ export class LogMoodItemFormComponent {
     },
     step: 1,
     animate: true,
-    animationDuration: 300,
-    cssClasses: {
-			target: 'target',
-				base: 'base',
-				origin: 'origin',
-				handle: 'handle',
-				handleLower: 'handle-lower',
-				handleUpper: 'handle-upper',
-				horizontal: 'horizontal',
-				vertical: 'vertical',
-				background: 'background',
-				connect: 'connect',
-     }
+    animationDuration: 300
   };
-
-  
 
   firstHandle: Element;
 
@@ -64,36 +50,16 @@ export class LogMoodItemFormComponent {
     this.addMoodItemForm = this.formBuilder.group({
       id: this.userId,
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
-      generalMood: this.formBuilder.control('No Entry'),
-      energyLevel: this.formBuilder.control('No Entry'),
-      motivationLevel: this.formBuilder.control('No Entry'),  
-      concentrationLevel: this.formBuilder.control('No Entry'),
-      anxietyLevel: this.formBuilder.control('No Entry'),
-      stressEvents: this.formBuilder.control('No Entry'),
-      extEffectOnMood: this.formBuilder.control('No Entry'),
-      additionalNotes: this.formBuilder.control('No Entry')
+      generalMood: this.formBuilder.control(null),
+      energyLevel: this.formBuilder.control(null),
+      motivationLevel: this.formBuilder.control(null),  
+      concentrationLevel: this.formBuilder.control(null),
+      anxietyLevel: this.formBuilder.control(null),
+      //stressEvents: this.formBuilder.control(null),
+    //  extEffectOnMood: this.formBuilder.control(null),
+     // additionalNotes: this.formBuilder.control('No Entry')
     })
 
-    var connectSlider = document.getElementById('slider-connect');
-
-    console.log('init mood')
-    var trueSlider = document.getElementById('slider-animate-true'),
-    falseSlider = document.getElementById('slider-animate-false'),
-    setButton = document.getElementById('set-sliders');
-    
-    
- 
-
-    var slider = document.getElementById('slider');
-    noUiSlider.create(slider, {
-     start: [20, 80],
-     connect: true,
-     step: 1,
-     range: {
-       'min': 0,
-       'max': 100
-     }
-    });
     
   }
 

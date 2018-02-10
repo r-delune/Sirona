@@ -5,13 +5,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { TreeModel, NodeEvent, Ng2TreeSettings } from 'ng2-tree';
-import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 declare var jquery:any;
 declare var $ :any;
-declare var Timeline: any;
-
-var treed: any;
 
 @Component({
   selector: 'app-user-graph',
@@ -34,12 +30,9 @@ export class UserGraphComponent  {
 
   logItems = []
   currentUserLogItems
-
   single: any[];
   multi: any[];
-
-  view: any[] = [1700, 1400];
-  // options
+  view: any[] = [1700, 1400]
   showLegend = false;
 
   treeSettings: Ng2TreeSettings = {
@@ -49,144 +42,89 @@ export class UserGraphComponent  {
   showLabels = true;
   explodeSlices = false;
   doughnut = false;
-  
+
+  public tree: TreeModel = 
+  {
+    value: 'Data Tree',
+    settings: {
+     // 'isCollapsedOnInit': true,
+      'static': true,
+      'rightMenu': true,
+      'leftMenu': true,
+      'cssClasses': {
+        'expanded': 'fa fa-caret-down fa-lg',
+        'collapsed': 'fa fa-caret-right fa-lg',
+        'leaf': 'fa fa-lg',
+        'empty': 'fa fa-caret-right disabled'
+      },
+      'templates': {
+        'node': '<i class="fa fa-folder-o fa-lg"></i>',
+        'leaf': '<i class="fa fa-file-o fa-lg"></i>',
+        'leftMenu': '<i class="fa fa-navicon fa-lg"></i>'
+      }
+      },    
+    children: [
+      {
+        value: 'Overview',
+      },
+      {
+        value: 'Analysis'
+      },
+      {
+        value: 'Diet/Exercise',
+        children: [
+          {value: 'Diet/Exercise Overview'},
+          {value: 'All Diet/Exercise Data'},
+        ]
+      },
+      {
+        value: 'Mood',
+        children: [
+          {value: 'Mood Overview'},
+          {value: 'All Mood Data'},
+        ]
+      },
+      {
+        value: 'Sleep',
+        children: [
+          {value: 'Sleep Overview'},
+          {value: 'All Sleep Data'}
+        ]
+      }
+  ]}
+
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private router: Router) { 
-      //this.currentUserLogItems = datastoreService.allUserItems
-     // console.log('GRAPH - get usrr items')
-      //console.log(this.currentUserLogItems)
-      //Object.assign(this, {single, multi}) 
       $(".navItem").fadeIn(200); 
+      $('.addEntry').fadeIn(500)
   }
 
    public logEvent(e: NodeEvent): void {
     console.log(e);
-    console.log(e.node.value);
-
-    ///CHANGE: COLOR OF NODES
-    //CHANGE: CLOSE TREE ON STARTUP
-
-
       if (e.node.value === 'Overview'){
         this.router.navigate(['/graph/overview']);
-      }else if (e.node.value === 'Excercise Entries'){
-        this.router.navigate(['/graph/excerciseGraph']);
-      }else if (e.node.value === 'Dietary Entries'){
+      }else if (e.node.value == 'Diet/Exercise Overview'){
         this.router.navigate(['/graph/dietGraph']);
-      }else if (e.node.value === 'Mood Entries'){
+      }else if (e.node.value == 'Mood Overview'){
         this.router.navigate(['/graph/moodGraph']);
-      }else if (e.node.value === 'Sleep Entries'){
+      }else if (e.node.value == 'Sleep Overview'){
         this.router.navigate(['/graph/sleepGraph']);
-      }else if (e.node.value === 'Correlation A'){
+      }else if (e.node.value == 'Analysis'){
         this.router.navigate(['/graph/analysisGraph']);
-      }else if (e.node.value === 'General Mood'){
+      }else if (e.node.value == 'All Mood Data'){
         this.router.navigate(['/graph/generalMoodGraph']);
-      }else if (e.node.value === 'Appetite Level'){
+      }else if (e.node.value == 'All Diet/Exercise Data'){
         this.router.navigate(['/graph/appetiteLevelGraph']);
-      }else if (e.node.value === 'Sleep Quality'){
+      }else if (e.node.value == 'Diet/Exercise'){
         this.router.navigate(['/graph/sleepQualityGraph']);
-      }else if (e.node.value === 'Energy Level'){
-        this.router.navigate(['/graph/energyLevelGraph']);
+      }else if (e.node.value == 'Mood'){
+        this.router.navigate(['/graph/generalMoodGraph']);
+      }else if (e.node.value == 'All Diet/Exercise Data'){
+        this.router.navigate(['/graph/appetiteLevelGraph']);
+      }else if (e.node.value == 'Sleep'){
+        this.router.navigate(['/graph/sleepQualityGraph']);
       }
     }
-    
-    public tree: TreeModel = 
-    {
-      value: 'Prototype-based programming',
-      settings: {
-        'static': true,
-        'rightMenu': true,
-        'leftMenu': true,
-       // 'isCollapsedOnInit' : true,
-        'cssClasses': {
-          'expanded': 'fa fa-caret-down fa-lg nodeExpanded',
-          'collapsed': 'fa fa-caret-right fa-lg nodeCollapsed',
-          'leaf': 'fa fa-lg nodeCollapsed',
-          'empty': 'fa fa-caret-right disabled nodeCollapsed'
-        },
-        'templates': {
-          'node': '<i class="fa fa-folder-o fa-lg"></i>',
-          'leaf': '<i class="fa fa-file-o fa-lg"></i>',
-          'leftMenu': '<i class="fa fa-navicon fa-lg"></i>'
-        },
-        'menuItems': [
-           // { action: NodeMenuItemAction.Custom, name: 'Foo', cssClass: 'fa fa-arrow-right' },
-          //  { action: NodeMenuItemAction.Custom, name: 'Bar', cssClass: 'fa fa-arrow-right' },
-          //  { action: NodeMenuItemAction.Custom, name: 'Baz', cssClass: 'fa fa-arrow-right'}
-          ]
-        },
-      
-      children: [
-        {
-          value: 'Overview',
-        },
-        {
-          value: 'Diet',
-          children: [
-            {value: 'Dietary Entries'},
-            {value: 'Appetite Level'},
-          ]
-        },
-        {
-          value: 'Excercise',
-          children: [
-            {value: 'Excercise Entries'},
-            {value: 'Energy Level'},
-          ]
-        },
-        {
-          value: 'Mood',
-          children: [
-            {value: 'Mood Entries'},
-            {value: 'General Mood'},
-          ]
-        },
-        {
-          value: 'Sleep',
-          children: [
-            {value: 'Sleep Entries'},
-            {value: 'Sleep Quality'},
-          ]
-        },
-        {
-          value: 'Analysis',
-          children: [
-            {value: 'Correlation A'},
-          ]
-        }
-    ]}
-
-    @ViewChild('treeComponent') treeComponent;
-
-    handleCreated($event){
-      console.log('created node')
-      //const oopNodeController = this.treeComponent.getControllerByNodeId(2);
-    }
-
-    handleExpanded($event){
-      console.log('node exaopnded')
-
-      console.log($event)
-      const oopNodeController = this.treeComponent.getControllerByNodeId(2);
-      oopNodeController.select();
-      oopNodeController.collapse();
-      oopNodeController.expand();
-    }
-
-  handleSelected($event){
-    console.log(event)
-    console.log($event)
-  }
-
-  //CHANGE HOVER OVER CHART
- 
-  onSelect(event) {
-    console.log(event);
-  }
-
-  ngOnOnit(){
-    $(".navItem").fadeIn(200); 
-    $('#tree1').treed();
-  }
+    //CHANGE HOVER OVER CHART
 }

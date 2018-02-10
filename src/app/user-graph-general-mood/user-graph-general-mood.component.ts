@@ -34,22 +34,20 @@ export class UserGraphGeneralMoodComponent  {
   timeline = true
   tooltipDisabled = true
   referenceLines = [{name: 'High', value: '80'},{name: 'OK', value: '50'},{name: 'Low', value: '20'}]
-
-
-
+  
   // line, area
   autoScale = true;
   data
-
+  totalData
   constructor(private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
 
     //this.generalMoodData = this.dataInterpretorService.getGeneralMoodTrend()
-    this.data = this.dataInterpretorService.getSleepQualityTrend()
-    this.generalMoodData = this.data.multiArray
+    this.data = this.dataInterpretorService.getMoodTrends()
+    //this.data = this.totalData.multiArray
     
-    console.log('generalMoodData')
-    console.log(this.generalMoodData)
+    console.log('Mood Item Trends')
+    console.log(this.data)
   }
 
 }

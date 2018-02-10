@@ -191,32 +191,7 @@ export class DatastoreService {
 
     return allUserLogs
   }
-
-/*
-
-  getUserMoodItems(): Observable<any> {
-    console.log('getUserMoodItems') 
-    return this.currentUserMoodItems
-  }
-
-  getUserMoodLogItems(): Observable<any> {
-    console.log('getUserMoodItems') 
-    return this.currentUserMoodItems
-  }
-
-  getUserSleepLogItems(): Observable<any> {
-    console.log('getUserSleepLogItems') 
-    return this.currentUserSleepItems
-  }
-  getUserDietLogItems(): Observable<any> {
-    console.log('getUserDietLogItems') 
-    return this.currentUserDietItems
-  }
-  getUserExerciseLogItems(): Observable<any> {
-    console.log('getUserExerciseLogItems') 
-    return this.currentUserExerciseItems
-  }
-*/
+  
   getAllUserInfo(): Observable<any> {
   console.log('RETURNING ALL USER INFO')
   console.log(this.allUserItems)
