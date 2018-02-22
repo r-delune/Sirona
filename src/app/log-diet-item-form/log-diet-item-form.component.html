@@ -1,51 +1,35 @@
 <section>
 <form [formGroup]='addDietItemForm' (ngSubmit)='onSubmit()' role="form" action="" method="post">
-    <h3>Diet</h3>
-      <div class="col-xs-6">
+      <div class="col-xs-1">  
+        <h3>Diet/Exercise</h3>
+      </div>
+      <div class="col-xs-11">
         <div class="row">
           <div class="form-group">
-            <label class="control-label">Appetite:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="appetite" ></nouislider>
+            <label class="control-label">Appetite Level:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="appetite" ></nouislider>
           </div>
           <div class="form-group">
             <label class="control-label">Cups of coffee drank:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="cupsOfCoffee"></nouislider>
-          </div>
-          <div class="form-group">
-            <label class="control-label">Confectionary</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="confectionary"></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange(this)" formControlName="cupsOfCoffee"></nouislider>
           </div>
           <div class="form-group">
             <label class="control-label">Units of Alcohol Drank:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="alcoholDrank" ></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange($event)" formControlName="alcoholDrank" ></nouislider>
           </div>
           <div class="form-group">
             <label class="control-label">Km Ran:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="kmRan"></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange($event)" formControlName="kmRan"></nouislider>
           </div>
           <div class="form-group">
-            <label class="control-label">Km Walked</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="kmWalked"></nouislider>
+            <label class="control-label">Km Cycled:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange($event)" formControlName="kmCycled" ></nouislider>
           </div>
-          <div class="form-group">
-            <label class="control-label">Km Cycled</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="kmCycled" ></nouislider>
-          </div>
-         <!-- <div class="form-group">
-            <label class="control-label">Cigarettes smoked:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" formControlName="cigarettesSmoked" ></nouislider>
-          </div>
-          <div class="form-group">     
-            <label class="control-label">Supplments:</label>
-            <input maxlength="100" type="text" class="form-control" formControlName="supplements" placeholder="" />     
+          <div class="form-group formButtons">
+              <button class="btn btn-success btn-lg formBtns backButton" routerLink="/add">Back</button>
+              <button class="btn btn-success btn-lg formBtns saveButton" type="submit">Submit</button>
           </div>  
-          <div class="form-group">     
-            <label class="control-label">Additional Note:</label>
-            <input maxlength="100" type="text" class="form-control" formControlName="additionalNotes" placeholder="" />     
-          </div>  -->
-          <div class="form-group">     
-            <button class="btn btn-success btn-lg saveFormButton" type="submit">Submit</button>
-          </div>   </div>   
+    </div>   
   </div>
 </form>
 </section>

@@ -33,7 +33,6 @@ import { TreeModule } from 'ng2-tree';
 import { LogMoodItemFormComponent } from './log-mood-item-form/log-mood-item-form.component';
 import { LogSleepItemFormComponent } from './log-sleep-item-form/log-sleep-item-form.component';
 import { LogDietItemFormComponent } from './log-diet-item-form/log-diet-item-form.component';
-import { LogExcerciseItemFormComponent } from './log-excercise-item-form/log-excercise-item-form.component';
 import { UserGraphSleepQualityComponent } from './user-graph-sleep-quality/user-graph-sleep-quality.component';
 import { UserGraphGeneralMoodComponent } from './user-graph-general-mood/user-graph-general-mood.component';
 import { UserGraphAppetiteLevelComponent } from './user-graph-appetite-level/user-graph-appetite-level.component';
@@ -43,8 +42,12 @@ import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-ove
 import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-analysis.component';
 import { UserGraphSleepComponent } from './user-graph-sleep/user-graph-sleep.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
-import { UserGraphEnergyLevelComponent } from './user-graph-energy-level/user-graph-energy-level.component';
 import { LogItemFormComponent } from './log-item-form/log-item-form.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import {MatSliderModule} from '@angular/material/slider';
+import { IonRangeSliderModule } from "ng2-ion-range-slider";
+import {MatExpansionModule} from '@angular/material/expansion';
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -64,6 +67,7 @@ firebase.initializeApp(firebaseConfig);
     NgxChartsModule,
     HttpModule,
     routing,
+    IonRangeSliderModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,
@@ -72,7 +76,9 @@ firebase.initializeApp(firebaseConfig);
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     TreeModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSliderModule,
+    MatExpansionModule
   ],
   declarations: [
     AppComponent,
@@ -90,12 +96,11 @@ firebase.initializeApp(firebaseConfig);
     LogSleepItemFormComponent,
     LogItemFormComponent,
     LogDietItemFormComponent,
-    LogExcerciseItemFormComponent,
     UserGraphSleepComponent,
     UserGraphSleepQualityComponent,
     UserGraphGeneralMoodComponent,
     UserGraphAppetiteLevelComponent,
-    UserGraphEnergyLevelComponent,
+    NavBarComponent,
   ],
   providers: [
     DatastoreService,

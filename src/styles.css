@@ -1,5 +1,7 @@
-@import "~nouislider/distribute/nouislider.css";
+/*@import "~nouislider/distribute/nouislider.css";
+@import "~http://fonts.googleapis.com/css?family=Lobster+Two";
 
+*/
   .noDataMessage{
     position: relative;
     margin: auto;
@@ -45,3 +47,22 @@
   width: 50%;
   display: block;
 }
+
+
+.noUi-horizontal {
+  height: 2px;
+}
+
+.noUi-horizontal .noUi-handle {
+  width: 20px;
+  height: 28px;
+  left: -17px;
+  top: -13px;
+}
+
+.saveButton{
+
+  float:right
+}
+
+

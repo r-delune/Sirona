@@ -127,4 +127,8 @@ export class UserGraphComponent  {
       }
     }
     //CHANGE HOVER OVER CHART
+
+    ngOnOnit(){
+      $('.addEntry').fadeIn(1000)
+    }
 }

@@ -43,11 +43,16 @@ export class UserGraphSleepComponent implements OnInit {
   constructor(private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
 
-    this.totalData = this.dataInterpretorService.getUserLogTimesByType('Sleep')
-    console.log('this.totalData.data1Sleep')
-    console.log(this.totalData)
-    this.data = this.totalData.data1
-    console.log(this.totalData.data1)
+    //this.totalData = this.dataInterpretorService.getUserLogTimesByType('Sleep')
+    //this.totalData = this.dataInterpretorService.getUserLogInstancesByType('Sleep')
+   // console.log('this.totalData.data1Sleep')
+   // console.log(this.totalData)
+   // this.data = this.totalData.data1
+    //console.log(this.totalData.data1)
+
+    this.data = this.dataInterpretorService.getUserLogInstancesByType('Sleep') 
+    console.log('appetiteData data')
+    console.log(this.data)
   }
   
   onSelect(event) {

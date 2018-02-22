@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import 'rxjs/add/operator/toPromise';
 import { DatastoreService } from '../services/datastore.service';
+import { Key } from 'protractor';
 
 declare var jquery:any;
 declare var $ :any;
@@ -55,7 +56,9 @@ export class DataInterpretorService {
   generalMoodData
   sleepQualityData 
   energyLevelData
-  
+  allUserDietLogs : Object
+  allUserSleepLogs : Object
+  allUserMoodLogs : Object
 
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
@@ -70,7 +73,7 @@ export class DataInterpretorService {
     this.currentUserMoodItems = this.datastoreService.getUserMoodItemsList()
     $.each(this.currentUserMoodItems, function(key, value) { 
       var myDate = new Date(value.moodEntry.date);
-      var val = Math.round(value.moodEntry.generalMood[1]);
+      var val = Math.round(value.moodEntry.generalMood);
       if (val == NaN){   
         console.log('Skipping ' + val)
       }else{
@@ -101,7 +104,7 @@ export class DataInterpretorService {
     
     $.each(this.currentUserDietItems, function(key, value) {
       var myDate = new Date(value.dietEntry.date);
-      var val = Math.round(value.dietEntry.appetite[1]);
+      var val = Math.round(value.dietEntry.appetite);
       if (val == NaN){   
         console.log('Skipping ' + val)
       }else{
@@ -140,10 +143,7 @@ export class DataInterpretorService {
       series: []
     }
 
-
-   
-    this.currentUserSleepItems = this.datastoreService.getUserSleepItemsList()
-    
+    this.currentUserSleepItems = this.datastoreService.getUserSleepItemsList()    
     console.log('this.currentUserSleepItems')
     console.log(this.currentUserSleepItems)
 
@@ -157,7 +157,7 @@ export class DataInterpretorService {
       console.log(value.sleepEntry)
 
       if (value.sleepEntry.noOfHoursSlept){
-        var noOfHoursSleptVal = Math.round(value.sleepEntry.noOfHoursSlept[1]);
+        var noOfHoursSleptVal = Math.round(value.sleepEntry.noOfHoursSlept);
 
         console.log('noOfHoursSlept')
         console.log(noOfHoursSlept)
@@ -169,7 +169,7 @@ export class DataInterpretorService {
       }
 
       if (value.sleepEntry.sleepQuality){
-        var sleepQualityVal = Math.round(value.sleepEntry.sleepQuality[1]);
+        var sleepQualityVal = Math.round(value.sleepEntry.sleepQuality);
         if (!isNaN(sleepQualityVal)){   
           sleepQuality.series.push({name:date, value: sleepQualityVal})       
         }else{
@@ -178,7 +178,7 @@ export class DataInterpretorService {
       }
 
       if (value.sleepEntry.sleepDifficulty){
-        var sleepDifficultyVal = Math.round(value.sleepEntry.sleepDifficulty[1]);
+        var sleepDifficultyVal = Math.round(value.sleepEntry.sleepDifficulty);
         if (!isNaN(sleepDifficultyVal)){   
           sleepDifficulty.series.push({name:date, value: sleepDifficultyVal})       
         }else{
@@ -238,7 +238,7 @@ export class DataInterpretorService {
       var date = myDate
 
       if (value.moodEntry.anxietyLevel){
-        var anxietyLevelVal = Math.round(value.moodEntry.anxietyLevel[1]);
+        var anxietyLevelVal = Math.round(value.moodEntry.anxietyLevel);
 
         console.log('anxietyLevelVal')
         console.log(anxietyLevelVal)
@@ -250,7 +250,7 @@ export class DataInterpretorService {
       }
 
       if (value.moodEntry.concentrationLevel){
-        var concentrationLevelVal = Math.round(value.moodEntry.concentrationLevel[1]);
+        var concentrationLevelVal = Math.round(value.moodEntry.concentrationLevel);
         if (!isNaN(concentrationLevelVal)){   
           concentrationLevel.series.push({name:date, value: concentrationLevelVal})       
         }else{
@@ -258,7 +258,7 @@ export class DataInterpretorService {
         }
       }
       if (value.moodEntry.motivationLevel){
-        var motivationLevelVal = Math.round(value.moodEntry.motivationLevel[1]);
+        var motivationLevelVal = Math.round(value.moodEntry.motivationLevel);
         if (!isNaN(motivationLevelVal)){   
           motivationLevel.series.push({name:date, value: motivationLevelVal})       
         }else{
@@ -267,7 +267,7 @@ export class DataInterpretorService {
       }
       
       if (value.moodEntry.generalMood){
-        var generalMoodVal = Math.round(value.moodEntry.generalMood[1]);
+        var generalMoodVal = Math.round(value.moodEntry.generalMood);
         if (!isNaN(generalMoodVal)){   
           generalMood.series.push({name:date, value: generalMoodVal})       
         }else{
@@ -276,7 +276,7 @@ export class DataInterpretorService {
       }
 
       if (value.moodEntry.externalStress){
-        var externalStressVal = Math.round(value.moodEntry.extEffectOnMood[1]);
+        var externalStressVal = Math.round(value.moodEntry.extEffectOnMood);
         if (!isNaN(externalStressVal)){   
           externalStress.series.push({name:date, value: externalStressVal})       
         }else{
@@ -351,7 +351,7 @@ export class DataInterpretorService {
       var date = myDate
 
       if (value.dietEntry.anxietyLevel){
-        var appetiteVal = Math.round(value.dietEntry.appetite[1]);
+        var appetiteVal = Math.round(value.dietEntry.appetite);
 
         console.log('appetiteVal')
         console.log(appetiteVal)
@@ -363,24 +363,16 @@ export class DataInterpretorService {
       }
 
       if (value.dietEntry.cupsOfCoffee){
-        var cupsOfCoffeeVal = Math.round(value.dietEntry.cupsOfCoffee[1]);
+        var cupsOfCoffeeVal = Math.round(value.dietEntry.cupsOfCoffee);
         if (!isNaN(cupsOfCoffeeVal)){   
           cupsOfCoffee.series.push({name:date, value: cupsOfCoffeeVal})       
         }else{
           console.log('Skipping cupsOfCoffeeVal')
         }
       }
-      if (value.dietEntry.confectionary){
-        var confectionaryVal = Math.round(value.dietEntry.confectionary[1]);
-        if (!isNaN(confectionaryVal)){   
-          confectionary.series.push({name:date, value: confectionaryVal})       
-        }else{
-          console.log('Skipping confectionaryVal')
-        }
-      }
       
       if (value.dietEntry.alcoholDrank){
-        var alcoholDrankVal = Math.round(value.dietEntry.alcoholDrank[1]);
+        var alcoholDrankVal = Math.round(value.dietEntry.alcoholDrank);
         if (!isNaN(alcoholDrankVal)){   
           alcoholDrank.series.push({name:date, value: alcoholDrankVal})       
         }else{
@@ -389,7 +381,7 @@ export class DataInterpretorService {
       }
 
       if (value.dietEntry.kmRan){
-        var kmRanVal = Math.round(value.dietEntry.kmRan[1]);
+        var kmRanVal = Math.round(value.dietEntry.kmRan);
         if (!isNaN(kmRanVal)){   
           kmRan.series.push({name:date, value: kmRanVal})       
         }else{
@@ -398,7 +390,7 @@ export class DataInterpretorService {
       }
 
       if (value.dietEntry.kmWalked){
-        var kmWalkedVal = Math.round(value.dietEntry.kmWalked[1]);
+        var kmWalkedVal = Math.round(value.dietEntry.kmWalked);
         if (!isNaN(kmWalkedVal)){   
           kmWalked.series.push({name:date, value: kmRanVal})       
         }else{
@@ -407,7 +399,7 @@ export class DataInterpretorService {
       }
 
       if (value.dietEntry.kmCycled){
-        var kmCycledVal = Math.round(value.dietEntry.kmCycled[1]);
+        var kmCycledVal = Math.round(value.dietEntry.kmCycled);
         if (!isNaN(kmCycledVal)){   
           kmCycled.series.push({name:date, value: kmCycledVal})       
         }else{
@@ -418,22 +410,21 @@ export class DataInterpretorService {
 
     if(appetite.series.length){singleArray.push(appetite)}
     if(cupsOfCoffee.series.length){singleArray.push(cupsOfCoffee)}
-    if(confectionary.series.length){singleArray.push(confectionary)}
     if(alcoholDrank.series.length){singleArray.push(alcoholDrank)}
     if(kmRan.series.length){singleArray.push(kmRan)}
     if(kmWalked.series.length){singleArray.push(kmWalked)}
     if(kmCycled.series.length){singleArray.push(kmCycled)}
+    
     return singleArray;
   }
-
-
-
 
   //CHANGE: GETTREND SHOULD BE CONSOLIDATED TO ONE FUNCTION
 
   countUserTotalEntries(){
     let allUserEntries = this.datastoreService.getAllCurrentUserLogItems()
     var count = 0;
+    console.log('getting total user entries')
+    console.log(allUserEntries)
 
     $.each(allUserEntries, function(key, value) {
       for(var prop in value) {
@@ -451,7 +442,7 @@ export class DataInterpretorService {
     this.currentUserSleepItems = this.datastoreService.getUserSleepItemsList()
     $.each(this.currentUserSleepItems, function(key, value) {
       var myDate = new Date(value.sleepEntry.date);
-      var val = Math.round(value.sleepEntry.sleepQuality[1]);
+      var val = Math.round(value.sleepEntry.sleepQuality);
       if (val == NaN){   
         console.log('Skipping ' + val)
       }else{
@@ -479,33 +470,230 @@ export class DataInterpretorService {
     return dateOnly
   }
 
-  getEnergyLevelTrend(){
-    console.log('getEnergyLevelTrend')
-    let data =  {} as Item;
-    let singleArray= [];
-    let multiArray = {} as MultiItem;
-    this.currentUserExerciseItems = this.datastoreService.getUserExerciseItemsList()
-    $.each(this.currentUserExerciseItems, function(key, value) {
-      var myDate = new Date(value.moodEntry.date);
-      var val = Math.round(value.moodEntry.energyLevel[1]);
-      if (val == NaN){   
-        console.log('Skipping ' + val)
-      }else{
-       let data =  {
-        name: myDate,
-        value: val
+  //CHANGE: REMOVE JQUERY AS IT IS UNNECCESARY
+
+  getUserLogFrequency(type){
+
+    this.type = type
+    console.log('getting user log frequency for - ' + this.type)
+
+    if (this.type == 'Diet'){
+      this.logItems = this.datastoreService.getUserDietItemsList()
+    }else if (this.type == 'Sleep'){
+      this.logItems = this.datastoreService.getUserSleepItemsList()
+      console.log(this.logItems)
+      console.log(this.logItems.length)
+    }else if (this.type == 'Mood'){
+      this.logItems = this.datastoreService.getUserMoodItemsList()
+    }else if (this.type == 'Exercise'){
+      this.logItems = this.datastoreService.getUserExerciseItemsList()
+    }
+
+    //SHOULD START AT 0
+    var morningLogCount = 0
+    var afternoonLogCount = 0
+    var eveningLogCount = 0
+    var nightLogCount = 0
+
+    $.each(this.logItems, function(key, value) {
+      //CHANGE: very inefficient. considering changing data model i.i removing sleepEntry node
+      
+      console.log(this.logItems)
+      console.log('GETTING TIMES')
+      console.log(key)
+      console.log(value)
+      
+      if (this.type == 'Diet'){
+        var myDate = new Date(value.dietEntry.date);
+      }else if (this.type == 'Sleep'){
+        var myDate = new Date(value.sleepEntry.date);      
+      }else if (this.type == 'Mood'){
+        var myDate = new Date(value.moodEntry.date);     
       }
-        singleArray.push(data)
-      }  
-    })
 
-    multiArray.name = 'Energy Level'
-    multiArray.series = singleArray
+      var minutes = myDate.getMinutes();
+      var hours = myDate.getHours();      
 
-    return {singleArray, multiArray};
+      console.log('TME')
+      console.log(minutes)
+      console.log(hours)
+
+      if (hours > 6 && hours < 12){
+        this.morningLogCount++
+        console.log('adding ' + this.morningLogCount)
+      }else if (hours > 12 && hours < 17){
+        this.afternoonCount++
+        console.log('adding ' + this.afternoonCount)
+      }else if (hours > 17 && hours < 21){
+        this.eveningCount++
+        console.log('adding ' + this.eveningCount)
+      }else if (hours > 21 || hours < 6){
+        console.log(this.nightCount)
+        this.nightCount++
+        console.log('adding ' + this.nightCount)
+      }
+    });
+
+    var data1 = [
+      { "name": "Morning", "value": this.morningLogCount},
+      { "name": "Afternoon","value": this.afternoonLogCount},
+      { "name": "Evening", "value": this.eveningLogCount },
+      { "name": "Night", "value": this.nightLogCount }
+    ];
+
+    var data2 = [
+      { "name": "Morning","series" : [{ "name": "Morning","value": this.morningLogCount},{ "name": "Morning","value": this.morningLogCount}]},
+      { "name": "Afternoon", "series" : [{"name": "Afternoon", "value": this.afternoonLogCount},{ "name": "Afternoon", "value": this.afternoonLogCount}]},
+      { "name": "Evening","series" : [{"name": "Evening", "value": this.eveningLogCount},{ "name": "Evening", "value": this.eveningLogCount}]},
+      { "name": "Night","series" : [{"name": "Night", "value": this.nightLogCount},{ "name": "Night", "value": this.nightLogCount}]}
+    ]; 
+    return {data1, data2}
   }
 
-  //CHANGE: REMOVE JQUERY AS IT IS UNNECCESARY
+  getUserLogInstancesByType(type){
+
+    var array = this.getAllUserLogInstances()
+    var instanceArray = []
+
+    $.each(array.data2, function(key, value) {
+      if (value.name == type){
+        instanceArray = value.series
+      }
+    })
+
+    console.log('getting all user log times for - ' + type)
+
+    return instanceArray
+  }
+
+  getAllUserLogInstances(){
+
+    var singleArray = []
+    var multiArray = []
+
+    console.log('getting all user log times')
+
+      var dietItemList = this.datastoreService.getUserDietItemsList()
+      var appetiteLevelCount = 0
+      var cupsOfCoffeeCount = 0
+      var alcoholDrankCount = 0
+      var kmRanCount = 0
+      var kmWalkedCount = 0
+      var kmCycledCount = 0
+      var totalDietCount= 0
+   
+      var sleepItemList = this.datastoreService.getUserSleepItemsList()
+      var sleepQualityCount = 0
+      var sleepDifficultyCount = 0
+      var noOfHoursSleptCount = 0
+      var totalSleepCount= 0
+   
+      var moodItemList = this.datastoreService.getUserMoodItemsList()
+      var generalMoodCount = 0
+      var energyLevelCount = 0
+      var motivationLevelCount = 0
+      var concentrationLevelCount = 0
+      var anxietyLevelCount = 0
+      var totalMoodCount = 0
+
+    $.each(dietItemList, function(key, value) {
+        var dietArray = value.dietEntry
+        console.log('value')
+        console.log(value)
+        $.each(dietArray, function(key, value) {
+          if (key != null){
+            totalDietCount++
+            if (key == 'appetiteLevel' && value != null){appetiteLevelCount++}
+            if (key == 'cupsOfCoffee' && value != null){cupsOfCoffeeCount++}
+            if (key == 'alcoholDrank' && value != null){alcoholDrankCount++}
+            if (key == 'kmRan' && value != null){kmRanCount++}
+            if (key == 'kmWalked' && value != null){kmWalkedCount++}
+            if (key == 'kmCycled' && value != null){kmCycledCount++}
+          }
+        });
+
+      });
+
+
+      $.each(sleepItemList, function(key, value) {
+        var sleepArray = value.sleepEntry
+        var sleepQuality = value.sleepEntry.sleepQuality;
+        var sleepDifficulty = value.sleepEntry.sleepDifficulty;
+        var noOfHoursSlept = value.sleepEntry.noOfHoursSlept;
+        $.each(sleepArray, function(key, value) {
+          if (key != null){
+            totalSleepCount++
+            if (key == 'sleepQuality' && value != null){sleepQualityCount++}
+            if (key == 'sleepDifficulty' && value != null){sleepDifficultyCount++}
+            if (key == 'noOfHoursSlept' && value != null){noOfHoursSleptCount++}
+          }
+        });
+      });
+
+      $.each(moodItemList, function(key, value) {
+        var moodArray = value.moodEntry
+        var generalMood = value.moodEntry.generalMood;
+        var energyLevel = value.moodEntry.energyLevel;
+        var motivationLevel = value.moodEntry.motivationLevel;
+        var concentrationLevel = value.moodEntry.concentrationLevel;
+        var anxietyLevel = value.moodEntry.anxietyLevel;
+        
+        $.each(moodArray, function(key, value) {      
+          if (key != null){
+            totalMoodCount++
+            if (key == 'generalMood'){generalMoodCount++}
+            if (key == 'energyLevel'){energyLevelCount++}
+            if (key == 'motivationLevel'){motivationLevelCount++}
+            if (key == 'concentrationLevel'){anxietyLevelCount++}
+            if (key == 'anxietyLevel'){anxietyLevelCount++}
+          }
+        });
+    });
+
+    console.log('totalDietCount')
+    console.log(totalDietCount)
+    console.log('totalMoodCount')
+    console.log(totalMoodCount)
+    console.log('totalSleepCount')
+    console.log(totalSleepCount)
+    
+    var data1 = [
+      { "name": "Mood", "value": totalMoodCount},
+      { "name": "Sleep","value": totalSleepCount},
+      { "name": "Diet/Exercise", "value": totalDietCount},
+    ];
+
+    var data2 = [
+      { "name": "Mood","series" : 
+        [
+          { "name": "General Mood","value": generalMoodCount},
+          { "name": "Energy Level","value": energyLevelCount},
+          { "name": "Motivation","value": motivationLevelCount},
+          { "name": "Concentration","value": concentrationLevelCount},
+          { "name": "Anxiety","value": anxietyLevelCount}
+        ]
+      },
+      { "name": "Sleep", "series" : 
+        [
+          { "name": "sleepQuality", "value": sleepQualityCount},
+          { "name": "sleepDifficulty", "value": sleepDifficultyCount},
+          { "name": "noOfHoursSlept", "value": noOfHoursSleptCount},
+        ]
+      },
+      { "name": "Diet/Exercise","series" : 
+        [
+          { "name": "Appetite", "value": appetiteLevelCount},
+          { "name": "Alcohol Intake", "value": alcoholDrankCount},
+          { "name": "Km Ran", "value": kmRanCount},
+          { "name": "Km Walked", "value": kmWalkedCount},
+          { "name": "Km Cycled", "value": kmCycledCount}
+        ]
+      },
+    ]; 
+
+    return {data1, data2}
+  }
+
 
   getUserLogTimesByType(type){
     this.type = type
@@ -617,7 +805,6 @@ export class DataInterpretorService {
 
     console.log('correlationArray')
     console.log(array)
-
     return array
   }
 
@@ -630,5 +817,42 @@ export class DataInterpretorService {
     }else{
       return num
     }
+  }
+
+  getAllUserLogCountData(){
+
+    console.log('getting all user log count data')
+
+    this.allUserDietLogs = this.datastoreService.getUserDietItemsList()
+    this.allUserSleepLogs = this.datastoreService.getUserSleepItemsList()
+    this.allUserMoodLogs = this.datastoreService.getUserMoodItemsList()
+    var dietLogCount = 0;
+    var MoodLogCount = 0;
+    var SleepLogCount = 0;
+    var TotalLogCount = dietLogCount + MoodLogCount + SleepLogCount;
+
+    for (var k in this.allUserDietLogs){
+      dietLogCount++
+    };
+    for (var k in this.allUserSleepLogs){
+      SleepLogCount++
+    };
+    for (var k in this.allUserMoodLogs){
+      MoodLogCount++
+    };
+
+    var data1 = [
+      { "name": "Mood", "value": MoodLogCount},
+      { "name": "Sleep","value": SleepLogCount},
+      { "name": "Diet/Exercise", "value": dietLogCount},
+    ];
+    
+    var data2 = [
+      { "name": "Mood", "series" : [{ "name": "Mood","value": MoodLogCount},{ "name": "Mood","value": MoodLogCount}]},
+      { "name": "Sleep", "series" : [{"name": "Sleep", "value": SleepLogCount},{ "name": "Sleep", "value": SleepLogCount}]},
+      { "name": "Diet", "series" : [{"name": "Diet", "value": dietLogCount},{ "name": "Diet", "value": dietLogCount}]},
+    ]; 
+
+    return {data1, data2}
   }
 }

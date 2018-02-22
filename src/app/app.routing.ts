@@ -11,14 +11,12 @@ import { UserGraphOverviewComponent } from './user-graph-overview/user-graph-ove
 import { LogMoodItemFormComponent } from './log-mood-item-form/log-mood-item-form.component';
 import { LogSleepItemFormComponent } from './log-sleep-item-form/log-sleep-item-form.component';
 import { LogDietItemFormComponent } from './log-diet-item-form/log-diet-item-form.component';
-import { LogExcerciseItemFormComponent } from './log-excercise-item-form/log-excercise-item-form.component';
 import { UserGraphSleepComponent } from './user-graph-sleep/user-graph-sleep.component';
 import { UserGraphSleepQualityComponent } from './user-graph-sleep-quality/user-graph-sleep-quality.component';
 import { UserGraphGeneralMoodComponent } from './user-graph-general-mood/user-graph-general-mood.component';
 import { UserGraphAppetiteLevelComponent } from './user-graph-appetite-level/user-graph-appetite-level.component';
-import { UserGraphEnergyLevelComponent } from './user-graph-energy-level/user-graph-energy-level.component';
 import { LogItemFormComponent } from './log-item-form/log-item-form.component';
-
+import {MatSliderModule} from '@angular/material/slider';
 const appRoutes: Routes = [
   { path: 'login', component: LoginFormComponent, data: { animation: 'tiger' } },
   { path: 'register', component: RegistrationFormComponent, data: { animation: 'dolphin'}},
@@ -26,10 +24,9 @@ const appRoutes: Routes = [
   { path: 'add', component: LogItemFormComponent, data: { animation: 'dolphin'}},
   //{ path: 'graph', component: UserGraphComponent },
   //{ path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
-  { path: 'exerciseForm', component: LogExcerciseItemFormComponent, data: { animation: 'dolphin'}},
   { path: 'dietForm', component: LogDietItemFormComponent,data: { animation: 'dolphin'}},
-  { path: 'sleepForm', component: LogSleepItemFormComponent},
-  { path: 'moodForm', component: LogMoodItemFormComponent},
+  { path: 'sleepForm', component: LogSleepItemFormComponent, data: { animation: 'dolphin'}},
+  { path: 'moodForm', component: LogMoodItemFormComponent, data: { animation: 'dolphin'}},
   {
     path: 'graph',
     component: UserGraphComponent,
@@ -42,8 +39,7 @@ const appRoutes: Routes = [
       {path: 'sleepGraph', component: UserGraphSleepComponent, data: { animation: 'dolphin' }},   
       {path: 'sleepQualityGraph', component: UserGraphSleepQualityComponent, data: { animation: 'dolphin' }},
       {path: 'generalMoodGraph', component: UserGraphGeneralMoodComponent, data: { animation: 'dolphin' }}, 
-      {path: 'appetiteLevelGraph', component: UserGraphAppetiteLevelComponent, data: { animation: 'dolphin' }},
-      {path: 'energyLevelGraph', component: UserGraphEnergyLevelComponent, data: { animation: 'dolphin' }}
+      {path: 'appetiteLevelGraph', component: UserGraphAppetiteLevelComponent, data: { animation: 'dolphin' }}
     ]
   },
  // { path: '**', pathMatch: 'full', redirectTo: '/error' }, CHANGE: ADD ERROR PAGE

@@ -70,13 +70,13 @@ export class RegistrationFormComponent implements OnInit {
       email: this.formBuilder.control(''),
       password: this.formBuilder.control(''),
       displayName: this.formBuilder.control('')
-     // sex: this.formBuilder.control('50'),
     })
   }
 
   onRegister(form) {
     console.log('submitting form')
     console.log(form)
+    $(".registrationError").text('')
 
     if (form.email == "" || form.name == "" || form.displayName == "" ){
       console.log('form is invalid'); 
@@ -92,6 +92,12 @@ export class RegistrationFormComponent implements OnInit {
       console.log('REG FORM: Success')
       console.log('user')
       console.log(user)
+      this.authState.auth.updateProfile({
+        displayName: form.displayName,
+        photoURL: "/assets/images/nobody.jpg"
+      }).then(() => {
+        console.log('updated firebase service successfully')
+      });
       //CHANGE: USE OBJECT FORMAT
     })
     .catch(error => 
@@ -106,7 +112,7 @@ export class RegistrationFormComponent implements OnInit {
         console.log(this.error[7])
         console.log(this.error.i)
         console.log(this.error.message)
-        $(".registrationError").text(this.error.message)
+        $(".registrationError").text('User name is taken. Please try again.')
       })
 
       console.log('FINAL ')

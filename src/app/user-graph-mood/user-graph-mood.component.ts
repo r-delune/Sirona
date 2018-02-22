@@ -36,9 +36,14 @@ export class UserGraphMoodComponent  {
   tooltipDisabled=true
   constructor(authService: AuthService,
     private dataInterpretorService: DataInterpretorService) { 
-      this.totalData = this.dataInterpretorService.getUserLogTimesByType('Mood')
-      console.log('getUserLogTimesByType')
-      this.data = this.totalData.data1
+     // this.totalData = this.dataInterpretorService.getUserLogInstancesByType('Mood')
+     // console.log('getUserLogTimesByType')
+     // this.data = this.totalData.data1
+      //console.log(this.data)
+
+
+      this.data = this.dataInterpretorService.getUserLogInstancesByType('Mood') 
+      console.log('appetiteData data')
       console.log(this.data)
      // this.data2 = this.totalData.data2
   }

@@ -1,43 +1,34 @@
 <form [formGroup]='addMoodItemForm' (ngSubmit)='onSubmit()' role="form">
   <div class="row setup-content" id="step-0">
-    <h3>Mood</h3>
-      <div class="col-xs-6">
+      <div class="col-xs-1">  
+          <h3>Mood</h3>
+        </div>
+      <div class="col-xs-11">
         <div class="row">
           <div class="form-group">
-            <label class="control-label">General mood:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" [connect]="true" formControlName="generalMood"></nouislider>
+            <label class="formLabel">General Mood:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="generalMood"></nouislider>
           </div>
           <div class="form-group">
-            <label class="control-label">Energy Level</label>
-           <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" [connect]="false" formControlName="energyLevel"></nouislider>
+            <label class="formLabel">Energy Level:</label>
+           <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="energyLevel"></nouislider>
           </div>
           <div class="form-group">
-            <label class="control-label">Motivation Level</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" formControlName="motivationLevel"></nouislider>
+            <label class="formLabel">Motivation Level:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="motivationLevel"></nouislider>
           </div>
           <div class="form-group">
-            <label class="control-label">Concentration ability:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" formControlName="concentrationLevel"></nouislider>
+            <label class="formLabel">Concentration Level:</label>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="concentrationLevel"></nouislider>
           </div>
           <div class="form-group">
-              <label class="control-label">Anxiety Level:</label>
-              <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" formControlName="anxietyLevel"></nouislider>
+              <label class="formLabel">Anxiety Level:</label>
+              <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="anxietyLevel"></nouislider>
           </div>
-          <!--<div class="form-group">
-              <label class="control-label">Tag stress events:</label>
-              <input maxlength="100" type="text" class="form-control" formControlName="stressEvents" placeholder="in litres" />   
-          </div> 
-          <div class="form-group">
-              <label class="control-label">Estimated effect on overall mood:</label>
-              <nouislider [config]="someRange2config" [tooltips]="[ false, true ]" (update)="onUpdate($event)" formControlName="extEffectOnMood"></nouislider>  
-          </div>                  
-          <div class="form-group">
-            <label class="control-label">Tag additonal</label>
-            <input maxlength="100" type="text" class="form-control" formControlName="additionalNotes" placeholder="" />     
-        </div>--> 
-        <div class="form-group">     
-          <button class="btn btn-success btn-lg saveFormButton" type="submit">Submit</button>
-        </div>
+          <div class="form-group formButtons">
+              <button class="btn btn-success btn-lg formBtns backButton" routerLink="/add">Back</button>
+              <button class="btn btn-success btn-lg formBtns saveButton" type="submit">Submit</button>
+            </div>
       </div>  
     </div>     
   </div>

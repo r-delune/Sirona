@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'
 import { DatastoreService } from '../services/datastore.service';
-import {BrowserModule} from '@angular/platform-browser';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { BrowserModule} from '@angular/platform-browser';
+import { NgxChartsModule} from '@swimlane/ngx-charts';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { DataInterpretorService} from '../services/data-interpretor.service'
 
@@ -100,13 +100,11 @@ export class UserGraphDietComponent  {
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
-      this.currentUserLogItems = datastoreService.allUserItems
-      this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
-      this.data = this.totalData.data1
-      
-      console.log('appetiteData time data')
+
+     // this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
+      this.data = this.dataInterpretorService.getUserLogInstancesByType('Diet/Exercise') 
+      console.log('appetiteData data')
       console.log(this.data)
-      console.log(this.data.series)
     }
 
   //CHANGE SLIDER TO SINGLE,

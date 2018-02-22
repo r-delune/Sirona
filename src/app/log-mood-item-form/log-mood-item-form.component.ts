@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { DatastoreService } from '../services/datastore.service'
 import { AngularFireAuth } from 'angularfire2/auth';
+import { NouisliderModule } from 'ng2-nouislider';
 declare var jquery:any;
 declare var noUiSlider:any;
 declare var $ :any;
@@ -32,8 +33,7 @@ export class LogMoodItemFormComponent {
 
   someRange2config: any = {
     behaviour: 'drag',
-    connect: false,
-    start: [0, 100],
+    start: 50,
     range: {
       min: 0,
       max: 100
@@ -48,30 +48,32 @@ export class LogMoodItemFormComponent {
   ngOnInit() {
     console.log('MOOD FORM')
     this.addMoodItemForm = this.formBuilder.group({
-      id: this.userId,
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
-      generalMood: this.formBuilder.control(null),
+      generalMood: this.formBuilder.control( { 'single': [30] }),
       energyLevel: this.formBuilder.control(null),
-      motivationLevel: this.formBuilder.control(null),  
+      motivationLevel: this.formBuilder.control('50'),  
       concentrationLevel: this.formBuilder.control(null),
       anxietyLevel: this.formBuilder.control(null),
-      //stressEvents: this.formBuilder.control(null),
-    //  extEffectOnMood: this.formBuilder.control(null),
-     // additionalNotes: this.formBuilder.control('No Entry')
     })
-
-    
   }
 
   onUpdate(event) {
-    this.renderer.setStyle(this.firstHandle, 'background', 'rgb(255, 255, ' + event[0] + ')'); //0 - handle index
-    }
-
+   // this.renderer.setStyle(this.firstHandle, 'background', 'rgb(255, 255, ' + event[0] + ')'); //0 - handle index
+  }
 
   onSubmit() {
     if (this.addMoodItemForm.valid) {
+      console.log('FORM')
+      console.log(this.addMoodItemForm.value)
       this.datastoreService.addMoodEntry(this.addMoodItemForm.value)
       this.router.navigate(['/add'])
     }
+  }
+
+  onUpdateMotivation($event){
+
+    console.log($event)
+    console.log($event.returnValue)
+
   }
 }

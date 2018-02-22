@@ -62,29 +62,6 @@ input[required].ng-invalid:not(.required-invalid) {
   width: 50px;
 }
 
-button[type=submit] {
-  background-color: #45bf94;
-  border: 0;
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 4px;
-  color: #ffffff;
-  cursor: pointer;
-}
-button[type=submit]:disabled {
-  background-color: #333;
-  color: #666;
-  cursor: default;
-}
-
-#saveButton{
-  margin: auto;
-  left: 30%;
-  position: relative;
-  width: 40%;
-  padding: 5% 5% 5%;
-}
-
 .container {
   margin: auto;
   width: 90%;
@@ -92,10 +69,14 @@ button[type=submit]:disabled {
 }
 
 .form-control {
-  height: 36px;
-  padding: 7px 0;
-  font-size: 14px;
-  line-height: 1.42857;
+  width: 70%;
+  position: relative;
+  font-size: 11px;
+  line-height: 1.07143;
+  color: #AAAAAA;
+  font-weight: 400;
+  padding: 10px 70px 20px 60px;
+  margin: auto;
 }
 
 .radio label,
@@ -802,17 +783,49 @@ form {
   margin: auto;
   width: 80%;
 }
-.form-group{
-  width: 40%;
-}
+
 
 .form-group{
-
   width: 60%;
+  position: relative;
+  display: inline-flex;
   font-size: 11px;
   line-height: 1.07143;
   color: #AAAAAA;
   font-weight: 400;
-  padding: 0px;
-  margin: 5px 0 0 0;
+  padding: 25px 0px 0px 0px;
+  margin: auto;
+  font-weight: bold;
+    font-size: 15px;
+}
+
+.saveButton{
+  padding: 20px;
+  float:right
+}
+
+.backButton{
+  padding: 20px;
+  float:left
+}
+
+.formLabel{
+  width: 40%;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.formBtns{
+position: relative;
+margin: auto;
+}
+
+section {
+  width: 100%;
+  bottom: 10px;
+  position: relative;
+}
+
+.ng2-nouislider{
+  width:70%
 }

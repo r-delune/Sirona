@@ -1,20 +1,17 @@
 <div class="container">  
         <div class="row setup-content" class='addEntryForm' id="step-0">
             <div class="row">
-            <h3>Make an entry!</h3></div>
-            <div class="col-xs-8">
+            <h3 class='fancyFont'>Make an entry!</h3></div>
+            <div class="col-xs-12">
                 <div class="row">
-                    <div class="col-md-2">
-                        <button type="button" (click)='navigateToMoodForm()' class="btn btn-secondary">Mood</button>
+                    <div class="col-md-4">
+                        <button type="button" routerLink="/moodForm" class="btn btn-success btn-lg">Mood</button>
                     </div>
-                    <!--<div class="col-md-2">
-                        <button type="button" routerLink="/exerciseForm" class="btn btn-secondary">Exercise</button>
-                    </div>-->
-                    <div class="col-md-2">
-                        <button type="button" routerLink="/dietForm" class="btn btn-secondary">Diet/Exercise</button>
+                    <div class="col-md-4">
+                        <button type="button" routerLink="/dietForm" class="btn btn-success btn-lg">Diet/Exercise</button>
                     </div>  
-                    <div class="col-md-2">
-                        <button type="button" routerLink="/sleepForm" class="btn btn-secondary">Sleep</button>
+                    <div class="col-md-4">
+                        <button type="button" routerLink="/sleepForm" class="btn btn-success btn-lg">Sleep</button>
                     </div>    
                 </div>
             </div>     

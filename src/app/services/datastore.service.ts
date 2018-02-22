@@ -202,11 +202,12 @@ export class DatastoreService {
   getUserData(): Observable<any> {
     console.log('getUserData')
     console.log('USER DATA2')
-    console.log(this.userData)
+    console.log(this.userDataObject )
     console.log('USER LIST2')
     console.log(this.userList)
   
-    return this.userDataObject.userData
+   // return this.userDataObject.userData
+   return this.userDataObject
   }
 
   //CHANGE: PLACE USER IMAGE ON SIDE

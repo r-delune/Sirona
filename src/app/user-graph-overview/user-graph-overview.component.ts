@@ -46,16 +46,21 @@ export class UserGraphOverviewComponent  {
   data1
   appetiteData
   data2
+  totalData1
 
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) {   
       $(".navItem").fadeIn(200);
       this.currentUserLogItems = datastoreService.allUserItems
-      this.totalData = this.dataInterpretorService.getUserLogTimesByType('Diet')
-      this.data = this.totalData.data1
+      this.data = this.dataInterpretorService.getAllUserLogCountData()
+      this.totalData1 = this.dataInterpretorService.getUserLogInstancesByType('Diet')
+      this.data = this.data.data1
       console.log('overview')
       console.log(this.data ) 
+
+      console.log('old overview')
+      console.log(this.totalData1 ) 
   }
   
   onSelect(event) {

@@ -57,7 +57,7 @@ export class UserProfileComponent {
     public dataInterpretorService: DataInterpretorService,
     db: AngularFireDatabase) {
       
-      this.userEntryCount = this.dataInterpretorService.countUserTotalEntries()
+      this.userEntryCount = this.dataInterpretorService.getAllUserLogCountData()
       this.userData = this.datastoreService.getUserData()
 
       //CHANGE: REMOVE 'USER' NODE IN USER DATA

@@ -94,12 +94,12 @@ body{
 
 .tree .node-value {
     display: inline-block;
-    color: deepskyblue;
+    color: black;
 }
 
 tree-internal .tree .node-value {
     display: inline-block;
-    color: aliceblue;
+    color: black;
 }
 
 ul.rootless {
@@ -107,15 +107,15 @@ ul.rootless {
 }
 
 #treeContainer{
-    padding: 16px 0px 0px 34px;
+    padding: 0px 0px 0px 4px;
 }
 
 .nodeCollapsed{
-    color:deepskyblue
+    color:black
 }
 
 .nodeExpanded{
-    color:deepskyblue
+    color:black
 }
 
 .advanced-pie-legend-wrapper{
@@ -126,4 +126,17 @@ ul.rootless {
 .tree .node-value {
     display: inline-block;
     color: white;
+}
+
+.legend-label-text {
+    width: 100%;
+}
+
+.col-5 {
+    max-width: 36.666667%;
+}
+
+.chart-legend .legend-label-text {
+
+    width: 100%;
 }
