@@ -7,27 +7,27 @@
         <div class="row">
           <div class="form-group">
             <label class="formLabel">General Mood:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="generalMood"></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange(this, $event)" formControlName="generalMood"></nouislider>
           </div>
           <div class="form-group">
             <label class="formLabel">Energy:</label>
-           <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="energyLevel"></nouislider>
+           <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange(this, $event)" formControlName="energyLevel"></nouislider>
           </div>
           <div class="form-group">
             <label class="formLabel">Motivation:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="motivationLevel"></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange(this, $event)" formControlName="motivationLevel"></nouislider>
           </div>
           <div class="form-group">
             <label class="formLabel">Concentration:</label>
-            <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="concentrationLevel"></nouislider>
+            <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange(this, $event)" formControlName="concentrationLevel"></nouislider>
           </div>
           <div class="form-group">
               <label class="formLabel">Anxiety:</label>
-              <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="anxietyLevel"></nouislider>
+              <nouislider [config]="someRange2config" [tooltips]="[true]" (ngModelChange)="onChange(this, $event)" formControlName="anxietyLevel"></nouislider>
           </div>
           <div class="form-group formButtons">
 
-              <button class="btn btn-success btn-lg formBtns saveButton" type="submit">Submit</button>
+              <button class="btn btn-success btn-lg formBtns saveButton" (ngModelChange)="onChange(this, $event)" type="submit">Submit</button>
             </div>
       </div>  
     </div>     

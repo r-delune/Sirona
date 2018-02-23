@@ -175,9 +175,6 @@ ngOnInit() {
   }
 
   getRouteAnimation(outlet) {
-   // console.log('ROUTER')
-   // console.log(outlet)
-   // console.log(outlet.activatedRouteData.animation)
     return outlet.activatedRouteData.animation
   }
 

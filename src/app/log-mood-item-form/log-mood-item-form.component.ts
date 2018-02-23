@@ -11,6 +11,8 @@ declare var jquery:any;
 declare var noUiSlider:any;
 declare var $ :any;
 
+
+
 @Component({
   selector: 'app-log-mood-item-form',
   templateUrl: './log-mood-item-form.component.html',
@@ -18,8 +20,8 @@ declare var $ :any;
 })
 export class LogMoodItemFormComponent {
   addMoodItemForm
-
-
+  slider
+  firstHandle
   constructor(
     private formBuilder: FormBuilder,
     private router: Router, 
@@ -55,5 +57,16 @@ export class LogMoodItemFormComponent {
       this.datastoreService.addMoodEntry(this.addMoodItemForm.value)
       this.router.navigate(['/add'])
     }
+
+  }
+
+  onChange(slider, value: any){
+
+    console.log(slider);
+    this.firstHandle =this.slider.nativeElement.querySelector('.noUi-handle[data-handle=\'0\']');
+    console.log(this.firstHandle);
+    //console.log('Value changed to', value);
+
+
   }
 }

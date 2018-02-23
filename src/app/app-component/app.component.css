@@ -145,7 +145,7 @@ nav ul li a:hover {
 	top:0;
 	height:100%;
 	width:100%;
-	background: linear-gradient(to right, #780206, #061161);	
+	background: linear-gradient(to right, rgb(21, 20, 21), rgb(6, 17, 97));
 	overflow:auto;
 	z-index:99;
 }
@@ -1062,4 +1062,11 @@ img{
 
 .mat-expansion-panel-body {
     color:#d6dfe2;
+}
+
+
+.overlayTitle{
+    font-weight:bold;
+    color:green;
+    text-align:center;
 }

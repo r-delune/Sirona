@@ -17,7 +17,6 @@ import { AngularFireList } from 'angularfire2/database/interfaces';
 import {MatSliderModule} from '@angular/material/slider';
 import { NouisliderModule } from 'ng2-nouislider';
 import {BrowserModule} from '@angular/platform-browser';
-import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 declare var jquery:any;

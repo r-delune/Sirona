@@ -42,6 +42,8 @@ export class LoginFormComponent {
   ngOnInit() {
     //CHANGE: FADE OUT MENU BEFORE LOGIN
    $(".navItem").fadeOut(200);
+   
+   $(".menuItems").fadeOut(200);
     this.form = this.formBuilder.group({
       date: this.formBuilder.control(new Date(Date.now()).toLocaleString()),
       email: this.formBuilder.control(''),

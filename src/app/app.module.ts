@@ -43,7 +43,6 @@ import { UserGraphAnalysisComponent } from './user-graph-analysis/user-graph-ana
 import { UserGraphSleepComponent } from './user-graph-sleep/user-graph-sleep.component';
 import { UserGraphComponent } from './user-graph/user-graph.component';
 import { LogItemFormComponent } from './log-item-form/log-item-form.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { MatSliderModule} from '@angular/material/slider';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
 import { MatExpansionModule} from '@angular/material/expansion';
@@ -110,8 +109,7 @@ firebase.initializeApp(firebaseConfig);
     UserGraphSleepComponent,
     UserGraphSleepQualityComponent,
     UserGraphGeneralMoodComponent,
-    UserGraphAppetiteLevelComponent,
-    NavBarComponent,
+    UserGraphAppetiteLevelComponent
   ],
   providers: [
     DatastoreService,

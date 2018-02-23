@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'
 import { DatastoreService } from '../services/datastore.service';
 import {BrowserModule} from '@angular/platform-browser';
-import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {DataInterpretorService} from '../services/data-interpretor.service'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,7 +17,6 @@ export class UserGraphAppetiteLevelComponent {
   multi: any[];
   view: any[] = [800, 440];
   logItems
-  // options
   showXAxis = true;
   showYAxis = true;
   gradient = true;
@@ -33,12 +31,12 @@ export class UserGraphAppetiteLevelComponent {
   };
   data
   multiArray
-  showGridLines= false
+  showGridLines= true
   schemeType="ordinal"
 
   legendTitle="Diet/Exercise Data"
   animations= true
-  timeline = true
+  timeline = false
   tooltipDisabled = true
   referenceLines = [{name: 'High', value: '80'},{name: 'OK', value: '50'},{name: 'Low', value: '20'}]
   singleArray

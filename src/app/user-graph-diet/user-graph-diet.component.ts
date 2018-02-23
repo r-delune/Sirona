@@ -60,6 +60,8 @@ export class UserGraphDietComponent  {
   itemRef
   logItemsList
   tooltipDisabled=true
+  timeline=false
+  legendTitle= "Diet/Exercise";
 
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,

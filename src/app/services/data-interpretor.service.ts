@@ -554,10 +554,10 @@ export class DataInterpretorService {
     ];
 
 
-    if (this.morningLogCount == 0 && this.afternoonLogCount == 0 && this.eveningLogCount == 0 && this.nightLogCount == 0){
-      console.log('No data found - returning null')
-      return null
-    }
+   // if (this.morningLogCount == 0 && this.afternoonLogCount == 0 && this.eveningLogCount == 0 && this.nightLogCount == 0){
+   //   console.log('No data found - returning null')
+   //   return null
+   // }
 
     var data2 = [
       { "name": "Morning","series" : [{ "name": "Morning","value": this.morningLogCount},{ "name": "Morning","value": this.morningLogCount}]},
@@ -696,10 +696,10 @@ export class DataInterpretorService {
       { "name": "Diet/Exercise", "value": totalDietCount},
     ];
 
-    if (totalMoodCount == 0 && totalSleepCount == 0 && totalDietCount == 0){
-      console.log('No data found - returning null')
-      return null
-    }
+   // if (totalMoodCount == 0 && totalSleepCount == 0 && totalDietCount == 0){
+   //   console.log('No data found - returning null')
+   //   return null
+   // }
 
     var data2 = [
       { "name": "Mood","series" : 

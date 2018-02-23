@@ -76,7 +76,7 @@
   -webkit-transform: translate(-50%,0);
   transform: translate(-50%,0);
   left: 50%;
-  bottom: 0%;
+  bottom: 10%;
 }
 
 .noUi-tooltip {
@@ -89,6 +89,11 @@
   padding: 6px;
   text-align: center;
   white-space: nowrap;
+}
+
+mat-expansion-panel-body{
+
+  color:white
 }
 
 
@@ -112,4 +117,19 @@
 
 text {
   fill: green!important;
+}
+
+
+.noDataMessage {
+  font-weight: bold;
+    position: relative;
+    margin: auto;
+    padding: 120px 0px 0px;
+    width: 60%;
+    font-size: 15px;
+    position: relative;
+    margin: auto;
+    padding: 120px 0px 0px;
+    width: 60%;
+    font-size: 20px;
 }

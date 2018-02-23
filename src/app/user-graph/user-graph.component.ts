@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'
 import { DatastoreService } from '../services/datastore.service';
 import {BrowserModule} from '@angular/platform-browser';
-import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { TreeModel, NodeEvent, Ng2TreeSettings } from 'ng2-tree';
 import { Router } from '@angular/router';
@@ -129,5 +128,8 @@ export class UserGraphComponent  {
 
     ngOnOnit(){
       $('.addEntry').fadeIn(1000)
+
+      $(".navItem").fadeIn(200);
+      
     }
 }

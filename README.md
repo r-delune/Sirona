@@ -2,22 +2,19 @@
 
 ### Sirona 
 
-    Sirona helps users record information regarding their behaviour and diet over the long term. The accumulated data is then plotted to charts so the user can observe trends and identify specific habits that they may want to address. 
+    Sirona helps users record information relating to their wellbeing over the long and short term. The accumulated data is plotted to charts so the user can identify trends or habits that are having a negative impact.
 
-    After login, The user will be able to specify what behaviours they would like to track. 
+    The current live site is a proof of concept, but I am to expand the idea. Please feel free to fire me an email if you have any useful idea's! 
 
-
-    Sirona is built using Angular and the Angular CLI, with backend storage and hosting provided by Google Firebase (using AngularFire2)
-
-
+    Sirona is built using Angular 4, with backend storage and hosting provided by Google Firebase.
 
 ***
 
  ###    GRAPHS
-        - There will be a graph for each variable
-        - There will be a cumative mood graph
+        - Graph displaying total entries of all variables (of either Mood, Sleep, or Diet types)
+        - Correlative data expressed on seperate graph
 
- ###    TIMELINE
+ ###    TIMELINE/ANALYSIS
         - user can scrub through archived data using timeline bar
 
 ***
@@ -25,54 +22,85 @@
  ###   ACCUMULATING DATA
 
         Log
-            -
-                  
-
-        HUAWEI BAND 2
-            - 
+            - User enters a value manually for each  
 
 ***
 
 ### DATA MODEL FOR MOOD ASSESMENT
 
-    1. General mood                 <40 (Bad Mood), 40-50 (meloncholic), 100 (Happy)
-    
-    2. Appetite                     <40 (not hungry), 50 (normal), 100 (Very hungry)
-    
-    3. Sleep Quality                0 (Extremely bad), 50 (Normal) 100 (Very good)                    
-    
-    4. Sleep Difficulty             0 (Extremely bad), 50 (Normal) 100 (Very good)
-    
-    5. Energy Levels                0 (Extremely bad), 50 (Normal) 100 (Very good) 
+MOOD
+
+    General mood                 <40 (bad), 50 (normal), >70 (great)
                                       
-    6. Motivation                   0 (Extremely bad), 50 (Normal) 100 (Very good)
+    Motivation                   <40 (bad), 50 (normal), >70 (great)
                                    
-    7. Concentration                0 (Extremely bad), 50 (Normal) 100 (Very good)
+    Concentration                <40 (bad), 50 (normal), >70 (great)
+
+    Energy Level                 <40 (bad), 50 (normal), >70 (great)
+                                   
+    Concentration                <40 (bad), 50 (normal), >70 (great)
+
+SLEEP
+
+    Sleep Quality                <40 (bad), 50 (normal), >70 (great)
+
+    Sleep Difficulty             <40 (bad), 50 (normal), >70 (great)
+
+    Hours Slept                  1 - 30
+
+
+DIET/EXERCISE
+
+  Coffee Drank (Cups)               1 - 30
+
+  Alcohol Drank (Units)             1 - 500
+
+  Stamina                           <40 (bad), 50 (normal), >70 (great)
+
+  Appetite                          <40 (bad), 50 (normal), >70 (great)
+
+  kmWalked                          1 - 100km
+
+  KmRan                             1 - 100km
                                     
-    8. External Stressors -         
-                                   
-    9. Coffee -     
-
-    10. Supplements - 
-    
-    11. Excercise Notes - 
-
-    12. Dietary Notes - 
-
-    13. Sleep Notes - 
-
-    14. Additional Notes - 
 
 ***
 
    ###  USER INTERFACE
 
-        LOGIN PAGE
-        TABLE
-        NEW ENTRY 
-        GRAPHS/STATS 
-            -  dropdown for each dataset
+        LOGIN
+        REGISTER
+        GRAPH TREE
+        ADD ENTRY
+            - Mood
+            - Diet/exercise
+            - Sleep
 
 ***
 
     ### GENERATING AN ASSESMENT
+
+    - Currently Sirona makes little use of correlative data. The next release will have a stronger focus on meaningful relationships between data.
+
+***
+
+    ### LOOKING TO THE FUTURE
+
+        Here are some of the things I intend to include in future releases
+            - Ionic mobile version
+            - Allow users to create their variables to track
+            - Make fully responsive (issues changing size of graph currently)
+            - Consolidate forms to appear as popou on main page
+            - Include more playful interpretations of the data (i.e flash animation)
+
+        HUAWEI BAND 2 (In future release)
+            - May use the Huawei API to retrieve data from users fitbit, or Huawei band 2. Data included heart-rate, steps walked in a day, etc
+
+***
+
+    ### Technology used
+
+            - Angular 4 (with Angular CLI)
+            - AngularFire2 datastore
+            - Typescript, Javascript, jQuery, JSON
+            - Deployed to Firebase Hosting using Firebase CLI

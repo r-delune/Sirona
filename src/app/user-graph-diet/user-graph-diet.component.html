@@ -5,10 +5,12 @@
 [legend]="showLegend"
 [explodeSlices]="explodeSlices"
 [labels]="showLabels"
+[animations]='animations'
+[legendTitle]="legendTitle"
 [doughnut]="doughnut"
 (select)="onSelect($event)"
 [tooltipDisabled]="tooltipDisabled"
 [view]="view">
 </ngx-charts-pie-chart>
 </div>
-<ng-template #noDataMessage><div class='noDataMessage'>Make an entry to plot data to graph!</div></ng-template>
+<ng-template #noDataMessage><div class='noDataMessage'>Make some entries to plot data to graph!</div></ng-template>

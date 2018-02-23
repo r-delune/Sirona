@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service'
 import { DatastoreService } from '../services/datastore.service';
 import { BrowserModule} from '@angular/platform-browser';
-import { single, multi} from '../data';
 import { NgxChartsModule} from '@swimlane/ngx-charts';
 import { DataInterpretorService} from '../services/data-interpretor.service'
 declare var jquery:any;
@@ -36,7 +35,9 @@ export class UserGraphOverviewComponent  {
 
   constructor(authService: AuthService,
     private dataInterpretorService: DataInterpretorService) {   
+      
       $(".navItem").fadeIn(200);
+      $(".menuItems").fadeIn(200);
       console.log('overview constructor')
       this.data = this.dataInterpretorService.getAllUserLogCountData().data1
       //this.data = this.data.data1
