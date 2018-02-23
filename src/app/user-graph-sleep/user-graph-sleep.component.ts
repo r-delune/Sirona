@@ -11,54 +11,28 @@ import {DataInterpretorService} from '../services/data-interpretor.service'
   templateUrl: './user-graph-sleep.component.html',
   styleUrls: ['./user-graph-sleep.component.css']
 })
-export class UserGraphSleepComponent implements OnInit {
+export class UserGraphSleepComponent{
 
-  single: any[];
-  multi: any[];
-  view: any[] = [700, 400];
-  logItems
+  view: any[] = [800, 440];
   tooltipDisabled=true
-  // options
   showXAxis = true;
   showYAxis = true;
   gradient = true;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Level';
+  xAxisLabel = 'Time';
   showYAxisLabel = true;
-  yAxisLabel = 'Date';
+  yAxisLabel = 'Level';
   showLabels = true
-  currentUserLogItems
-
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-  data1
-  data2
-  totalData
-  // line, area
-  autoScale = true;
-  sleepQualityData
   data
+  legendTitle = 'Sleep Entries'
+  colorScheme = "fire"
+
   constructor(private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
-
-    //this.totalData = this.dataInterpretorService.getUserLogTimesByType('Sleep')
-    //this.totalData = this.dataInterpretorService.getUserLogInstancesByType('Sleep')
-   // console.log('this.totalData.data1Sleep')
-   // console.log(this.totalData)
-   // this.data = this.totalData.data1
-    //console.log(this.totalData.data1)
 
     this.data = this.dataInterpretorService.getUserLogInstancesByType('Sleep') 
     console.log('appetiteData data')
     console.log(this.data)
-  }
-  
-  onSelect(event) {
-    console.log(event);
-  }
-
-  ngOnInit(){
   }
 }

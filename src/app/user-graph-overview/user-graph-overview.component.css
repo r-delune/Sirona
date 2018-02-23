@@ -11,6 +11,11 @@ body{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    margin:20px
   }
   
+  .overviewContainer{
+
+    padding-left:20px
+
+
+  }

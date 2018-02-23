@@ -50,6 +50,7 @@ export class AuthService {
   private user_displayName: String;
   private user_email: String;
   
+  //CHANGE: DENOTE OBSERVABLES WITH DOLLAR SIGN
 
   constructor(private afAuth: AngularFireAuth,
     private db: AngularFireDatabase,
@@ -197,6 +198,11 @@ export class AuthService {
     return this.users;
   }
 
+  getUser(){
+    console.log('GETTING USER')
+    return this.afAuth
+  }
+
   //// Email/Password Auth ////
   emailSignUp(email:string, password:string, displayName:string) {
 
@@ -259,20 +265,11 @@ export class AuthService {
 
   //CHANGE: REMOVE OTHER LOGIN FUCNTIONS
   emailLogin(email:string, password:string) {
-
     console.log('signing in via email:')
-
-
-
-  //  console.log('this.err')
-  //  console.log(this.err)
-    
     return 'Hello'
   }
 
-
   //CHANGE: MAYBE ONLY USE PROVIDEDATA FUNCTION IN ANGULARAUTH
-  // Sends email allowing user to reset password
   resetPassword(email: string) {
     var auth = firebase.auth();
     console.log('resetting passwword')

@@ -12,8 +12,10 @@
       [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel"
       [autoScale]="autoScale"
+      [showGridLines]="showGridLines"
       [referenceLines]="referenceLines"
       (select)="onSelect($event)">
     </ngx-charts-line-chart>
+    
 </div>
 <ng-template #noDataMessage><div class='noDataMessage'>Insufficient data to draw analysis graph!</div></ng-template>

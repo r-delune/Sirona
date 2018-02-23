@@ -1,12 +1,12 @@
 <section>
     <div class="container">
         <div class="row">
-          <div class="col-5">
+          <div class="col-4">
             <div id='treeContainer'>
               <tree (nodeSelected)="logEvent($event)" (nodeExpanded)="handleExpanded($event)" #treeComponent (nodeCreated)="handleCreated($event)" [tree]="tree" [settings]='treeSettings'></tree>
             </div>      
           </div>      
-          <div class="col-7">           
+          <div class="col-8">           
             <router-outlet></router-outlet>
           </div>
         </div>       

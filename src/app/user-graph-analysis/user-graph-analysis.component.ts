@@ -16,7 +16,7 @@ export class UserGraphAnalysisComponent{
   single: any[];
   multi: any[];
 
-  view: any[] = [700, 400];
+  view: any[] = [800, 450];
 
   // options
   showXAxis = true;
@@ -26,6 +26,7 @@ export class UserGraphAnalysisComponent{
   showXAxisLabel = true;
   xAxisLabel = 'Level';
   showYAxisLabel = true;
+  showGridLines = false;
   yAxisLabel = 'Date';
   referenceLines = [ {name: 'Low', value: 20}, {name: 'OK', value: 40}, {name: 'Great', value: "60"}]
 
@@ -33,6 +34,7 @@ export class UserGraphAnalysisComponent{
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
+  schemeType="linear"
   // line, area
   autoScale = true;
   data

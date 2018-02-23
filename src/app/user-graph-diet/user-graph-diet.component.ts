@@ -44,59 +44,23 @@ export class myMulti {
 
 export class UserGraphDietComponent  {
 
-  translation: string;
-  outerRadius: number;
-  innerRadius: number;
   data: any;
-  data2: any;
   domain: any;
   dims: any;
-  margin = [20, 20, 20, 20];
+  margin = [0, 0, 0, 0];
   legendOptions: any;
-
-  logItems
-  currentUserLogItems
-
-  entryDates = []
-  noOfEntrys
-
-  single: any[];
-  multi: any[];
- 
-  //data: Object[] = [];
-  
-  view: any[] = [1700, 1400];
+  view: any[] = [800, 450];
   showLegend = true;
 
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
+  colorScheme = "fire"
 
-  // pie
   showLabels = true;
-  explodeSlices = false;
+  explodeSlices = true;
   doughnut = false;
   itemRef
   logItemsList
-
-  timeOfEntryGraphLegend
-  timeOfEntryGraph
-  morningCount
-  afternoonCount
-  eveningCount 
-  nightCount 
-
-  timeOfDayArray = []
-  myDate
-  minutes
-  hours
-
-  timeOfDayArrayList: any[];
-  timeOfDayArrayListMulti: any[];
-  totalData
-  data1
-  appetiteData
   tooltipDisabled=true
+
   constructor(authService: AuthService,
     private datastoreService: DatastoreService,
     private dataInterpretorService: DataInterpretorService) { 
@@ -106,11 +70,6 @@ export class UserGraphDietComponent  {
       console.log('appetiteData data')
       console.log(this.data)
     }
-
-  //CHANGE SLIDER TO SINGLE,
-  //CHANGE DATE TO TIMEOFeNTRY
-  //DATE SHOULD BE 24HR
-  //THIS SHOULD BE A SEPERATE FUNCTION
   
   onSelect(event) {
     console.log(event);

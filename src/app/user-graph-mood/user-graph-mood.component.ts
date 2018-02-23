@@ -17,8 +17,8 @@ export class UserGraphMoodComponent  {
 
   single: any[];
   multi: any[];
-  view: any[] = [700, 400];
-  // options
+  view: any[] = [800, 450];
+
   showLegend = true;
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
@@ -26,7 +26,7 @@ export class UserGraphMoodComponent  {
 
   // pie
   showLabels = true;
-  explodeSlices = false;
+  explodeSlices = true;
   doughnut = false;
   totalData
   data1

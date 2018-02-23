@@ -50,14 +50,21 @@
 
 
 .noUi-horizontal {
-  height: 2px;
+  height: 12px;
+  position: relative;
+  bottom: 10px;
 }
 
 .noUi-horizontal .noUi-handle {
-  width: 20px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   left: -17px;
-  top: -13px;
+  top: -11px;
+
+  border: none;
+  border-radius: 10px;
+  background: white;
+  cursor: default;
 }
 
 .saveButton{
@@ -65,4 +72,44 @@
   float:right
 }
 
+.noUi-horizontal .noUi-tooltip {
+  -webkit-transform: translate(-50%,0);
+  transform: translate(-50%,0);
+  left: 50%;
+  bottom: 0%;
+}
 
+.noUi-tooltip {
+  display: block;
+  position: absolute;
+  border: none;
+  border-radius: 43px;
+  background: #fff;
+  color: red;
+  padding: 6px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+
+
+
+.formLabel{
+  width: 40%;
+  font-weight: bold;
+  color: deepskyblue;
+  font-size: 20px;
+
+}
+
+.form-group label{
+  width: 60%;
+  font-weight: bold;
+  color: deepskyblue;
+  font-size: 20px;
+  padding: 0px 20px 10px;
+}
+
+text {
+  fill: green!important;
+}

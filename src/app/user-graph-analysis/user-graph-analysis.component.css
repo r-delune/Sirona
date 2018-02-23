@@ -11,6 +11,23 @@ body{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    margin:20px
   }
   
+  .chart-legend .legend-label-text {
+    display: initial;
+
+  }
+
+  ngx-charts-legend.chart-legend .legend-labels {
+    line-height: 85%;
+    list-style: none;
+    display: initial;
+    text-align: right;
+    float: left;
+    width: 100%;
+    border-radius: 3px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: nowrap;
+    background: rgba(0, 0, 0, 0.05);
+}

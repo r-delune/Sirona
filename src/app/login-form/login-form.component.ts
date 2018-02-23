@@ -24,39 +24,6 @@ declare var $ :any;
   selector: 'mw-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css'],
-  animations: [
-    trigger('routerAnimation', [
-      transition('* <=> *', [
-        // Initial state of new route
-        query(':enter',
-          style({
-            position: 'fixed',
-            width:'100%',
-            transform: 'translateX(-100%)'
-          }),
-          {optional:true}),
-        // move page off screen right on leave
-        query(':leave',
-          animate('500ms ease',
-            style({
-              position: 'fixed',
-              width:'100%',
-              transform: 'translateX(100%)'
-            })
-          ),
-        {optional:true}),
-        // move page in screen from left to right
-        query(':enter',
-          animate('500ms ease',
-            style({
-              opacity: 1,
-              transform: 'translateX(0%)'
-            })
-          ),
-        {optional:true}),
-      ])
-    ])
-  ]
 })
 
 export class LoginFormComponent {
@@ -102,15 +69,11 @@ export class LoginFormComponent {
   onSubmit(form){
 
     if (form.email == "" || form.name == ""){
-      console.log('form is invalid'); 
       console.log(form); 
       $(".loginError").text('Invalid login.')
       return
     }
 
-
-   // this.error = this.authService.emailLogin(form.email.toLocaleString(), form.password.toLocaleString()) 
-    
    this.afAuth.auth.signInWithEmailAndPassword(form.email.toLocaleString(), form.password.toLocaleString())
    .then((user) => {
     // this.authState = user
@@ -126,9 +89,6 @@ export class LoginFormComponent {
    
    .catch(error => 
      {
-     //  console.log('PRBLM:' + error); 
-     //  this.err = error;
-     //  return error
       $(".loginError").text(error.message)
      });
 
@@ -137,11 +97,6 @@ export class LoginFormComponent {
     $.each(this.error, function(key, value) {
       console.log(key);  console.log(value)    
   })
-    //.catch(error => {
-     // console.log('Error handler')
-    //  console.log(error)
-    //  $(".loginError").text(error.message)
-   // })
   }
 }
 

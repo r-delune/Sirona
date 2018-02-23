@@ -11,10 +11,12 @@
 [showYAxisLabel]="showYAxisLabel"
 [xAxisLabel]="xAxisLabel"
 [yAxisLabel]="yAxisLabel"
-[autoScale]="autoScale"
 [timeline]="timeline"
+[legendTitle]='legendTitle'
 [animations]='animations'
-[tooltipDisabled]='tooltipDisabled'
+tooltipDisabled=true
+[referenceLines]='referenceLines'
+[autoScale]="autoScale"
 (select)="onSelect($event)">
 </ngx-charts-line-chart>
 </div>

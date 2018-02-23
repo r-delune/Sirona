@@ -7,7 +7,8 @@
 [labels]="showLabels"
 [doughnut]="doughnut"
 (select)="onSelect($event)"
-[view]="[width, height]">
+[tooltipDisabled]="tooltipDisabled"
+[view]="view">
 </ngx-charts-pie-chart>
 </div>
 <ng-template #noDataMessage><div class='noDataMessage'>Make an entry to plot data to graph!</div></ng-template>

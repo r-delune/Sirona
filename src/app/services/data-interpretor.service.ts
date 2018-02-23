@@ -50,7 +50,6 @@ export class DataInterpretorService {
   type
   currentUserMoodItems
   currentUserDietItems
-  currentUserExerciseItems
   currentUserSleepItems
   appetiteData
   generalMoodData
@@ -102,6 +101,8 @@ export class DataInterpretorService {
     let multiArray = {} as MultiItem;
     this.currentUserDietItems = this.datastoreService.getUserDietItemsList()
     
+    console.log(this.currentUserDietItems)
+
     $.each(this.currentUserDietItems, function(key, value) {
       var myDate = new Date(value.dietEntry.date);
       var val = Math.round(value.dietEntry.appetite);
@@ -188,10 +189,18 @@ export class DataInterpretorService {
      
     })
     
+   // if(noOfHoursSlept.series.length >= 2 ){singleArray.push(noOfHoursSlept)}else{console.log('not enough hours slept data')}
+   // if(sleepQuality.series.length >= 2 ){singleArray.push(sleepQuality)}else{console.log('not enough sleep quality data')}
+    //if(sleepDifficulty.series.length >= 2 ){singleArray.push(sleepDifficulty)}else{console.log('not enough sleep difficulty slept data')}
+
     if(noOfHoursSlept.series.length){singleArray.push(noOfHoursSlept)}
     if(sleepQuality.series.length){singleArray.push(sleepQuality)}
     if(sleepDifficulty.series.length){singleArray.push(sleepDifficulty)}
-    return singleArray;
+
+    console.log('GET Sleep TRENDS')
+      //if (singleArray.length <= 3){console.log('No Data Found'); return null}
+
+      if (singleArray.length == 0){console.log('No Data Found'); return null}else{return singleArray;}
   }
 
   getMoodTrends(){
@@ -284,17 +293,25 @@ export class DataInterpretorService {
         }
       }
     })
-    console.log(anxietyLevel)
-    console.log(anxietyLevel.series.length)
-    console.log(externalStress)
-    console.log(externalStress.series.length)
+
+   // if(anxietyLevel.series.length  >= 2){singleArray.push(anxietyLevel)}else{console.log('not enough anxietyLevel data')}
+   // if(concentrationLevel.series.length  >= 2){singleArray.push(concentrationLevel)}else{console.log('not enough concentrationLevel data')}
+   // if(motivationLevel.series.length  >= 2){singleArray.push(motivationLevel)}else{console.log('not enough motivationLevel data')}
+  //  if(generalMood.series.length  >= 2){singleArray.push(generalMood)}else{console.log('not enough generalMood data')}
+  //  if(externalStress.series.length >= 2){singleArray.push(externalStress)}else{console.log('not enough externalStress data')}
 
     if(anxietyLevel.series.length){singleArray.push(anxietyLevel)}
-    if(concentrationLevel.series.length){singleArray.push(concentrationLevel)}
-    if(motivationLevel.series.length){singleArray.push(motivationLevel)}
-    if(generalMood.series.length){singleArray.push(generalMood)}
+    if(concentrationLevel.series.length ){singleArray.push(concentrationLevel)}
+    if(motivationLevel.series.length ){singleArray.push(motivationLevel)}
+    if(generalMood.series.length ){singleArray.push(generalMood)}
     if(externalStress.series.length){singleArray.push(externalStress)}
-    return singleArray;
+
+
+    console.log('GET Mood TRENDS')
+    if (singleArray.length == 0){console.log('No Data Found'); return null}else{return singleArray;}
+
+
+    
   }
 
   getDietTrends(){
@@ -308,12 +325,7 @@ export class DataInterpretorService {
     }
 
     var cupsOfCoffee = {
-      name:'Cups of Coffe',
-      series: []
-    }
-
-    var confectionary = {
-      name:'Confectionary Intake',
+      name:'Cups of Coffee',
       series: []
     }
 
@@ -408,14 +420,23 @@ export class DataInterpretorService {
       }
     })
 
+  //  if(appetite.series.length >= 2){singleArray.push(appetite)}else{console.log('not enough appetite data')}
+  //  if(cupsOfCoffee.series.length >= 2){singleArray.push(cupsOfCoffee)}else{console.log('not enough cupsOfCoffee data')}
+  //  if(alcoholDrank.series.length >= 2){singleArray.push(alcoholDrank)}else{console.log('not enough alcoholDrank data')}
+  //  if(kmRan.series.length >= 2){singleArray.push(kmRan)}else{console.log('not enough kmRan data')}
+  //  if(kmWalked.series.length >= 2){singleArray.push(kmWalked)}else{console.log('not enough kmWalked data')}
+   // if(kmCycled.series.length >= 2){singleArray.push(kmCycled)}else{console.log('not enough kmCycled data')}
+   // console.log('GET DIET TRENDS')  
+  //  if (singleArray.length == 0){console.log('No Data Found'); return null}else{return singleArray;}
+
     if(appetite.series.length){singleArray.push(appetite)}
     if(cupsOfCoffee.series.length){singleArray.push(cupsOfCoffee)}
     if(alcoholDrank.series.length){singleArray.push(alcoholDrank)}
     if(kmRan.series.length){singleArray.push(kmRan)}
     if(kmWalked.series.length){singleArray.push(kmWalked)}
     if(kmCycled.series.length){singleArray.push(kmCycled)}
-    
-    return singleArray;
+    console.log('GET DIET TRENDS')  
+    if (singleArray.length == 0){console.log('No Data Found'); return null}else{return singleArray;}
   }
 
   //CHANGE: GETTREND SHOULD BE CONSOLIDATED TO ONE FUNCTION
@@ -424,7 +445,6 @@ export class DataInterpretorService {
     let allUserEntries = this.datastoreService.getAllCurrentUserLogItems()
     var count = 0;
     console.log('getting total user entries')
-    console.log(allUserEntries)
 
     $.each(allUserEntries, function(key, value) {
       for(var prop in value) {
@@ -485,8 +505,6 @@ export class DataInterpretorService {
       console.log(this.logItems.length)
     }else if (this.type == 'Mood'){
       this.logItems = this.datastoreService.getUserMoodItemsList()
-    }else if (this.type == 'Exercise'){
-      this.logItems = this.datastoreService.getUserExerciseItemsList()
     }
 
     //SHOULD START AT 0
@@ -496,12 +514,6 @@ export class DataInterpretorService {
     var nightLogCount = 0
 
     $.each(this.logItems, function(key, value) {
-      //CHANGE: very inefficient. considering changing data model i.i removing sleepEntry node
-      
-      console.log(this.logItems)
-      console.log('GETTING TIMES')
-      console.log(key)
-      console.log(value)
       
       if (this.type == 'Diet'){
         var myDate = new Date(value.dietEntry.date);
@@ -541,28 +553,58 @@ export class DataInterpretorService {
       { "name": "Night", "value": this.nightLogCount }
     ];
 
+
+    if (this.morningLogCount == 0 && this.afternoonLogCount == 0 && this.eveningLogCount == 0 && this.nightLogCount == 0){
+      console.log('No data found - returning null')
+      return null
+    }
+
     var data2 = [
       { "name": "Morning","series" : [{ "name": "Morning","value": this.morningLogCount},{ "name": "Morning","value": this.morningLogCount}]},
       { "name": "Afternoon", "series" : [{"name": "Afternoon", "value": this.afternoonLogCount},{ "name": "Afternoon", "value": this.afternoonLogCount}]},
       { "name": "Evening","series" : [{"name": "Evening", "value": this.eveningLogCount},{ "name": "Evening", "value": this.eveningLogCount}]},
       { "name": "Night","series" : [{"name": "Night", "value": this.nightLogCount},{ "name": "Night", "value": this.nightLogCount}]}
-    ]; 
+    ];  
     return {data1, data2}
   }
 
   getUserLogInstancesByType(type){
 
     var array = this.getAllUserLogInstances()
-    var instanceArray = []
+    var instanceArray
 
-    $.each(array.data2, function(key, value) {
+    $.each(array.data1, function(key, value) {
       if (value.name == type){
-        instanceArray = value.series
+        console.log('Testing to see if array is populated with useful data')
+        console.log(value.value)
+        if (value.value <= 2){
+          console.log('Not enough entries - returning null'); 
+          return null
+        }else{
+          $.each(array.data2, function(key, value) {
+            if (value.name == type){
+              console.log('Adding data to array')
+              console.log(key)
+              console.log(value)
+              instanceArray = value.series
+             // instanceArray.push(value)
+            // return value.series
+            }
+          })
+
+         console.log('getting all user log times for - ' + type)
+         console.log('Returning' + instanceArray)
+          console.log(instanceArray)
+          return instanceArray
+        }
       }
+      console.log('Returning' + instanceArray)
+      console.log(instanceArray)
+      return instanceArray
     })
 
-    console.log('getting all user log times for - ' + type)
-
+    console.log('Returning' + instanceArray)
+    console.log(instanceArray)
     return instanceArray
   }
 
@@ -611,9 +653,7 @@ export class DataInterpretorService {
             if (key == 'kmCycled' && value != null){kmCycledCount++}
           }
         });
-
       });
-
 
       $.each(sleepItemList, function(key, value) {
         var sleepArray = value.sleepEntry
@@ -649,19 +689,17 @@ export class DataInterpretorService {
           }
         });
     });
-
-    console.log('totalDietCount')
-    console.log(totalDietCount)
-    console.log('totalMoodCount')
-    console.log(totalMoodCount)
-    console.log('totalSleepCount')
-    console.log(totalSleepCount)
     
     var data1 = [
       { "name": "Mood", "value": totalMoodCount},
       { "name": "Sleep","value": totalSleepCount},
       { "name": "Diet/Exercise", "value": totalDietCount},
     ];
+
+    if (totalMoodCount == 0 && totalSleepCount == 0 && totalDietCount == 0){
+      console.log('No data found - returning null')
+      return null
+    }
 
     var data2 = [
       { "name": "Mood","series" : 
@@ -675,9 +713,9 @@ export class DataInterpretorService {
       },
       { "name": "Sleep", "series" : 
         [
-          { "name": "sleepQuality", "value": sleepQualityCount},
-          { "name": "sleepDifficulty", "value": sleepDifficultyCount},
-          { "name": "noOfHoursSlept", "value": noOfHoursSleptCount},
+          { "name": "Sleep Quality", "value": sleepQualityCount},
+          { "name": "Sleep Difficulty", "value": sleepDifficultyCount},
+          { "name": "Hours Slept", "value": noOfHoursSleptCount},
         ]
       },
       { "name": "Diet/Exercise","series" : 
@@ -691,11 +729,15 @@ export class DataInterpretorService {
       },
     ]; 
 
+
     return {data1, data2}
   }
 
 
   getUserLogTimesByType(type){
+
+    //CHANGE: CURRENTLY UNUSED
+
     this.type = type
     console.log('getting user log times for - ' + this.type)
 
@@ -705,8 +747,6 @@ export class DataInterpretorService {
       this.logItems = this.datastoreService.getUserSleepItemsList()
     }else if (this.type == 'Mood'){
       this.logItems = this.datastoreService.getUserMoodItemsList()
-    }else if (this.type == 'Exercise'){
-      this.logItems = this.datastoreService.getUserExerciseItemsList()
     }
 
     //SHOULD START AT 0
@@ -803,6 +843,13 @@ export class DataInterpretorService {
     sleepQualityArray.series = this.sleepQualityData.singleArray
     array.push(sleepQualityArray)
 
+    console.log(this.sleepQualityData.singleArray.length)
+
+    if (this.sleepQualityData.singleArray.length <= 3 && this.generalMoodData.singleArray.length <= 3 && this.appetiteData.singleArray.length <= 3 && this.sleepQualityData.singleArray.length <= 3){
+      console.log('Correlation array is less than 2 - returning');
+      return null
+    }
+
     console.log('correlationArray')
     console.log(array)
     return array
@@ -826,6 +873,7 @@ export class DataInterpretorService {
     this.allUserDietLogs = this.datastoreService.getUserDietItemsList()
     this.allUserSleepLogs = this.datastoreService.getUserSleepItemsList()
     this.allUserMoodLogs = this.datastoreService.getUserMoodItemsList()
+    
     var dietLogCount = 0;
     var MoodLogCount = 0;
     var SleepLogCount = 0;
@@ -855,4 +903,15 @@ export class DataInterpretorService {
 
     return {data1, data2}
   }
+
+  truncateDate(date){
+    var myDate = new Date(date);
+    var year = myDate.getFullYear();
+    var month = myDate.getMonth(); 
+    var day = myDate.getUTCDate(); 
+    var truncatedDate = day+'/'+month+'/'+year
+
+    return truncatedDate
+  }
+
 }

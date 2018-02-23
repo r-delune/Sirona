@@ -825,11 +825,6 @@ form {
   margin: auto;
   }
 
-.formLabel{
-  width: 40%;
-  font-weight: bold;
-    font-size: 10px;
-}
 
 section {
   width: 100%;
@@ -844,9 +839,63 @@ section {
 .saveButton{
   float:right;
   padding: 20px;
+  width: 220px;
 }
 
 .backButton{
   float:left;
   padding: 20px;
+}
+
+.homeButton{
+
+  position:relative
+
+}
+
+.formLabel{
+  width: 40%;
+  font-weight: bold;
+  color: deepskyblue;
+  font-size: 20px;
+}
+
+.formTitle{
+  font-size: 2.5rem;
+  border-left: 10px;
+  border-left-width: 10px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.col-xs-1 {
+  float: left;
+  width: 8.333333%;
+  top: 100px;
+  position: relative;
+  right: 40px;
+}
+
+
+.formLabel{
+  width: 40%;
+  font-weight: bold;
+  color: deepskyblue;
+  font-size: 20px;
+
+}
+
+
+span {
+  display: block;
+  color: white;
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.form-group .checkbox label, .form-group .radio label, .form-group label {
+  width: 40%;
+  font-weight: bold;
+  color: deepskyblue;
+  font-size: 20px;
 }

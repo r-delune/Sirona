@@ -3,20 +3,13 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { lookupListToken } from '../providers';
 import { NgModule } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { DatastoreService } from '../services/datastore.service'
 import * as firebase from 'firebase/app';
-import { AuthService } from '../services/auth.service';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { single, multi} from '../data';
 import { NouisliderModule } from 'ng2-nouislider';
-import {MatSliderModule} from '@angular/material/slider';
 declare var jquery:any;
 declare var $ :any;
-
-export class DietItem { body: string; }
 
 @Component({
   selector: 'app-log-diet-item-form',
@@ -38,10 +31,34 @@ export class LogDietItemFormComponent{
     animationDuration: 300
   };
 
-  constructor(private formBuilder: FormBuilder, private angularAuth: AngularFireAuth, 
+  coffeeConfig: any = {
+    behaviour: 'drag',
+    start: 0,
+    range: {
+      min: 0,
+      max: 20
+    },
+    step: 1,
+    animate: true,
+    animationDuration: 300
+  };
+
+  alcoholConfig: any = {
+    behaviour: 'drag',
+    start: 0,
+    range: {
+      min: 0,
+      max: 500
+    },
+    step: 1,
+    animate: true,
+    animationDuration: 300
+  };
+
+  constructor(
+    private formBuilder: FormBuilder, 
     private router: Router, 
-    private datastoreService: DatastoreService, 
-    authService: AuthService,
+    private datastoreService: DatastoreService
   ) {}
   
   ngOnInit() {
@@ -53,7 +70,6 @@ export class LogDietItemFormComponent{
       alcoholDrank: this.formBuilder.control(null),
       kmRan: this.formBuilder.control(null),
       kmCycled : this.formBuilder.control(null)
-     // kmWalked : this.formBuilder.control(null)
     })
   }
 
@@ -66,8 +82,6 @@ export class LogDietItemFormComponent{
   }
 
   onChange($event){
-
     console.log($event)
-
   }
 }

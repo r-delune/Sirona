@@ -16,24 +16,27 @@ export class UserGraphAppetiteLevelComponent {
   appetiteLevelData
   single: any[];
   multi: any[];
-  view: any[] = [700, 400];
+  view: any[] = [800, 440];
   logItems
   // options
   showXAxis = true;
   showYAxis = true;
-  gradient = false;
+  gradient = true;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Level';
+  xAxisLabel = 'Time';
   showYAxisLabel = true;
-  yAxisLabel = 'Date';
+  yAxisLabel = 'Level';
   getAppetiteMultiTrend
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
   data
   multiArray
+  showGridLines= false
+  schemeType="ordinal"
 
+  legendTitle="Diet/Exercise Data"
   animations= true
   timeline = true
   tooltipDisabled = true
@@ -47,12 +50,5 @@ export class UserGraphAppetiteLevelComponent {
     this.data = this.dataInterpretorService.getDietTrends()
     console.log('data')
     console.log(this.data)
-    //this.singleArray = this.data.singleArray
-    //console.log('singleArray')
-    //console.log(this.singleArray)
-
-    Object.assign(this, {single, multi})  
-
-    console.log(multi)
   }
 }

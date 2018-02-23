@@ -44,10 +44,16 @@ import { UserGraphSleepComponent } from './user-graph-sleep/user-graph-sleep.com
 import { UserGraphComponent } from './user-graph/user-graph.component';
 import { LogItemFormComponent } from './log-item-form/log-item-form.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule} from '@angular/material/slider';
 import { IonRangeSliderModule } from "ng2-ion-range-slider";
-import {MatExpansionModule} from '@angular/material/expansion';
-
+import { MatExpansionModule} from '@angular/material/expansion';
+import { RouterModule } from '@angular/router';
+import {
+  MatListModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatSlideToggleModule
+} from '@angular/material';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyAr7JyYnwIGJGbu4PR8l1KTNon9FMoVmdI",
@@ -78,7 +84,12 @@ firebase.initializeApp(firebaseConfig);
     TreeModule,
     HttpClientModule,
     MatSliderModule,
-    MatExpansionModule
+    MatListModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
+    RouterModule
   ],
   declarations: [
     AppComponent,

@@ -801,17 +801,12 @@ form {
 .saveButton{
   padding: 20px;
   float:right;
+  width: 220px;
 }
 
 .backButton{
   padding: 20px;
   float:left;
-}
-
-.formLabel{
-  width: 40%;
-  font-weight: bold;
-    font-size: 15px;
 }
 
 .formBtns{
@@ -828,3 +823,51 @@ form {
   .ng2-nouislider{
    width:70%
   }
+
+  
+
+
+.formLabel{
+  width: 40%;
+  font-weight: bold;
+  color: deepskyblue;
+  font-size: 20px;
+
+}
+
+.formTitle{
+  font-size: 3.5rem;
+  border-left: 10px;
+  border-left-width: 10px;
+  top: 80px;
+  position: relative;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.form-group .checkbox label, .form-group .radio label, .form-group label {
+  width: 40%;
+  font-weight: bold;
+  color: deepskyblue;
+  font-size: 20px;
+}
+
+.noUi-horizontal {
+  height: 12px;
+  position: relative;
+  bottom: 10px;
+}
+
+.noUi-horizontal .noUi-handle {
+  width: 35px;
+  height: 35px;
+  left: -17px;
+  top: -12px;
+}
+
+span {
+    color: white;
+    text-align: center;
+    font-size: 1.3em;
+  font-size: 1.4em;
+}

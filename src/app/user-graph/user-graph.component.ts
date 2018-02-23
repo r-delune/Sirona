@@ -104,28 +104,27 @@ export class UserGraphComponent  {
     console.log(e);
       if (e.node.value === 'Overview'){
         this.router.navigate(['/graph/overview']);
-      }else if (e.node.value == 'Diet/Exercise Overview'){
-        this.router.navigate(['/graph/dietGraph']);
-      }else if (e.node.value == 'Mood Overview'){
-        this.router.navigate(['/graph/moodGraph']);
-      }else if (e.node.value == 'Sleep Overview'){
-        this.router.navigate(['/graph/sleepGraph']);
       }else if (e.node.value == 'Analysis'){
         this.router.navigate(['/graph/analysisGraph']);
       }else if (e.node.value == 'All Mood Data'){
         this.router.navigate(['/graph/generalMoodGraph']);
-      }else if (e.node.value == 'All Diet/Exercise Data'){
-        this.router.navigate(['/graph/appetiteLevelGraph']);
-      }else if (e.node.value == 'Diet/Exercise'){
-        this.router.navigate(['/graph/sleepQualityGraph']);
       }else if (e.node.value == 'Mood'){
         this.router.navigate(['/graph/generalMoodGraph']);
+      }else if (e.node.value == 'Mood Overview'){
+        this.router.navigate(['/graph/moodGraph']);
       }else if (e.node.value == 'All Diet/Exercise Data'){
         this.router.navigate(['/graph/appetiteLevelGraph']);
+      }else if (e.node.value == 'Diet/Exercise Overview'){
+        this.router.navigate(['/graph/dietGraph']);
+      }else if (e.node.value == 'Diet/Exercise'){
+        this.router.navigate(['/graph/appetiteLevelGraph']);
+      }else if (e.node.value == 'All Sleep Data'){
+        this.router.navigate(['/graph/sleepQualityGraph']);
       }else if (e.node.value == 'Sleep'){
         this.router.navigate(['/graph/sleepQualityGraph']);
-      }
-    }
+      }else if (e.node.value == 'Sleep Overview'){
+        this.router.navigate(['/graph/sleepGraph']);
+    }}
     //CHANGE HOVER OVER CHART
 
     ngOnOnit(){

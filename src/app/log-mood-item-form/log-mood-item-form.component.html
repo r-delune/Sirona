@@ -1,7 +1,7 @@
 <form [formGroup]='addMoodItemForm' (ngSubmit)='onSubmit()' role="form">
   <div class="row setup-content" id="step-0">
       <div class="col-xs-1">  
-          <h3>Mood</h3>
+          <h3 class='formTitle'><span>Mood</span></h3>
         </div>
       <div class="col-xs-11">
         <div class="row">
@@ -10,23 +10,23 @@
             <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="generalMood"></nouislider>
           </div>
           <div class="form-group">
-            <label class="formLabel">Energy Level:</label>
+            <label class="formLabel">Energy:</label>
            <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="energyLevel"></nouislider>
           </div>
           <div class="form-group">
-            <label class="formLabel">Motivation Level:</label>
+            <label class="formLabel">Motivation:</label>
             <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="motivationLevel"></nouislider>
           </div>
           <div class="form-group">
-            <label class="formLabel">Concentration Level:</label>
+            <label class="formLabel">Concentration:</label>
             <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="concentrationLevel"></nouislider>
           </div>
           <div class="form-group">
-              <label class="formLabel">Anxiety Level:</label>
+              <label class="formLabel">Anxiety:</label>
               <nouislider [config]="someRange2config" [tooltips]="[true]" formControlName="anxietyLevel"></nouislider>
           </div>
           <div class="form-group formButtons">
-              <button class="btn btn-success btn-lg formBtns backButton" routerLink="/add">Back</button>
+
               <button class="btn btn-success btn-lg formBtns saveButton" type="submit">Submit</button>
             </div>
       </div>  

@@ -18,31 +18,30 @@ import { UserGraphAppetiteLevelComponent } from './user-graph-appetite-level/use
 import { LogItemFormComponent } from './log-item-form/log-item-form.component';
 import {MatSliderModule} from '@angular/material/slider';
 const appRoutes: Routes = [
-  { path: 'login', component: LoginFormComponent, data: { animation: 'tiger' } },
-  { path: 'register', component: RegistrationFormComponent, data: { animation: 'dolphin'}},
-  { path: 'profile', component: UserProfileComponent,data: { animation: 'dolphin'}},
-  { path: 'add', component: LogItemFormComponent, data: { animation: 'dolphin'}},
-  //{ path: 'graph', component: UserGraphComponent },
+  { path: 'login', component: LoginFormComponent, data: { animation: 'loginRoute' } },
+  { path: 'register', component: RegistrationFormComponent, data: { animation: 'registerRoute'}},
+  { path: 'profile', component: UserProfileComponent,data: { animation: 'profileRoute'}},
+  { path: 'add', component: LogItemFormComponent, data: { animation: 'addRoute'}},
   //{ path: ':medium', component: LogItemListComponent, data: { animation: 'dolphin'}},
-  { path: 'dietForm', component: LogDietItemFormComponent,data: { animation: 'dolphin'}},
-  { path: 'sleepForm', component: LogSleepItemFormComponent, data: { animation: 'dolphin'}},
-  { path: 'moodForm', component: LogMoodItemFormComponent, data: { animation: 'dolphin'}},
+  { path: 'dietForm', component: LogDietItemFormComponent,data: { animation: 'dietRoute'}},
+  { path: 'sleepForm', component: LogSleepItemFormComponent, data: { animation: 'sleepRoute'}},
+  { path: 'moodForm', component: LogMoodItemFormComponent, data: { animation: 'moodRoute'}},
   {
     path: 'graph',
     component: UserGraphComponent,
     children: [
       {path: '', redirectTo: 'graph/overview',pathMatch: 'full'},
-      {path: 'moodGraph', component: UserGraphMoodComponent, data: { animation: 'dolphin' }},
-      {path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dolphin' }},
-      {path: 'overview', component: UserGraphOverviewComponent, data: { animation: 'dolphin' }},
-      {path: 'analysisGraph', component: UserGraphAnalysisComponent, data: { animation: 'dolphin' }}, 
-      {path: 'sleepGraph', component: UserGraphSleepComponent, data: { animation: 'dolphin' }},   
-      {path: 'sleepQualityGraph', component: UserGraphSleepQualityComponent, data: { animation: 'dolphin' }},
-      {path: 'generalMoodGraph', component: UserGraphGeneralMoodComponent, data: { animation: 'dolphin' }}, 
-      {path: 'appetiteLevelGraph', component: UserGraphAppetiteLevelComponent, data: { animation: 'dolphin' }}
+      {path: 'moodGraph', component: UserGraphMoodComponent, data: { animation: 'moodGraphRoute' }},
+      {path: 'dietGraph', component: UserGraphDietComponent, data: { animation: 'dietGraphRoute' }},
+      {path: 'overview', component: UserGraphOverviewComponent, data: { animation: 'overviewGraphRoute' }},
+      {path: 'analysisGraph', component: UserGraphAnalysisComponent, data: { animation: 'analyisGraphRoute' }}, 
+      {path: 'sleepGraph', component: UserGraphSleepComponent, data: { animation: 'sleepGraphRoute' }},   
+      {path: 'sleepQualityGraph', component: UserGraphSleepQualityComponent, data: { animation: 'sleepQualityGraphRoute' }},
+      {path: 'generalMoodGraph', component: UserGraphGeneralMoodComponent, data: { animation: 'generalMoodGraphRoute' }}, 
+      {path: 'appetiteLevelGraph', component: UserGraphAppetiteLevelComponent, data: { animation: 'appetiteGraphRoute' }}
     ]
   },
- // { path: '**', pathMatch: 'full', redirectTo: '/error' }, CHANGE: ADD ERROR PAGE
+  { path: '**', pathMatch: 'full', redirectTo: '/login' },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 

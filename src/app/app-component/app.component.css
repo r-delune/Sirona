@@ -84,7 +84,9 @@ ul {
 }
 li {
 	padding:0;
-	margin:0;
+    margin:0;
+    right: 15px;
+    position: relative;
 }
 nav {
 	text-align:center;
@@ -1011,10 +1013,8 @@ img{
       display: inline;
   }
 
-
-       body{
+    body{
        background-color: #000000;
-
    }
   
   #gradient
@@ -1031,7 +1031,35 @@ img{
 }
 
 .innerMenuItems{
+   display:flex;
+}
 
-    display:flex;
+.profileImg{
+    width: 10%;
+    position: relative;
+    margin: auto;
+    padding: 0px;
+}
 
+.returnHome{
+    display:none;
+    float:left;
+    padding:20px
+}
+
+.tree{
+
+    padding: 1px 10px 3px 5px;
+}
+
+.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}
+
+.mat-expansion-panel {
+    box-shadow: none;
+}
+
+.mat-expansion-panel-body {
+    color:#d6dfe2;
 }

@@ -6,6 +6,7 @@ import {single, multi} from '../data';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {DataInterpretorService} from '../services/data-interpretor.service'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import * as shape from 'd3-shape';
 
 @Component({
   selector: 'app-user-graph-general-mood',
@@ -15,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 export class UserGraphGeneralMoodComponent  {
 
   generalMoodData
-  view: any[] = [700, 400];
+  view: any[] = [800, 450];
   logItems
   // options
   showXAxis = true;
@@ -23,15 +24,14 @@ export class UserGraphGeneralMoodComponent  {
   gradient = true;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Date';
+  xAxisLabel = 'Time';
   showYAxisLabel = true;
   yAxisLabel = 'Level';
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
-
+  colorScheme = "fire"
+  curve = shape.curveCardinal;
+  legendTitle="Mood Data"
   animations= true
-  timeline = true
+  timeline = false
   tooltipDisabled = true
   referenceLines = [{name: 'High', value: '80'},{name: 'OK', value: '50'},{name: 'Low', value: '20'}]
   

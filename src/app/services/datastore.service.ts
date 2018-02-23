@@ -71,16 +71,17 @@ export class DatastoreService {
 
     userAuth.authState.subscribe((auth) => {
 
-      console.log('Datastore, subscribe/userAuth/authservie - ')
-      console.log(auth)
-      console.log(userAuth)
-      console.log(authService)
+     // console.log('Datastore, subscribe/userAuth/authservie - ')
+     // console.log(auth)
+     // console.log(userAuth)
+      //console.log(authService)
 
       try { this.userId = auth.uid;console.log(`Users/${this.userId}`)} catch{console.log('Datastore resubscribing but no uid found')} 
       
 
       let subscribe1 = db.object(`Logs/Diet/${this.userId}`).valueChanges().subscribe(
         data =>{
+          console.log('DATASTORE!')
           this.dietItemList = data;
         }
       );
@@ -106,18 +107,18 @@ export class DatastoreService {
       let subscribe5 = db.object(`Users/${this.userId}`).valueChanges().subscribe(
         data =>{
           
-          console.log('USER List')
-          console.log(data)
+        //  console.log('USER List')
+        //  console.log(data)
           this.userData = data;
         }
       );
 
       let subscribe6 = db.object(`Users`).valueChanges().subscribe(
         data =>{
-          console.log(`Users/${this.userId}`)
-          console.log('ALL USER Data observer')
-          try { console.log(this.authService)} catch{console.log('ALL USR data resubscribing but no uid found')} 
-          console.log(data)
+         // console.log(`Users/${this.userId}`)
+         // console.log('ALL USER Data observer')
+         // try { console.log(this.authService)} catch{console.log('ALL USR data resubscribing but no uid found')} 
+        //  console.log(data)
           this.allUsersList = data;
         }
 
@@ -125,8 +126,8 @@ export class DatastoreService {
 
       let subscribe7 = db.list(`Users/${this.userId}`).valueChanges().subscribe(
         data =>{  
-          console.log('USER INFO observer')
-          console.log(data[0])
+         /// console.log('USER INFO observer')
+         /// console.log(data[0])
           try { console.log(this.authService)} catch{console.log('USR info resubscribing but no uid found')} 
           this.userDataObject = data[0]
         }
@@ -152,7 +153,7 @@ export class DatastoreService {
   }
 
   getUserDietItemsList(): Observable<any[]>{
-    console.log('dietItemList')
+    console.log('DATASTORE - dietItemList')
     console.log(this.dietItemList)   
     return this.dietItemList
   }
@@ -201,10 +202,10 @@ export class DatastoreService {
   //CHANGE: ADD ASYNC PIPES
   getUserData(): Observable<any> {
     console.log('getUserData')
-    console.log('USER DATA2')
-    console.log(this.userDataObject )
-    console.log('USER LIST2')
-    console.log(this.userList)
+  //  console.log('USER DATA2')
+  //  console.log(this.userDataObject )
+  //  console.log('USER LIST2')
+  //  console.log(this.userList)
   
    // return this.userDataObject.userData
    return this.userDataObject
@@ -214,9 +215,9 @@ export class DatastoreService {
 
   updateUser(user) {
     console.log('UPDATING user ITEM')
-    console.log(user)
+    //console.log(user)
     const userDBInfo = this.db.list(`Users/${this.userId}`);
-    console.log(userDBInfo) 
+   // console.log(userDBInfo) 
    // userDBInfo.set( user);
   //  this.allUsersRef.update({ size: newSize });
   }
